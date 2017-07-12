@@ -1,0 +1,9 @@
+
+.detail-text {
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #333333;
+  height: 200rpx;
+  width: 100%;
+  border-bottom: 1rpx solid #F0F0F0;
+}

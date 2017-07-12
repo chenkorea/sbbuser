@@ -1,0 +1,39 @@
+/* pages/selectKeyType/selectKeyType.wxss */
+
+.main-view
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 40rpx;
+}
+
+.page__bd {
+  margin-top: 1rpx;
+}
+
+.weui-grids {
+  border: 1rpx solid #FFFFFF;
+}
+.weui-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  float: left;
+  padding: 40rpx 40rpx;
+  width: 40.33333333%;
+  box-sizing: border-box;
+  border: 1rpx solid #F0F0F0;
+  margin: 20rpx 20rpx;
+}
+.weui-grid__label {
+  margin-top: 10rpx;
+  display: block;
+  text-align: center;
+  color: #333333;
+  font-size: 30rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

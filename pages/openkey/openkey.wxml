@@ -1,0 +1,59 @@
+<!-- openkey.wxml -->
+<view class="main-view">
+  <!-- 开锁类别 -->
+  <view class="type-view">
+    <text class="type-nmae">{{oneTypeTitle}}</text>
+    <view class="val-view">
+      <picker mode="selector" range="{{fdmarray}}" value="{{fdmindex}}" bindchange="listenerPickerFDMSelected">
+          <text class="type-value">{{fdmarray[fdmindex]}}</text><icon class="iconfont icon-jiantou1" />
+      </picker>
+    </view>
+  </view>
+
+  <!-- 开锁图片 -->
+  <view class="type-view" bindtap="selectPicAndUp">
+    <text class="type-nmae">{{twoTypeTitle}}</text>
+    <view class="val-view">
+      <text class="type-value">点击上传</text><icon class="iconfont icon-jiantou1" />
+    </view>
+  </view>
+
+  <!-- 服务地址 -->
+  <view class="type-view" bindtap="selectAddress">
+    <text class="type-nmae">服务地址</text>
+    <view class="val-view">
+      <text class="type-value">贵阳市云岩区贵乌中路27号北京路一号大楼</text><icon class="iconfont icon-jiantou1" />
+    </view>
+  </view>
+
+  <!-- 保修期 -->
+  <view class="type-view" hidden="{{isShowBx==0}}">
+    <text class="type-nmae">保修期</text>
+    <view class="val-view">
+    <!--mode默认selector range数据源value选择的index bindchange事件监听-->
+      <picker mode="selector" range="{{bxarray}}" value="{{index}}" bindchange="listenerPickerSelected">
+          <text class="type-value">{{bxarray[index]}}</text><icon class="iconfont icon-jiantou1" />
+      </picker>
+    </view>
+  </view>
+  
+
+  <!-- 服务时间 -->
+  <view class="type-view" bindtap="selectTimeType">
+    <text class="type-nmae">服务时间</text>
+    <view class="val-view">
+      <text class="type-value">马上</text><icon class="iconfont icon-jiantou1" />
+    </view>
+  </view>
+
+  <!-- 备注 -->
+  <view class="type-view" bindtap="addNote">
+    <text class="type-nmae">备注</text>
+    <view class="val-view">
+      <text class="type-value">请快一点过来，一会还有事</text><icon class="iconfont icon-jiantou1" />
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <button class="save-button">提交</button>
+</view>

@@ -1,0 +1,47 @@
+<!--addAddr.wxml-->
+
+<view class="main-view">
+
+  <!--{{province}}-{{city}}-{{county}}  open-->
+
+  <view class="type-view" bindtap="open">
+    <text class="type-nmae">所在地区</text>
+    <view class="val-view">
+      <text class="type-value">{{province}}-{{city}}-{{county}}</text><icon class="iconfont icon-jiantou1" />
+    </view>
+  </view>
+  <view class="type-view" bindtap="openRoad">
+    <text class="type-nmae">所在街道</text>
+    <view class="val-view">
+      <text class="type-value">{{province}}-{{city}}-{{county}}</text><icon class="iconfont icon-jiantou1" />
+    </view>
+  </view>
+  <view class="detail-title">详细地址</view>
+  <textarea class="detail-text" placeholder="请输入具体小区，楼房，单元号，门牌号" placeholder-style="color:#999999;" />
+  
+  <!-- 设置默认 -->
+  <view class="type-view" bindtap="setDef">
+    <text class="type-nmae">设置为默认地址</text>
+    <view class="val-view">
+      <icon class="icon-xuanze1 type-value" />
+    </view>
+  </view>
+
+</view>
+<view wx:if="{{condition}}" class="citypicker">
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
+    <view class="cityheader">
+      <view bindtap="open" class="city-cancel">取消</view>
+      <view bindtap="open" class="city-true">确定</view>
+    </view>
+    <picker-view-column>
+      <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>

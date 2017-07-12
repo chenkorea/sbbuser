@@ -1,0 +1,44 @@
+<!--index.wxml-->
+<view class="main_view">
+  <view class="header_view">
+    <view class="header_left_view" bindtap="toMyOrderView">
+      <image class="user_head" src="http://m.vstou.com/img/201511/hk4_8.jpg"></image>
+      <text class="user_name">米兰可儿</text>
+    </view>
+    <view class="header_right_view" bindtap="selectNewCity">
+      <text class="location_city">{{city}}<icon class="iconfont icon-icon-copy-copy-copy"></icon></text>
+    </view>
+  </view>
+  <!-- 通知和广告 -->
+  <view class="ad_view">
+    <view class="ad_top" bindtap="toNoticeDetailView">
+      <icon class="iconfont icon-laba notice_ic"/>
+      <text class="notice-text">锁具修理工国家职业标准</text>
+    </view>
+    <view class="ad-bottom">
+        <image src="http://pic.58pic.com/58pic/16/81/53/42y58PICxf8_1024.jpg" class="ad-image"></image>
+    </view>
+  </view>
+
+  <!--以下是gird关键代码-->
+  <view class="page__bd">
+      <view class="weui-grids">
+          <block wx:for-items="{{muenus}}" wx:key="{{index}}">
+              <navigator url="{{item.url}}" class="weui-grid {{item.bac}}" hover-class="weui-grid_active">
+                  <view class="weui-grid__label">{{item.text}}</view>
+                  <icon class="weui-grid__icon iconfont {{item.icon}}" />
+              </navigator>
+          </block>
+      </view>
+  </view>
+  
+  <!-- 公安标示 -->
+  <view class="footer_view">
+    <view class="footer-main-ciew">
+      <text class="gongan-text">贵州</text>
+      <image class="gonganlogo" src='../images/gonganlogo.png'></image>
+      <text class="gongan-text">公安</text>
+    </view>
+  </view>
+</view>
+

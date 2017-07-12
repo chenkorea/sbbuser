@@ -1,0 +1,13 @@
+<!--pages/selectKeyType/selectKeyType.wxml-->
+<view class="main-view">
+ <!--以下是gird关键代码-->
+  <view class="page__bd">
+      <view class="weui-grids">
+          <block wx:for-items="{{muns}}" wx:key="{{index}}">
+              <view class="weui-grid">
+                  <view class="weui-grid__label">{{item.text}}</view>
+              </view>
+          </block>
+      </view>
+  </view>
+</view>

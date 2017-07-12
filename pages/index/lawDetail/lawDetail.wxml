@@ -1,0 +1,5 @@
+<view class="main-view">
+  <view class="title-text">{{detailObj.title}}</view>
+  <view class="time-text">{{detailObj.time}}</view>
+  <view class="content-text">{{detailObj.content}}</view>
+</view>

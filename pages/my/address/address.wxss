@@ -1,0 +1,49 @@
+.main-view{
+  
+}
+
+.add_view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+  background: #43CD80;
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+
+.list-view {
+}
+
+.address-item {
+  border-bottom: 20rpx solid #F0F0F0;
+}
+
+.address-text {
+  font-size: 30rpx;
+  padding: 20rpx;
+  margin: 10rpx auto;
+}
+
+.oper-view {
+  padding: 20rpx;
+  border-top: 1rpx solid #F0F0F0;
+}
+
+.def-view {
+  display: inline;
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.del-view {
+  position: absolute;
+  right: 20rpx;
+  display: inline;
+  font-size: 26rpx;
+  color: #999999;
+}

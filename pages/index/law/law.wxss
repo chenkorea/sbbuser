@@ -1,0 +1,15 @@
+.law-item {
+  padding: 20rpx;
+  border-bottom: 2rpx solid #F0F0F0;
+}
+
+.title-text {
+  font-size: 32rpx;
+  color: #333333;
+}
+
+.time-text {
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 20rpx;
+}

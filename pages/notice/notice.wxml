@@ -1,0 +1,5 @@
+<!-- notice.wxml -->
+<view class="main-view">
+  <view class="title-view">{{titleText}}</view>
+  <view class="content-view">{{contentText}}</view>
+</view>

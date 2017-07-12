@@ -1,0 +1,18 @@
+.title-view {
+  padding: 20rpx;
+  display: flex;
+  justify-content: center;
+  color: #43CD80;
+  font-size: 35rpx;
+}
+
+.content-view {
+  padding: 20rpx;
+  display: flex;
+  justify-content: center;
+  color: #333333;
+  font-size: 28rpx;
+}
+
+.main-view {
+}

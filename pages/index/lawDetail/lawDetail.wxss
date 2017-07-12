@@ -1,0 +1,27 @@
+.main-view {
+  padding: 20rpx;
+}
+
+.title-text {
+  display: flex;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #333333;
+  margin-top: 10rpx;
+}
+
+.time-text {
+  display: flex;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 20rpx;
+}
+
+.content-text {
+  display: flex;
+  justify-content: center;
+  font-size: 30rpx;
+  color: #333333;
+  margin-top: 20rpx;
+}

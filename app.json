@@ -1,0 +1,31 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/openkey/openkey",
+    "pages/notice/notice",
+    "pages/selectKeyType/selectKeyType",
+    "pages/my/address/address",
+    "pages/my/address/addAddr/addAddr",
+    "pages/openkey/selectTimeType/selectTimeType",
+    "pages/openkey/addNote/addNote",
+    "pages/index/law/law",
+    "pages/index/lawDetail/lawDetail",
+    "pages/index/search/search",
+    "pages/switchcity/switchcity",
+    "pages/my/orderView/orderView",
+    "pages/my/mine/mine",
+    "pages/my/myorder/myorder",
+    "pages/my/score/score",
+    "pages/login/login",
+    "pages/login/findpwd/findpwd",
+    "pages/login/changepwd/changepwd",
+    "pages/login/register/register"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#43CD80",
+    "navigationBarTitleText": "锁帮帮",
+    "navigationBarTextStyle":"white"
+  }
+}

@@ -1,0 +1,16 @@
+<view class="main-view">
+  <view class="mashang-text" bindtap="changeSelectIndex" data-id="1">
+    <text>马上</text> <icon class="iconfont {{selectIndex == 0?'icon-xuanze1':''}}" />
+  </view>
+  <view class="mashang-text" bindtap="changeSelectIndex" data-id="2">
+    <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange" class="timePicker">  
+      <text>预约 {{times}}</text> <icon class="iconfont {{selectIndex == 1?'icon-xuanze1':''}}" />
+    </picker>  
+  </view>
+</view>
+
+<view class="section">  
+  <picker mode="time" value="{{time}}" start="00:00" end="23:59" bindchange="bindTimeChange">  
+    
+  </picker>  
+</view>  
