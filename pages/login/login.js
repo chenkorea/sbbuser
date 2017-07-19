@@ -4,7 +4,9 @@
 var app = getApp()
 Page({
   data: {
-    titleText: ''
+    titleText: '',
+    username:'',
+    passwd:''
   },
   //事件处理函数
   bindViewTap: function () {
@@ -18,8 +20,34 @@ Page({
     })
   },
   loginTap: function () {
-    wx.navigateBack({
-      
+    if (this.data.username.length == 0) {
+      wx.showToast({
+        title: '请输入登录账号',
+        duration: 1500,
+      })
+    } else if (this.data.passwd.length == 0) {
+      wx.showToast({
+        title: '请输入登录密码',
+        duration: 1500,
+      })
+    } else {
+      wx.setStorage({
+        key: 'isLogin',
+        data: '1',
+      }),
+      wx.navigateBack({
+
+      })
+    }
+  },
+  getusername: function (e) {
+    this.setData({
+      username: e.detail.value
+    })
+  },
+  getpasswd:function (e) {
+    this.setData({
+      passwd: e.detail.value
     })
   },
   onLoad: function () {

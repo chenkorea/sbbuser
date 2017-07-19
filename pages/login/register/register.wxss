@@ -81,3 +81,11 @@
   font-size: 30rpx;
 }
 
+.agreeselect {
+  color: #43CD80;
+}
+
+.agreeunselect{
+  color: #BEBEBE; 
+}
+

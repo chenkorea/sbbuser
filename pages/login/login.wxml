@@ -7,12 +7,12 @@
    <text class="login-title">锁帮帮-用户版</text>
    <view class="user-view">
      <icon class="iconfont icon-wode" />
-     <input class="user-text" placeholder="手机号" type="number"/>
+     <input class="user-text" bindinput="getusername" placeholder="手机号" type="number"/>
    </view>
 
    <view class="pwd-view">
      <icon class="iconfont icon-yaochi" />
-     <input class="pwd-text" placeholder="密码"/>
+     <input class="pwd-text" bindinput="getpasswd" type="password" placeholder="密码"/>
    </view>
 
    <button class="login_btn" bindtap="loginTap">登录</button>
