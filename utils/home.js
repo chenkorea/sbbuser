@@ -9,7 +9,7 @@ var PageItems =
     },
     {
       id: '2',
-      text: '换锁服务', 
+      text: '换锁服务',
       icon: 'iconfont icon-suo',
       bac: 'top-icon',
       url: '../openkey/openkey?fuwuType=1'
