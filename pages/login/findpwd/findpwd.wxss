@@ -65,6 +65,30 @@
   text-align: center;
 }
 
+.next_en_btn {
+  width: 80%;
+  height: 90rpx;
+  background: #228B22;
+  border-radius: 40rpx;
+  color: #FFFFFF;
+  margin-left: 60rpx;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+  text-align: center;
+}
+
+.next_un_btn {
+  width: 80%;
+  height: 90rpx;
+  background: #999999;
+  border-radius: 40rpx;
+  color: #FFFFFF;
+  margin-left: 60rpx;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+  text-align: center;
+}
+
 .register_btn {
   width: 80%;
   height: 90rpx;

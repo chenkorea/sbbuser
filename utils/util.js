@@ -17,5 +17,6 @@ function formatNumber(n) {
 }
 
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  url: 'http://192.200.200.71:9000/sbb-web'
 }

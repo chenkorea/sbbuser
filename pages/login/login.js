@@ -1,7 +1,8 @@
 //index.js
 
 //获取应用实例
-var app = getApp()
+var app = getApp();
+var loginrequest = require('./datarequest.js')
 Page({
   data: {
     titleText: '',
@@ -31,13 +32,7 @@ Page({
         duration: 1500,
       })
     } else {
-      wx.setStorage({
-        key: 'isLogin',
-        data: '1',
-      }),
-      wx.navigateBack({
-
-      })
+      loginrequest.getlogin(this.data.username, this.data.passwd);
     }
   },
   getusername: function (e) {
@@ -51,8 +46,17 @@ Page({
     })
   },
   onLoad: function () {
-    console.log('onLoad')
     var that = this
 
+  },
+
+  onShow:function(opntions){
+    var that = this;
+    wx.getStorage({
+      key: 'phone',
+      success: function(res) {
+        that.setData({ username:res.data})
+      },
+    })
   }
 })
