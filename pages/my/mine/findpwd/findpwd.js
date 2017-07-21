@@ -2,11 +2,11 @@
 
 //获取应用实例
 var app = getApp();
-var fogrequest = require('../datarequest.js');
+var fogrequest = require('../../../login/datarequest.js');
 Page({
   data: {
     titleText: '',
-    fogcode:'',
+    fogpwd:'',
     fogphone:'',
     nextstep:'next_un_btn'
   },
@@ -14,29 +14,36 @@ Page({
   bindViewTap: function () {
     var verifycode = '';
     var that = this;
-    wx.getStorage({
-      key: 'fogcode',
-      success: function (res) {
-        verifycode = res.data;
-      },
-      fail: function (res) { },
-      complete: function (res) {
-        if (that.fogphone.length != 11) {
-          wx.showToast({
-            title: '手机号码格式有误',
-          })
-        } else if (that.data.fogcode != verifycode){
-          wx.showToast({
-            title: '验证码错误',
-            duration: 1500,
-          })
-        }else{
+    if (that.fogphone.length != 11) {
+      wx.showToast({
+        title: '手机号码格式有误',
+      })
+    } else if (that.data.fogpwd.length < 6) {
+      wx.showToast({
+        title: '登录密码不得少于6位',
+        duration: 1500,
+      })
+    } else {
+      fogrequest.getconfirmlogin(this.data.fogphone, this.data.fogpwd,function(res){
+        if (res.data.code == '1'){
           wx.redirectTo({
-            url: '../changepwd/changepwd'
+            url: '../updatepwd/updatepwd'
           })
         }
-      },
-    });
+        
+      });
+      
+    }
+    // wx.getStorage({
+    //   key: 'fogcode',
+    //   success: function (res) {
+    //     verifycode = res.data;
+    //   },
+    //   fail: function (res) { },
+    //   complete: function (res) {
+        
+    //   },
+    // });
    
   },
   onLoad: function () {
@@ -81,12 +88,22 @@ Page({
   getfogname: function (e) {
     this.setData({
       fogphone: e.detail.value
-    })
+    })        
     if (this.data.fogphone.length==11){
       this.setData({
         nextstep: 'next_en_btn'
       })
+    }else{
+      this.setData({
+        nextstep: 'next_un_btn'
+      })
     }
+  },
+
+  getfogpwd: function (e) {
+    this.setData({
+      fogpwd: e.detail.value
+    })
   },
 
   onShow: function (opntions) {
@@ -96,6 +113,13 @@ Page({
       success: function (res) {
         that.setData({ fogphone: res.data })
       },
+      complete:function(res){
+        if (that.data.fogphone.length == 11) {
+          that.setData({
+            nextstep: 'next_en_btn'
+          })
+        }
+      }
     })
   }
 })

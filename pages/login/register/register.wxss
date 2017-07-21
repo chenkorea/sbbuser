@@ -64,11 +64,11 @@
   width: 35%;
   background: #43CD80;
   color: #ffffff;
-  height: 90rpx;
+  height: 60rpx;
   border-bottom: 1rpx solid #CCCCCC;
   font-size: 30rpx;
   padding-left: 20rpx;
-  top: 30rpx;
+  padding-top: 30rpx;
 }
 
 .send_btn {

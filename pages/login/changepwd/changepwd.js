@@ -9,11 +9,11 @@ Page({
     newpwd:'',
     conformpwd:'',
     phone:'',
-    uid:''
+    uid:'',
+    nickname:''
   },
   //事件处理函数
   bindViewTap: function () {
-    console.log("bindViewTap_-----------------this.data.newpwd:" + this.data.newpwd + "this.data.conformpwd:" + this.data.conformpwd)
     if (this.data.newpwd.length < 6){
       wx.showToast({
         title: '登录密码不得少于六位',
@@ -24,10 +24,14 @@ Page({
       });
     }else{
       resetrequest.getupdate(this.data.phone, this.data.uid, this.data.conformpwd
-            ,function(res){
+        , this.data.nickname,function(res){
               if(res.data.code == '1'){
                 wx.showToast({
                   title: '重置密码成功,请返回登录体验吧',
+                })
+                wx.setStorage({
+                  key: 'isLogin',
+                  data: '0',
                 })
                 wx.navigateBack({
 
@@ -53,6 +57,17 @@ Page({
         })
       },
     })
+
+    //获取昵称
+    wx.getStorage({
+      key: 'nickname',
+      success: function (res) {
+        that.setData({
+          nickname: res.data
+        })
+      },
+    })
+
     wx.getStorage({
       key: 'uid',
       success: function (res) {

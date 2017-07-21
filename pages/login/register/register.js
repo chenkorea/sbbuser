@@ -8,6 +8,7 @@ Page({
     titleText: '',
     regusername:'',
     regpasswd:'',
+    nickname:'',
     regverifycode:'',
     isagree:false,
     agreeBg:'#43CD80',
@@ -43,7 +44,7 @@ Page({
               duration: 1500,
             })
           } else {
-            regrequest.getregist(that.data.regusername, that.data.regpasswd);
+            regrequest.getregist(that.data.regusername, that.data.regpasswd, that.data.nickname);
           }
         } else {
           wx.showToast({
@@ -58,7 +59,12 @@ Page({
   onLoad: function () {
     console.log('onLoad')
     var that = this
-
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function (userInfo) {
+      that.setData({
+        nickname: userInfo.nickName
+      })
+    })
   },
   getcode:function(){
     var that = this;

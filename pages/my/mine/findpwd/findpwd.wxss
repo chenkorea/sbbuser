@@ -113,6 +113,19 @@
   justify-content: space-between;
 }
 
+.passwd-view {
+  width: 80%;
+  height: 90rpx;
+  border-radius: 40rpx;
+  margin-left: 60rpx;
+  margin-top: 50rpx;
+  background: #999999;
+  font-size: 30rpx;
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+
 .pwd-view {
   width: 45%;
   height: 90rpx;
@@ -140,18 +153,24 @@
 
 .pwd-text {
   position: absolute;
-  padding-left:30rpx; 
+  left: 120rpx;
+  top: 210rpx;
+  width: 60%;
+}
+
+.code-text {
+  position: absolute;
   left: 70rpx;
-  top: 185rpx;
+  top: 330rpx;
   width: 60%;
 }
 
 .send_btn {
   position: absolute;
-  top: 175rpx;
+  top: 310rpx;
   right: 70rpx;
   width: 30%;
-  height: 80rpx;
+  height: 90rpx;
   border-radius: 60rpx;
   background: #FF6666;
   color: #FFFFFF;
