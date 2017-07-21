@@ -1,5 +1,7 @@
 //获取应用实例
 var tcity = require("../../../../utils/citys.js");
+// 获取Util实例
+var Util = require('../../../../utils/address.js')
 
 var app = getApp()
 Page({
@@ -12,7 +14,9 @@ Page({
     county: '',
     value: [0, 0, 0],
     values: [0, 0, 0],
-    condition: false
+    condition: false,
+    detailAddress:'',
+    isDef: '0'
   },
   bindChange: function (e) {
     //console.log(e);
@@ -76,6 +80,43 @@ Page({
     this.setData({
       condition: !this.data.condition
     })
+  },
+  changeDef: function () {
+    if ("1" == this.data.isDef) {
+      this.setData({ isDef: '0'})
+    } else {
+      this.setData({ isDef: '1' })
+    }
+  },
+  bindKeyInput: function (e) {
+    this.setData({
+      detailAddress: e.detail.value
+    })
+  },
+  // 上传数据
+  saveData: function () {
+    if ("" == this.data.detailAddress) {
+      wx.showToast({
+        title: '请输入详细地址信息',
+      })
+      return;
+    }
+    // 上传数据
+    var popedom = this.data.province + this.data.city + this.data.county;
+    var address = this.data.detailAddress;
+    var uid = '343ee451a1ae4e3788789e0851fd59d7';
+    var isDef = this.data.isDef;
+    Util.addUserAddress(function (data) {
+      var code = data.data.code;
+      if (code == "1") {
+        // 保存成功
+        wx.navigateBack({});
+      } else {
+        wx.showToast({
+          title: '保存地址失败！',
+        })
+      }
+    }, uid, popedom, address, isDef);
   },
   onLoad: function () {
     console.log("onLoad");

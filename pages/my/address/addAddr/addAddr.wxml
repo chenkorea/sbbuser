@@ -10,24 +10,22 @@
       <text class="type-value">{{province}}-{{city}}-{{county}}</text><icon class="iconfont icon-jiantou1" />
     </view>
   </view>
-  <view class="type-view" bindtap="openRoad">
-    <text class="type-nmae">所在街道</text>
-    <view class="val-view">
-      <text class="type-value">{{province}}-{{city}}-{{county}}</text><icon class="iconfont icon-jiantou1" />
-    </view>
-  </view>
   <view class="detail-title">详细地址</view>
-  <textarea class="detail-text" placeholder="请输入具体小区，楼房，单元号，门牌号" placeholder-style="color:#999999;" />
+  <textarea class="detail-text" placeholder="请输入具体小区，楼房，单元号，门牌号" placeholder-style="color:#999999;" bindinput="bindKeyInput"/>
   
   <!-- 设置默认 -->
   <view class="type-view" bindtap="setDef">
     <text class="type-nmae">设置为默认地址</text>
-    <view class="val-view">
-      <icon class="icon-xuanze1 type-value" />
+    <view class="val-view" bindtap="changeDef">
+      <icon class="iconfont is-def-icon {{isDef=='1'?'icon-xuanze1':'icon-xuanze'}}" />
     </view>
   </view>
 
+  <!-- 提交按钮 -->
+  <button class="save-button" bindtap="saveData">提交</button>
 </view>
+
+
 <view wx:if="{{condition}}" class="citypicker">
   <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
     <view class="cityheader">
@@ -44,4 +42,7 @@
       <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
     </picker-view-column>
   </picker-view>
+
+
+
 </view>

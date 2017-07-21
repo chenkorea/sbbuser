@@ -16,39 +16,101 @@ Page({
       url: '../address/addAddr/addAddr',
     })
   },
+  /**
+   * 选择地址
+   */
+  selectAddress: function (e) {
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    for (var i = 0; i < that.data.addresses.length; i++) {
+      var data = that.data.addresses[i];
+      console.log(data);
+      if (id == data.id) {
+        console.log(data.address);
+        wx.setStorage({ key: 'selAddr', data: data, })
+        wx.navigateBack({})
+        break;
+      }
+    }
+  },
+  /**
+   * 删除地址
+   */
   delAddress: function (e) {
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    
     // 获取ID
     var id = e.currentTarget.dataset.id;
     wx.showModal({
       title: '提示',
-      content: '是否删除改服务地址',
+      content: '是否删除该服务地址',
       showCancel: true,
       cancelText: '取消',
       confirmText: '确定',
       success: function (res) {
         if (res.confirm) {
-          console.log('用户点击确定' + id)
+          Util.deleteUserAddress(function (data) {
+            var code = data.data.code;
+            if (code == "1") {
+              // 上传数据成功
+              wx.showToast({ title: '删除地址成功', });
+              that.setData({ addresses: [] });
+              that.getUserAddr();
+            } else {
+              wx.showToast({title: '删除地址失败！',})
+            }
+          }, id);
         } else {
           console.log('用户点击取消' + id)
         }
       }
     })
   },
+  /**
+   * 设置默认地址
+   */
   setDefAddress: function (e) {
+    var that = this;
     var id = e.currentTarget.dataset.id;
-    wx.showToast({
-      title: '设置成功' + id,
-    })
+    var uid = '343ee451a1ae4e3788789e0851fd59d7';
+    Util.updateUserAddress(function (data) {
+      var code = data.data.code;
+      if (code == "1") {
+        // 上传数据成功
+        wx.showToast({title: '设置默认地址成功',});
+        that.setData({ addresses: []});
+        that.getUserAddr();
+      } else {
+        wx.showToast({
+          title: '设置地址失败！',
+        })
+      }
+    }, uid, id);
+  },
+  /**
+   * 获取用户服务地址
+   */
+  getUserAddr: function () {
+    var that = this;
+    // 获取地址列表
+    Util.getUserAddress(function (data) {
+      var code = data.data.code;
+      if (code == "1") {
+        // 获取成功
+        that.setData({ addresses: data.data.content })
+      } else {
+        wx.showToast({
+          title: '获取地址失败！',
+        })
+      }
+    }, '343ee451a1ae4e3788789e0851fd59d7');
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(Util.addresses);
-    var that = this;
-    that.setData({
-      addresses: Util.addresses
-    })
+    this.getUserAddr();
   },
 
   /**
@@ -62,7 +124,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getUserAddr();
   },
 
   /**

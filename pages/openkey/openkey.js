@@ -1,7 +1,9 @@
 //index.js
+// 获取Util实例
+var Util = require('../../utils/address.js')
 
 //获取应用实例
-// fuwuType服务类型  0：开锁服务  1：换锁服务  2：报修服务  3：汽车解匙  4：民用解匙
+// fuwuType服务类型  01：开锁服务  02：换锁服务  03：报修服务  04：汽车解匙  05：民用解匙
 var app = getApp()
 Page({
   data: {
@@ -10,10 +12,17 @@ Page({
     bxarray: ['保修期内', '保修期外'],  // 保修类型数据
     fdmindex: 0,   // 服务类别选择索引
     fdmarray: [],  // 服务类别数据
-    fuwuType: 0,  // 服务类型
+    fuwuType: '01',  // 服务类型
     isShowBx:0,   // 是否显示保修选择
     oneTypeTitle: '',   // 开锁类别title
-    twoTypeTitle: ''   // 开锁图片title
+    twoTypeTitle: '',   // 开锁图片title
+    address: {},
+    serviceTime: '马上',
+    remark:'',
+    serviceAr: [],
+    picnumStr: '点击上传',
+    picnum: 0,
+    filePaths: []
   },
   /**
    * 监听普通picker选择器
@@ -46,23 +55,38 @@ Page({
   * 选择图片上传
   */
   selectPicAndUp: function () {
-    wx.chooseImage({
-      success: function (res) {
-        var tempFilePaths = res.tempFilePaths
-        // wx.uploadFile({
-        //   url: 'http://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
-        //   filePath: tempFilePaths[0],
-        //   name: 'file',
-        //   formData: {
-        //     'user': 'test'
-        //   },
-        //   success: function (res) {
-        //     var data = res.data
-        //     //do something
-        //   }
-        // })
-      }
-    })
+    var that = this;
+    var pics = that.data.filePaths;
+    //将json转成字符串
+    let picsStr = JSON.stringify(pics);
+    if (that.data.picnum != 0) {
+      wx.navigateTo({
+        url: '../openkey/selectPic/selectPic?picsStr=' + picsStr,
+      })
+    } else {
+      wx.chooseImage({
+        success: function (res) {
+          var tempFilePaths = res.tempFilePaths
+          that.setData({ filePaths: tempFilePaths});
+          that.setData({ picnumStr: '已经选择' + tempFilePaths.length + '张图片' });
+          that.setData({ picnum: tempFilePaths.length });
+          
+          wx.uploadFile({
+            url: getApp().globalData.serverIp + 'openkey/uploadFileToServer', //仅为示例，非真实的接口地址
+            filePath: tempFilePaths[0],
+            name: 'file',
+            formData: {
+              'user': 'test'
+            },
+            success: function (res) {
+              var data = res.data
+              console.log(data);
+              //do something
+            }
+          })
+        }
+      })
+    }
   },
   /**
    * 选择服务地址
@@ -85,17 +109,65 @@ Page({
       url: '../openkey/addNote/addNote',
     })
   },
+
+  /**
+   * 上传数据
+   */
+  saveData:function () {
+    var that = this;
+    var service_item_id = that.data.serviceAr[that.data.fdmindex].id;
+    var service_time = "01";
+    if ("马上" != that.data.serviceTime) {
+        service_time = "02";
+    }
+    // 组合订单对象
+    var order = {
+      user_id: '343ee451a1ae4e3788789e0851fd59d7',
+      service_type: that.data.fuwuType,
+      service_item_id: service_item_id,
+      service_address: that.data.address.popedom + that.data.address.address,
+      service_time: service_time,
+      service_time_describe: that.data.serviceTime,
+      remarks: that.data.remark,
+      order_type: '1'
+    }
+
+    // 提交数据
+    Util.createUserOrder(function (data) {
+      var code = data.data.code;
+      if (code == "1") {
+        // 上传数据成功
+        wx.showModal({
+          title: '提交订单成功',
+          content: '请稍等，将会有师傅和您联系！',
+          showCancel: false,
+        })
+        // 清空当前订单界面的数据
+        wx.removeStorage({ key: 'remark', success: function (res) { }, })
+        wx.removeStorage({ key: 'selectPics', success: function (res) { }, })
+        wx.removeStorage({ key: 'serviceTime', success: function (res) { }, })
+      } else {
+        wx.showToast({
+          title: '提交订单失败！',
+        })
+      }
+    }, order);
+    console.log(order);
+  },
+
   onLoad: function (options) {
     console.log('onLoad')
     // 获取传送过来的值
     var that = this;
-
     that.setData({
       fuwuType: options.fuwuType
     })
 
+    // 查询服务列表
+    that.getServiceType();
+
     // 是否显示保修期
-    if (that.data.fuwuType == 2) {
+    if (that.data.fuwuType == '03') {
       that.setData({
         isShowBx: 1
       })
@@ -107,50 +179,92 @@ Page({
 
     // 设置初始数据
     var type = that.data.fuwuType;
-    if (type == 0 || type == 1 || type == 2) {
-       that.setData({
-         fdmarray: ['防盗门锁', '汽车锁', '保险柜锁', '其他锁具']
-       })
-    } else if (type == 3) {
-      that.setData({
-        fdmarray: ['钥匙增加', '钥匙丢失', '折叠钥匙改装', '电池更换']
-      })
-    } else if (type == 4) {
-      that.setData({
-        fdmarray: ['配车库电动门钥匙', '配小区门禁卡']
-      })
-    }
 
-    if (type == 0) {
+    if (type == '01') {
       that.setData({
         oneTypeTitle: '开锁类别',
         twoTypeTitle: '开启锁具图片'
       })
-    } else if (type == 1) {
+      wx.setNavigationBarTitle({ title: that.data.titleAr[0], })
+    } else if (type == '02') {
       that.setData({
         oneTypeTitle: '换锁类别',
         twoTypeTitle: '更换锁具图片'
       })
-    } else if (type == 2) {
+      wx.setNavigationBarTitle({ title: that.data.titleAr[1], })
+    } else if (type == '03') {
       that.setData({
         oneTypeTitle: '保修锁具类别',
         twoTypeTitle: '保修锁具图片'
       })
-    } else if (type == 3) {
+      wx.setNavigationBarTitle({ title: that.data.titleAr[2], })
+    } else if (type == '04') {
       that.setData({
         oneTypeTitle: '服务类别',
         twoTypeTitle: '钥匙车辆图片'
       })
-    } else if (type == 4) {
+      wx.setNavigationBarTitle({ title: that.data.titleAr[3], })
+    } else if (type == '05') {
       that.setData({
         oneTypeTitle: '服务类别',
         twoTypeTitle: '配置钥匙图片'
       })
+      wx.setNavigationBarTitle({ title: that.data.titleAr[4], })
     }
-
-    // 设置标题
-    wx.setNavigationBarTitle({
-      title: that.data.titleAr[that.data.fuwuType],
+    
+  },
+  onShow: function () {
+    var that = this;
+    // 地址
+    wx.getStorage({
+      key: 'selAddr',
+      success: function(res) {
+        that.setData({ address: res.data})
+      },
     })
-  }
+    // 服务时间
+    wx.getStorage({
+      key: 'serviceTime',
+      success: function(res) {
+        that.setData({ serviceTime: res.data})
+      },
+    })
+    // 备注
+    wx.getStorage({
+      key: 'remark',
+      success: function(res) {
+        that.setData({ remark: res.data})
+      },
+    })
+    // 选择图片
+    wx.getStorage({
+      key: 'selectPics',
+      success: function(res) {
+        that.setData({ filePaths: res.data })
+        that.setData({ picnumStr: '已经选择' + res.data.length + '张图片' });
+        that.setData({ picnum: res.data.length });
+      },
+    })
+  },
+  /**
+   * 获取服务类型
+   */
+  getServiceType: function (e) {
+    var that = this;
+    Util.getServiceType(function (data) {
+      var code = data.data.code;
+      if (code == "1") {
+        var serAr = [];
+        for (var i = 0; i < data.data.content.length; i++) {
+          serAr[i] = data.data.content[i].service_item;
+        }
+        that.setData({ fdmarray: serAr});
+        that.setData({ serviceAr: data.data.content });
+      } else {
+        wx.showToast({
+          title: '获取服务类型失败！',
+        })
+      }
+    }, that.data.fuwuType);
+  },
 })

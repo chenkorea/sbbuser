@@ -13,7 +13,6 @@ Page({
     city:'',
     latitude:'',
     longitude:''
-
   },
   //事件处理函数
   bindViewTap: function() {
@@ -42,16 +41,16 @@ Page({
       data: '1',
     })
 
-    wx.getStorage({
-      key: 'isLogin',
-      success: function (res) {
-        // if (res.data != '1') {
-          wx.navigateTo({
-            url: '../login/login',
-          })
-        // }
-      },
-    })
+    // wx.getStorage({
+    //   key: 'isLogin',
+    //   success: function (res) {
+    //     // if (res.data != '1') {
+    //       wx.navigateTo({
+    //         url: '../login/login',
+    //       })
+    //     // }
+    //   },
+    // })
 
     console.log('onLoad')
     var that = this

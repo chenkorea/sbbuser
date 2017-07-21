@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/logs/logs",
     "pages/openkey/openkey",
@@ -9,6 +9,7 @@
     "pages/my/address/addAddr/addAddr",
     "pages/openkey/selectTimeType/selectTimeType",
     "pages/openkey/addNote/addNote",
+    "pages/openkey/selectPic/selectPic",
     "pages/index/law/law",
     "pages/index/lawDetail/lawDetail",
     "pages/index/search/search",
@@ -22,10 +23,10 @@
     "pages/login/changepwd/changepwd",
     "pages/login/register/register"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#43CD80",
     "navigationBarTitleText": "锁帮帮",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   }
 }

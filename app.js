@@ -24,6 +24,7 @@ App({
   },
 
   globalData: {
-    userInfo: null
+    userInfo: null,
+    serverIp:"http://192.200.200.21:9000/sbb-web/phone/"
   }
 })

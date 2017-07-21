@@ -12,11 +12,10 @@
   <!-- 通知和广告 -->
   <view class="ad_view">
     <view class="ad_top" bindtap="toNoticeDetailView">
-      <icon class="iconfont icon-laba notice_ic"/>
-      <text class="notice-text">锁具修理工国家职业标准</text>
+      <icon class="iconfont icon-laba notice_ic"/><text class="notice-text">锁具修理工国家职业标准</text>
     </view>
     <view class="ad-bottom">
-        <image src="http://pic.58pic.com/58pic/16/81/53/42y58PICxf8_1024.jpg" class="ad-image"></image>
+        <image src="http://wimg.huodongxing.com/Content/app/appom/792702452794718.jpg@!wmlogo" class="ad-image"></image>
     </view>
   </view>
 

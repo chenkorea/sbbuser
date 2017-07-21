@@ -5,21 +5,21 @@ var PageItems =
       text: '开锁服务',
       icon: 'iconfont icon-yaochi',
       bac: 'top-icon',
-      url: '../openkey/openkey?fuwuType=0'
+      url: '../openkey/openkey?fuwuType=01'
     },
     {
       id: '2',
       text: '换锁服务',
       icon: 'iconfont icon-suo',
       bac: 'top-icon',
-      url: '../openkey/openkey?fuwuType=1'
+      url: '../openkey/openkey?fuwuType=02'
     },
     {
       id: '3',
       text: '报修服务',
       icon: 'iconfont icon-dianhua',
       bac: 'top-icon',
-      url: '../openkey/openkey?fuwuType=2'
+      url: '../openkey/openkey?fuwuType=03'
     },
     {
       id: '4',
@@ -32,14 +32,14 @@ var PageItems =
       text: '汽车解匙',
       icon: 'iconfont icon-qiche',
       bac: 'mid-icon',
-      url: '../openkey/openkey?fuwuType=3'
+      url: '../openkey/openkey?fuwuType=04'
     },
     {
       id: '6',
       text: '民用解匙',
       icon: 'iconfont icon-fangwuqiuzu',
       bac: 'mid-icon',
-      url: '../openkey/openkey?fuwuType=4'
+      url: '../openkey/openkey?fuwuType=05'
     },
     {
       id: '7',

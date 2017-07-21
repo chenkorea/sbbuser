@@ -48,20 +48,19 @@
   display: flex;
   background: #FF6666;
   height: 60rpx;
-  font-size: 25rpx;
   color: #FFF;
   align-items: center;
 }
 
 .notice_ic {
   color: #FFFFFF;
-  margin-top: -15rpx;
+  font-size: 20rpx;
 }
 
 .notice-text {
   flex: 1;
   height: 30rpx;
-  line-height: 25rpx;
+  font-size: 25rpx;
 }
 
 .ad-bottom .ad-image {
