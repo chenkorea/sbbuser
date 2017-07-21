@@ -12,8 +12,9 @@ Page({
     cellHeight: '120rpx',
     city:'',
     latitude:'',
-    longitude:''
-
+    longitude:'',
+    user_name:'昵称',
+    user_head:'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg'
   },
   //事件处理函数
   bindViewTap: function() {
@@ -37,32 +38,25 @@ Page({
     })
   },
   onLoad: function () {
-    wx.setStorage({
-      key: 'isLogin',
-      data: '1',
-    })
-
-    wx.getStorage({
-      key: 'isLogin',
-      success: function (res) {
-        // if (res.data != '1') {
-          wx.navigateTo({
-            url: '../login/login',
-          })
-        // }
-      },
-    })
-
     console.log('onLoad')
     var that = this
+    var islogin = wx.getStorageSync('isLogin');
+    console.log('++++++++index onShow+++++++++islogin:' + islogin);
+    if (islogin != '1') {
+      wx.navigateTo({
+        url: '../login/login',
+        success: function (res) {
+        },
+      })
+    }
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
       //更新数据
       that.setData({
-        userInfo:userInfo
+        userInfo:userInfo,
+        user_head: userInfo.avatarUrl == "" ? "http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg" : userInfo.avatarUrl
       })
     })
-
     // 自动定位获取地理位置
     homeUtil.getCityName(function (locationData) {
 
@@ -117,10 +111,20 @@ Page({
    */
   onShow: function () {
     var that = this;
+    
     wx.getStorage({
       key: 'city',
       success: function(res) {
         that.setData({ city: res.data})
+      },
+    }),
+    //获取昵称
+     wx.getStorage({
+       key: 'nickname',
+      success: function (res) {
+         that.setData({
+           user_name: res.data
+         })
       },
     })
   }

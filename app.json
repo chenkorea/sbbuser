@@ -20,7 +20,9 @@
     "pages/login/login",
     "pages/login/findpwd/findpwd",
     "pages/login/changepwd/changepwd",
-    "pages/login/register/register"
+    "pages/login/register/register",
+    "pages/my/mine/findpwd/findpwd",
+    "pages/my/mine/updatepwd/updatepwd"
   ],
   "window":{
     "backgroundTextStyle":"light",
