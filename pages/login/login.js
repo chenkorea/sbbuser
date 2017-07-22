@@ -2,7 +2,7 @@
 
 //获取应用实例
 var app = getApp();
-var loginrequest = require('./datarequest.js')
+var loginrequest = require('./datarequest/datarequest.js')
 Page({
   data: {
     titleText: '',
@@ -47,18 +47,10 @@ Page({
   },
   onLoad: function () {
     var that = this
-
   },
 
   onShow:function(opntions){
     var that = this;
-    var islogin = wx.getStorageSync('isLogin')
-    console.log('++++++++login onShow+++++++islogin:' + islogin)
-    // if(islogin == '1'){
-    //   wx.navigateBack({
-        
-    //   })
-    // }
     wx.getStorage({
       key: 'phone',
       success: function(res) {

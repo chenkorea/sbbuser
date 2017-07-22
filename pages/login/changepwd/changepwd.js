@@ -2,7 +2,7 @@
 
 //获取应用实例
 var app = getApp();
-var resetrequest = require('../datarequest.js');
+var resetrequest = require('../datarequest/datarequest.js');
 Page({
   data: {
     titleText: '',

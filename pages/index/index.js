@@ -38,7 +38,6 @@ Page({
     })
   },
   onLoad: function () {
-    console.log('onLoad')
     var that = this
     var islogin = wx.getStorageSync('isLogin');
     if (islogin != '1') {
@@ -110,7 +109,6 @@ Page({
    */
   onShow: function () {
     var that = this;
-    
     wx.getStorage({
       key: 'city',
       success: function(res) {

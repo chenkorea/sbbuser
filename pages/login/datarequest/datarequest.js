@@ -1,5 +1,5 @@
 
-var util = require('../../utils/util.js');
+var util = require('../../../utils/util.js');
 //登录接口
 function getlogin(loginname,loginpw){
   wx.request({
