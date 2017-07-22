@@ -13,6 +13,7 @@ Page({
     city:'',
     latitude:'',
     longitude:'',
+    uid:'',
     user_name:'昵称',
     user_head:'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg'
   },
@@ -34,10 +35,21 @@ Page({
   },
   toMyOrderView: function () {
     wx.navigateTo({
-      url: '../my/orderView/orderView'
+      url: '../my/orderView/orderView?uid=' +  this.data.uid
     })
   },
   onLoad: function () {
+
+    // 获取uid
+    wx.getStorage({
+      key: 'uid',
+      success: function (res) {
+        that.setData({ uid: res.data })
+      },
+    })
+
+    console.log('onLoad')
+
     var that = this
     var islogin = wx.getStorageSync('isLogin');
     if (islogin != '1') {
@@ -122,6 +134,14 @@ Page({
          that.setData({
            user_name: res.data
          })
+      },
+    })
+
+    // 获取uid
+    wx.getStorage({
+      key: 'uid',
+      success: function (res) {
+        that.setData({ userId: res.data })
       },
     })
   }

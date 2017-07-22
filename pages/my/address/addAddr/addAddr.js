@@ -104,19 +104,24 @@ Page({
     // 上传数据
     var popedom = this.data.province + this.data.city + this.data.county;
     var address = this.data.detailAddress;
-    var uid = '343ee451a1ae4e3788789e0851fd59d7';
     var isDef = this.data.isDef;
-    Util.addUserAddress(function (data) {
-      var code = data.data.code;
-      if (code == "1") {
-        // 保存成功
-        wx.navigateBack({});
-      } else {
-        wx.showToast({
-          title: '保存地址失败！',
-        })
-      }
-    }, uid, popedom, address, isDef);
+    wx.getStorage({
+      key: 'uid',
+      success: function (res) {
+        var uid = res.data;
+        Util.addUserAddress(function (data) {
+          var code = data.data.code;
+          if (code == "1") {
+            // 保存成功
+            wx.navigateBack({});
+          } else {
+            wx.showToast({
+              title: '保存地址失败！',
+            })
+          }
+        }, uid, popedom, address, isDef);
+      },
+    })
   },
   onLoad: function () {
     console.log("onLoad");

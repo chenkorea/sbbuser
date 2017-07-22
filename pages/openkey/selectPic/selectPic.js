@@ -27,23 +27,7 @@ Page({
       success: function (res) {
         var tempFilePaths = res.tempFilePaths
         that.setData({ selectPicAr: tempFilePaths });
-        wx.setStorage({
-          key: 'selectPics',
-          data: tempFilePaths,
-        })
-        wx.uploadFile({
-          url: getApp().globalData.serverIp + 'openkey/uploadFileToServer',
-          filePath: tempFilePaths[0],
-          name: 'file',
-          formData: {
-            'user': 'test'
-          },
-          success: function (res) {
-            var data = res.data
-            console.log(data);
-            //do something
-          }
-        })
+        
       }
     })
   },

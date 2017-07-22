@@ -73,38 +73,50 @@ Page({
   setDefAddress: function (e) {
     var that = this;
     var id = e.currentTarget.dataset.id;
-    var uid = '343ee451a1ae4e3788789e0851fd59d7';
-    Util.updateUserAddress(function (data) {
-      var code = data.data.code;
-      if (code == "1") {
-        // 上传数据成功
-        wx.showToast({title: '设置默认地址成功',});
-        that.setData({ addresses: []});
-        that.getUserAddr();
-      } else {
-        wx.showToast({
-          title: '设置地址失败！',
-        })
-      }
-    }, uid, id);
+    
+    wx.getStorage({
+      key: 'uid',
+      success: function(res) {
+        var uid = res.data;
+        Util.updateUserAddress(function (data) {
+          var code = data.data.code;
+          if (code == "1") {
+            // 上传数据成功
+            wx.showToast({ title: '设置默认地址成功', });
+            that.setData({ addresses: [] });
+            that.getUserAddr();
+          } else {
+            wx.showToast({
+              title: '设置地址失败！',
+            })
+          }
+        }, uid, id);
+      },
+    })
   },
   /**
    * 获取用户服务地址
    */
   getUserAddr: function () {
     var that = this;
-    // 获取地址列表
-    Util.getUserAddress(function (data) {
-      var code = data.data.code;
-      if (code == "1") {
-        // 获取成功
-        that.setData({ addresses: data.data.content })
-      } else {
-        wx.showToast({
-          title: '获取地址失败！',
-        })
-      }
-    }, '343ee451a1ae4e3788789e0851fd59d7');
+    wx.getStorage({
+      key: 'uid',
+      success: function (res) {
+        var uid = res.data;
+        // 获取地址列表
+        Util.getUserAddress(function (data) {
+          var code = data.data.code;
+          if (code == "1") {
+            // 获取成功
+            that.setData({ addresses: data.data.content })
+          } else {
+            wx.showToast({
+              title: '获取地址失败！',
+            })
+          }
+        }, uid);
+      },
+    })
   },
   /**
    * 生命周期函数--监听页面加载

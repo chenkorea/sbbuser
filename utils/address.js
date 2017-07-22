@@ -107,6 +107,24 @@ function createUserOrder(callback, userOrder) {
   })
 }
 
+// 获取用户订单
+function getUserOrders(callback, uid, status) {
+  var remoteUrl = getApp().globalData.serverIp + "openkey/getUserOrders";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      uid: uid,
+      status: status
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
+
 
 
 module.exports = {
@@ -115,5 +133,6 @@ module.exports = {
   updateUserAddress: updateUserAddress,
   deleteUserAddress: deleteUserAddress,
   getServiceType: getServiceType,
-  createUserOrder: createUserOrder
+  createUserOrder: createUserOrder,
+  getUserOrders: getUserOrders
 } 

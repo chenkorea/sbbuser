@@ -22,7 +22,8 @@ Page({
     serviceAr: [],
     picnumStr: '点击上传',
     picnum: 0,
-    filePaths: []
+    filePaths: [],
+    userId: ''
   },
   /**
    * 监听普通picker选择器
@@ -71,19 +72,19 @@ Page({
           that.setData({ picnumStr: '已经选择' + tempFilePaths.length + '张图片' });
           that.setData({ picnum: tempFilePaths.length });
           
-          wx.uploadFile({
-            url: getApp().globalData.serverIp + 'openkey/uploadFileToServer', //仅为示例，非真实的接口地址
-            filePath: tempFilePaths[0],
-            name: 'file',
-            formData: {
-              'user': 'test'
-            },
-            success: function (res) {
-              var data = res.data
-              console.log(data);
-              //do something
-            }
-          })
+          // wx.uploadFile({
+          //   url: getApp().globalData.serverIp + 'openkey/uploadFileToServer', //仅为示例，非真实的接口地址
+          //   filePath: tempFilePaths[0],
+          //   name: 'file',
+          //   formData: {
+          //     'user': 'test'
+          //   },
+          //   success: function (res) {
+          //     var data = res.data
+          //     console.log(data);
+          //     //do something
+          //   }
+          // })
         }
       })
     }
@@ -120,39 +121,91 @@ Page({
     if ("马上" != that.data.serviceTime) {
         service_time = "02";
     }
-    // 组合订单对象
-    var order = {
-      user_id: '343ee451a1ae4e3788789e0851fd59d7',
-      service_type: that.data.fuwuType,
-      service_item_id: service_item_id,
-      service_address: that.data.address.popedom + that.data.address.address,
-      service_time: service_time,
-      service_time_describe: that.data.serviceTime,
-      remarks: that.data.remark,
-      order_type: '1'
+    // 保修期Index
+    var type = that.data.fuwuType;
+    var guaran = "1";
+    if (that.data.index != 0) {
+      guaran = "2"
     }
+    if (type != '03') {
+      guaran = ''
+    }
+    
+    wx.getStorage({
+      key: 'uid',
+      success: function(res) {
+        var uid = res.data;
 
-    // 提交数据
-    Util.createUserOrder(function (data) {
-      var code = data.data.code;
-      if (code == "1") {
-        // 上传数据成功
-        wx.showModal({
-          title: '提交订单成功',
-          content: '请稍等，将会有师傅和您联系！',
-          showCancel: false,
-        })
-        // 清空当前订单界面的数据
-        wx.removeStorage({ key: 'remark', success: function (res) { }, })
-        wx.removeStorage({ key: 'selectPics', success: function (res) { }, })
-        wx.removeStorage({ key: 'serviceTime', success: function (res) { }, })
-      } else {
-        wx.showToast({
-          title: '提交订单失败！',
-        })
-      }
-    }, order);
-    console.log(order);
+        // 组合订单对象
+        var order = {
+          user_id: uid,
+          service_type: that.data.fuwuType,
+          service_item_id: service_item_id,
+          service_address: that.data.address.popedom + that.data.address.address,
+          service_time: service_time,
+          service_time_describe: that.data.serviceTime,
+          guarantee_type: guaran,
+          remarks: that.data.remark,
+          order_type: '1'
+        }
+
+        // 提交数据
+        Util.createUserOrder(function (data) {
+          var code = data.data.code;
+          if (code == "1") {
+            // 上传数据成功
+            wx.showModal({
+              title: '提交订单成功',
+              content: '请稍等，将会有师傅和您联系！',
+              showCancel: false,
+            })
+            // 订单生成成功，上传订单图片(获取订单ID)
+            var orderID = data.data.content[0].id;
+            that.uploadOrderPics(orderID);
+
+            // 清空当前订单界面的数据
+            wx.removeStorage({ key: 'remark', success: function (res) { }, })
+            wx.removeStorage({ key: 'selectPics', success: function (res) { }, })
+            wx.removeStorage({ key: 'serviceTime', success: function (res) { }, })
+          } else {
+            wx.showToast({
+              title: '提交订单失败！',
+            })
+          }
+        }, order);
+        console.log(order);
+      },
+    })
+  },
+
+  /**
+   * 上传订单图片
+   */
+  uploadOrderPics: function (orderId) {
+    var tempPics = this.data.filePaths;
+    for (var i = 0; i < tempPics.length; i++) {
+      console.log(tempPics[i]);
+      wx.uploadFile({
+        url: getApp().globalData.serverIp + 'openkey/uploadMobileFile',
+        filePath: tempPics[i],
+        name: 'file',
+        formData: {
+          'file_type': '5',
+          'parent_id': orderId
+        },
+        header: { 'content-type': 'application/x-www-form-urlencoded' },
+        success: function (res) {
+          console.log(res);
+          var code = res.data.code;
+          // 成功
+          if (code == '1') {
+            wx.showToast({
+              title: '图片上传成功',
+            })
+          }
+        }
+      })
+    }
   },
 
   onLoad: function (options) {
