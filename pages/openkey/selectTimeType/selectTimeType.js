@@ -10,12 +10,9 @@ Page({
     var id = e.currentTarget.dataset.id;
     var that = this;
     if (id == 1) {
-      that.setData({
-        selectIndex: 0
-      })
-      wx.navigateBack({
-        url: '../openkey/openley'
-      })
+      that.setData({ selectIndex: 0 })
+      wx.setStorage({ key: 'serviceTime', data: '马上', })
+      wx.navigateBack({})
     } else {
       that.setData({
         selectIndex: 1
@@ -24,10 +21,9 @@ Page({
   },
   //  点击时间组件确定事件  
   bindTimeChange: function (e) {
-    
-    this.setData({
-      times: e.detail.value
-    })
+    this.setData({times: e.detail.value})
+    wx.setStorage({ key: 'serviceTime', data: this.data.times,})
+    wx.navigateBack({})
   },
   //事件处理函数
   bindViewTap: function () {

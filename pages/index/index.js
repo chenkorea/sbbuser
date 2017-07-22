@@ -41,7 +41,6 @@ Page({
     console.log('onLoad')
     var that = this
     var islogin = wx.getStorageSync('isLogin');
-    console.log('++++++++index onShow+++++++++islogin:' + islogin);
     if (islogin != '1') {
       wx.navigateTo({
         url: '../login/login',

@@ -1,0 +1,44 @@
+.air_container {
+  column-count:3;
+  column-gap: 10px;
+  width: 100%;
+  margin-bottom: 100rpx;
+  padding: 2rpx;
+}
+
+.mv_item {
+  width: 150rpx;
+  background: #fefefe;
+  border: 2px solid #fcfcfc;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+  margin: 2px;
+  padding: 1px;
+  transition: opacity .4s ease-in-out;
+  display: inline-block;
+}
+
+.mv_pic
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150rpx;
+  height: 160rpx;
+}
+
+.pic {
+  width: 150rpx;
+  height: 160rpx;
+}
+
+.save-button {
+  height: 100rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #FFFFFF;
+  font-size: 32rpx;
+  background: #43CD80;
+  border-radius:0;
+}

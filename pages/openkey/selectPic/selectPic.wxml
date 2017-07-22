@@ -1,0 +1,11 @@
+<!--selectPic.wxml-->
+<view class="air_container">
+  <view class="mv_item" wx:for="{{selectPicAr}}" wx:key="index"wx data-id="{{index}}" bindtap="seeMovieInfo">
+    <view class="mv_pic">
+      <image src="{{selectPicAr[index]}}" mode="scaleToFit" class="pic"></image>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <button class="save-button" bindtap="selectPic">重新选择图片</button>
+</view>

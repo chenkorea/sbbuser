@@ -1,4 +1,4 @@
 <!-- addNote.wxml -->
 <view class="main-view">
-  <textarea class="detail-text" placeholder="请输入备注信息" placeholder-style="color:#999999;" />
+  <textarea class="detail-text" placeholder="请输入备注信息" placeholder-style="color:#999999;" value="{{remark}}" bindinput="saveRemark"/>
 </view>
