@@ -23,7 +23,8 @@
     "pages/login/changepwd/changepwd",
     "pages/login/register/register",
     "pages/my/mine/findpwd/findpwd",
-    "pages/my/mine/updatepwd/updatepwd"
+    "pages/my/mine/updatepwd/updatepwd",
+    "pages/openkey/newPic/newPic"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -193,3 +193,11 @@
   font-size: 50rpx;
   margin: 20rpx;
 }
+
+.pay_but {
+  height: 90rpx;
+  background: #43CD80;
+  color: white;
+  font-size: 30rpx;
+  margin: 20rpx 10rpx 10rpx 10rpx;
+}

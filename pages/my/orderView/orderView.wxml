@@ -36,12 +36,13 @@
       <scroll-view class="content-view" scroll-y="true">
         <view class="order-item" wx:for="{{userOrders}}" wx:key="{{index}}" data-id="{{item.id}}">
           <view class="order-no">订单号：{{item.order_no}}</view>
-          <view class="order-status">发起时间：{{item.create_time}}</view>
+          <view class="order-status">发起时间：{{item.create_time_ttr}}</view>
           <view class="order-status">类   别：{{item.data_name}}-{{item.service_item}}</view>
           <view class="order-status">服务地址：{{item.service_address}}</view>
-          <view class="order-status" hidden="{{orderstatus=='1'}}">接单技师：彰显三</view>
-          <view class="order-status" hidden="{{orderstatus=='1'}}">报   价：200.00元</view>
-          <view class="order-status" hidden="{{orderstatus=='1' || orderstatus=='2'}}">完工时间：2017年4月21号13:00</view>
+          <view class="order-status" hidden="{{orderstatus=='1'}}">接单技师：{{item.process_person_name}}</view>
+          <view class="order-status" hidden="{{orderstatus=='1'}}">报   价：服务费{{item.service_price}}元 附加费{{item.additional_service_price>0?item.service_price:0}}元 </view>
+          <view class="order-status" hidden="{{orderstatus=='1' || orderstatus=='2'}}">完工时间：{{item.finish_time}}</view>
+          <button class="pay_but" data-id="{{item.id}}" bindtap="toPay">去支付</button>
         </view>
       </scroll-view>
   </view>

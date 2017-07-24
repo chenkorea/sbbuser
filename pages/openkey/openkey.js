@@ -62,7 +62,7 @@ Page({
     let picsStr = JSON.stringify(pics);
     if (that.data.picnum != 0) {
       wx.navigateTo({
-        url: '../openkey/selectPic/selectPic?picsStr=' + picsStr,
+        url: '../openkey/newPic/newPic?picsStr=' + picsStr,
       })
     } else {
       wx.chooseImage({
@@ -141,7 +141,8 @@ Page({
           user_id: uid,
           service_type: that.data.fuwuType,
           service_item_id: service_item_id,
-          service_address: that.data.address.popedom + that.data.address.address,
+          popedom_name: that.data.address.popedom,
+          service_address: that.data.address.address,
           service_time: service_time,
           service_time_describe: that.data.serviceTime,
           guarantee_type: guaran,

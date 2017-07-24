@@ -1,0 +1,9 @@
+<!-- 猫眼展示 -->
+<view class="air_container">
+  <view class="mv_item" wx:for="{{selectPicAr}}" wx:key="index" data-id="{{index}}" data-type="open" catchtap="seeMovieInfo">
+    <view class="mv_pic">
+      <image src="{{item}}" mode="scaleToFill" class="pic" ></image>
+    </view>
+    <button class="mv_name" hidden="{{index == selectPicAr.length-1}}" data-id="{{index}}" data-type="del" catchtap="deletePic">删除</button>
+  </view>
+</view>
