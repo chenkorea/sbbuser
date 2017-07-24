@@ -35,7 +35,7 @@ Page({
   },
   toMyOrderView: function () {
     wx.navigateTo({
-      url: '../my/orderView/orderView?uid=' +  this.data.uid
+      url: '../my/orderView/orderView?uid=' + this.data.uid + "&user_name=" + this.data.user_name
     })
   },
   onLoad: function () {

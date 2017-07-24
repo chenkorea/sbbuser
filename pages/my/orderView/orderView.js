@@ -145,42 +145,71 @@ Page({
   /**
    * 去支付
    */
-  toPay: function () {
-    // 时间戳
-    var timestamp = '' + Date.parse(new Date()); 
-    // 随机数
-    var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    var nums = "";
-    for (var i = 0; i < 32; i++) {
-      var id = parseInt(Math.random() * 61);
-      nums += chars[id];
-    }
-
-    var paySign = MD5Util.hexMD5("appId=wxd678efh567hg6787&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS&package=prepay_id=wx2017033010242291fcfe0db70013231072&signType=MD5&timeStamp=1490840662&key=qazwsxedcrfvtgbyhnujmikolp111111");
-
-    wx.requestPayment({
-      'timeStamp': timestamp,
-      'nonceStr': nums,
-      'package': 'prepay_id=2378621736721323721537612',
-      'signType': 'MD5',
-      'paySign': paySign,
-      'total_fee': '0.01',
-      'success': function (res) {
+  toPay: function (e) {
+    var that = this;
+    var orderId = e.currentTarget.dataset.id;
+    var uname = this.data.user_name;
+    var uid = this.data.uid;
+    console.log(orderId);
+    // 这个应该是支付成功之后调用的，现在是直接跳过支付默认支付成功
+    Util.updateOrderPayStatus(function (data) {
+      var code = data.data.code;
+      if (code == "1") {
+        // 直接跳转到查询已完成的
+        that.setData({ classone: '', classtwo: '', classThree: '', classFour: 'selected', orderstatus: '4' })
+        // 查询已完成订单
+        that.getUserOrder(that.data.uid, that.data.orderstatus);
+      } else {
+        // 失败
         wx.showModal({
-          title: '',
-          content: '支付成功',
-        })
-      },
-      'fail': function (res) {
-        wx.showModal({
-          title: '支付失败',
-          content: res,
+          title: '失败',
+          content: '提交状态更新失败！',
+          showCancel: false,
         })
       }
-    })
+    }, uid, uname, orderId);
+
+
+    // // 时间戳
+    // var timestamp = '' + Date.parse(new Date()); 
+    // // 随机数
+    // var chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    // var nums = "";
+    // for (var i = 0; i < 32; i++) {
+    //   var id = parseInt(Math.random() * 61);
+    //   nums += chars[id];
+    // }
+
+    // var paySign = MD5Util.hexMD5("appId=wxd678efh567hg6787&nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS&package=prepay_id=wx2017033010242291fcfe0db70013231072&signType=MD5&timeStamp=1490840662&key=qazwsxedcrfvtgbyhnujmikolp111111");
+
+    // wx.requestPayment({
+    //   'timeStamp': timestamp,
+    //   'nonceStr': nums,
+    //   'package': 'prepay_id=2378621736721323721537612',
+    //   'signType': 'MD5',
+    //   'paySign': paySign,
+    //   'total_fee': '0.01',
+    //   'success': function (res) {
+    //     wx.showModal({
+    //       title: '',
+    //       content: '支付成功',
+    //     })
+    //   },
+    //   'fail': function (res) {
+    //     wx.showModal({
+    //       title: '支付失败',
+    //       content: res,
+    //     })
+    //   }
+    // })
   },
   getNum:function (callback){  
     
     return nums;  
-  }  
+  },  
+  toRating: function () {
+    wx.navigateTo({
+      url: '../../my/ratings/ratings',
+    })
+  }
 })

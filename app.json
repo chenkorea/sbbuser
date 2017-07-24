@@ -24,7 +24,8 @@
     "pages/login/register/register",
     "pages/my/mine/findpwd/findpwd",
     "pages/my/mine/updatepwd/updatepwd",
-    "pages/openkey/newPic/newPic"
+    "pages/openkey/newPic/newPic",
+    "pages/my/ratings/ratings"
   ],
   "window": {
     "backgroundTextStyle": "light",

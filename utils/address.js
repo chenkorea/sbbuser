@@ -125,6 +125,25 @@ function getUserOrders(callback, uid, status) {
   })
 }
 
+// 用户支付订单更新状态
+function updateOrderPayStatus(callback, uid, uname, orderId) {
+  var remoteUrl = getApp().globalData.serverIp + "openkey/updateOrderPayStatus";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      uid: uid,
+      uname: uname,
+      orderId: orderId
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
+
 
 
 module.exports = {
@@ -134,5 +153,6 @@ module.exports = {
   deleteUserAddress: deleteUserAddress,
   getServiceType: getServiceType,
   createUserOrder: createUserOrder,
-  getUserOrders: getUserOrders
+  getUserOrders: getUserOrders,
+  updateOrderPayStatus: updateOrderPayStatus
 } 

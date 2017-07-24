@@ -1,0 +1,19 @@
+<!--ratings.wxml-->
+<view class="main_view">
+
+  <text class="title_name">服务评价</text>
+
+  <view class="num_view"></view>
+
+  <radio-group class="radio-group" bindchange="radioChange">
+    <label class="radio" wx:for="{{ratings}}" wx:key="{{index}}">
+      <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.value}}
+    </label>
+  </radio-group>
+
+  <text class="title_name">评论内容</text>
+  <view class="num_view"></view>
+
+  <textarea class="ratings_content" placeholder="请输入您的评论内容！"/>
+  <button class="pay_but" bindtap="toRating">提交评论</button>
+</view>
