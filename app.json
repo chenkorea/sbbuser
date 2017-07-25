@@ -25,7 +25,10 @@
     "pages/my/mine/findpwd/findpwd",
     "pages/my/mine/updatepwd/updatepwd",
     "pages/openkey/newPic/newPic",
-    "pages/my/ratings/ratings"
+    "pages/my/ratings/ratings",
+    "pages/keymarkets/keymarkets",
+    "pages/keymarkets/goodsclsfy/goodsclsfy",
+    "pages/keymarkets/goodsdetail/goodsdetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -25,7 +25,8 @@ var PageItems =
       id: '4',
       text: '锁具商城',
       icon: 'iconfont icon-gouwucheman',
-      bac: 'mid-icon'
+      bac: 'mid-icon',
+      url: '../keymarkets/keymarkets'
     },
     {
       id: '5',

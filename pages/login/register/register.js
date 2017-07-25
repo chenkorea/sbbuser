@@ -2,7 +2,7 @@
 
 //获取应用实例
 var app = getApp();
-var regrequest = require('../datarequest/datarequest.js');
+var regrequest = require('../util/datarequest.js');
 Page({
   data: {
     titleText: '',
