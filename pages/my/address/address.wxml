@@ -1,14 +1,14 @@
 <view class="main-view">
 
   <view class="list-view">
-    <view class="address-item" wx:for="{{addresses}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="selectAddress">
+    <view class="address-item" wx:for="{{addresses}}" wx:key="{{index}}" data-id="{{item.id}}" catchtap="selectAddress">
       <view class="address-text">{{item.address}}</view>
       <view class="oper-view">
-        <view class="def-view" data-id="{{item.id}}"  bindtap="setDefAddress">
+        <view class="def-view" data-id="{{item.id}}"  catchtap="setDefAddress">
           <icon class="iconfont {{item.is_default=='1'?'icon-xuanze1':'icon-xuanze'}}" />
           <text>{{item.is_default=='1'?'默认地址':'设为默认'}}</text>
         </view>
-        <view class="del-view" data-id="{{item.id}}"  bindtap="delAddress">
+        <view class="del-view" data-id="{{item.id}}"  catchtap="delAddress">
           <icon class="iconfont icon-shanchu" />
           <text>删除</text>
         </view>

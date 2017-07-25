@@ -44,7 +44,7 @@
           <view class="order-status" hidden="{{orderstatus=='1' || orderstatus=='2'}}">完工时间：{{item.finish_time}}</view>
           <!-- <button class="pay_but" data-id="{{item.id}}" bindtap="cancelOrder" hidden="{{orderstatus!='3'}}">取消订单</button> -->
           <button class="pay_but" data-id="{{item.id}}" bindtap="toPay" hidden="{{orderstatus!='3'}}">去支付</button>
-          <button class="pay_but" data-id="{{item.id}}" bindtap="toRating" hidden="{{orderstatus!='4'}}">去评价</button>
+          <button class="pay_but" data-id="{{item.id}}" data-dis="{{item.dispatching_id}}" bindtap="toRating" hidden="{{orderstatus!='4' || item.process_stage == '08'}}">去评价</button>
         </view>
       </scroll-view>
   </view>

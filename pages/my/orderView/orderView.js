@@ -117,6 +117,7 @@ Page({
 
   },
   getUserOrder: function(uid, status) {
+    wx.showLoading({title: '数据加载中...',})
     var that = this;
     // 提交数据
     var process_status = '';
@@ -130,6 +131,7 @@ Page({
       process_status = "('07', '08')";
     }
     Util.getUserOrders(function (data) {
+      wx.hideLoading();
       var code = data.data.code;
       if (code == "1") {
         that.setData({ userOrders: data.data.content})
@@ -146,6 +148,7 @@ Page({
    * 去支付
    */
   toPay: function (e) {
+    wx.showLoading({title: '数据提交中...',})
     var that = this;
     var orderId = e.currentTarget.dataset.id;
     var uname = this.data.user_name;
@@ -153,6 +156,7 @@ Page({
     console.log(orderId);
     // 这个应该是支付成功之后调用的，现在是直接跳过支付默认支付成功
     Util.updateOrderPayStatus(function (data) {
+      wx.hideLoading();
       var code = data.data.code;
       if (code == "1") {
         // 直接跳转到查询已完成的
@@ -207,9 +211,14 @@ Page({
     
     return nums;  
   },  
-  toRating: function () {
+  toRating: function (e) {
+    var orderId = e.currentTarget.dataset.id;
+    var dispatching_id = e.currentTarget.dataset.dis;
     wx.navigateTo({
-      url: '../../my/ratings/ratings',
+      url: '../../my/ratings/ratings?uid=' + this.data.uid + '&uname=' + this.data.user_name + '&dispatching_id=' + dispatching_id + '&orderId=' + orderId,
     })
+  },
+  onShow: function () {
+    this.getUserOrder(this.data.uid, this.data.orderstatus);
   }
 })

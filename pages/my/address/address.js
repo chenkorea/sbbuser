@@ -37,6 +37,7 @@ Page({
    * 删除地址
    */
   delAddress: function (e) {
+    
     var that = this;
     var id = e.currentTarget.dataset.id;
     
@@ -50,9 +51,12 @@ Page({
       confirmText: '确定',
       success: function (res) {
         if (res.confirm) {
+          wx.showLoading({ title: '正在删除...', })
           Util.deleteUserAddress(function (data) {
+            wx.hideLoading();
             var code = data.data.code;
             if (code == "1") {
+              
               // 上传数据成功
               wx.showToast({ title: '删除地址成功', });
               that.setData({ addresses: [] });

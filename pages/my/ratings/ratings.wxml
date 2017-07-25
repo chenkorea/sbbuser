@@ -14,6 +14,6 @@
   <text class="title_name">评论内容</text>
   <view class="num_view"></view>
 
-  <textarea class="ratings_content" placeholder="请输入您的评论内容！"/>
+  <textarea class="ratings_content" placeholder="请输入您的评论内容！" bindinput="saveRemark"/>
   <button class="pay_but" bindtap="toRating">提交评论</button>
 </view>
