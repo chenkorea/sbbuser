@@ -21,7 +21,8 @@ Page({
       brand: e.brand,
       price: e.price,
       id: e.sp_no,
-      contentText: e.summary
+      contentText: e.summary,
+      imgUrls: e.archives_url
     })
   },
   preview: function (e) {
