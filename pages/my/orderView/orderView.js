@@ -164,6 +164,7 @@ Page({
    * 去支付
    */
   toPay: function (e) {
+    
     wx.showLoading({title: '数据提交中...',})
     var that = this;
     var orderId = e.currentTarget.dataset.id;
@@ -230,6 +231,7 @@ Page({
     var that = this;
     wx.login({
       success: function (res) {
+        console.log(res.code);
         that.getOpenId(res.code);
       }
     });
@@ -237,18 +239,23 @@ Page({
   /**
    * 获取openId
    */
-  getOpenId: function () {
+  getOpenId: function (code) {
     var that = this;
+    // http://192.200.200.21:9000/sbb-web/phone/openkey/getWXopenId
+    // code=013Bu1c00iFzsD1klvc00RS3c00Bu1ch
     wx.request({
-      url: 'https://www.see-source.com/weixinpay/GetOpenId',
+      url: getApp().globalData.serverIp + 'openkey/getWXopenId',
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      data: {'code':code},
+      data: { code:code},
       success: function(res) {
-        var openId = res.data.openid;
-        that.xiadan(openId);
+        var openIdStr = res.data.content[0];
+        // "{"session_key":"WX39zL8sZsFPOu4ajGQ1pQ== ","expires_in":7200,"openid":"ov9Hv0PDYNOv- tdbSM7Nv2beapSk"}"
+        var jsonObj = JSON.parse(openIdStr);
+        console.log(jsonObj.openid);
+        that.xiadan(jsonObj.openid);
       }
     })
   },
@@ -256,18 +263,64 @@ Page({
    * 微信统一下单
    */
   xiadan: function (opendId) {
+    // data: { openid: 'ov9Hv0PDYNOv-tdbSM7Nv2beapSk' },
+    console.log('opendId == ' + opendId);
     var that = this;
     wx.request({
-      url: '自己的服务器',
+      url: getApp().globalData.serverIp + 'openkey/xiadan',
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      data: { 'openid': openId },
+      data: { 'openid': opendId},
       success: function (res) {
-        var prepay_id = res.data.prepay_id;
-        console.log("统一下单返回 prepay_id:" + prepay_id);
-        that.sign(prepay_id);
+        var code = res.data.code;
+        if (code == '1') {
+          // 成功
+          var prepay_id = res.data.content[0];
+          if (prepay_id == null || '' == prepay_id) {
+            wx.showToast({
+              title: 'prepay_id获取失败',
+            })
+          } else {
+            console.log('prepay_id == ' + prepay_id);
+            that.sign(prepay_id);  
+          }
+        }
+      }
+    })
+  },
+  sign: function (prepay_id) {
+    var that = this;
+    wx.request({
+      url: getApp().globalData.serverIp + 'openkey/sign',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: { prepay_id: prepay_id },
+      success: function (res) {
+        var code = res.data.code;
+        if (code == '1') {
+          console.log(res.data.content[0].prepay_id);
+          that.requestPayment(res.data.content[0].prepay_id);
+        }
+      }
+    })
+  },
+  requestPayment: function (objj) {
+    var obj = JSON.parse(objj);
+    wx.requestPayment({
+      timeStamp: obj.timeStamp,
+      nonceStr: obj.nonceStr,
+      package: obj.package,
+      signType: obj.signType,
+      paySign: obj.paySign,
+      success: function (res) {
+        // 成功
+      },
+      fail: function (res) {
+        // 失败
       }
     })
   },
@@ -276,11 +329,13 @@ Page({
     return nums;  
   },  
   toRating: function (e) {
-    var orderId = e.currentTarget.dataset.id;
-    var dispatching_id = e.currentTarget.dataset.dis;
-    wx.navigateTo({
-      url: '../../my/ratings/ratings?uid=' + this.data.uid + '&uname=' + this.data.user_name + '&dispatching_id=' + dispatching_id + '&orderId=' + orderId,
-    })
+    var that = this;
+    // var orderId = e.currentTarget.dataset.id;
+    // var dispatching_id = e.currentTarget.dataset.dis;
+    // wx.navigateTo({
+    //   url: '../../my/ratings/ratings?uid=' + this.data.uid + '&uname=' + this.data.user_name + '&dispatching_id=' + dispatching_id + '&orderId=' + orderId,
+    // })
+    that.wxLogin();
   },
   onShow: function () {
     this.getUserOrder(this.data.uid, this.data.orderstatus);
