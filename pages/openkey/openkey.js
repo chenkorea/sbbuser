@@ -23,7 +23,9 @@ Page({
     picnumStr: '点击上传',
     picnum: 0,
     filePaths: [],
-    userId: ''
+    userId: '',
+    uname: '',
+    phone: ''
   },
   /**
    * 监听普通picker选择器
@@ -56,6 +58,7 @@ Page({
   * 选择图片上传
   */
   selectPicAndUp: function () {
+    
     var that = this;
     var pics = that.data.filePaths;
     //将json转成字符串
@@ -128,9 +131,9 @@ Page({
       guaran = "2"
     }
     if (type != '03') {
-      guaran = ''
+      guaran = '0'
     }
-    
+    wx.showLoading({ title: '图片上传中...', })
     wx.getStorage({
       key: 'uid',
       success: function(res) {
@@ -139,6 +142,8 @@ Page({
         // 组合订单对象
         var order = {
           user_id: uid,
+          user_name: that.data.uname,
+          user_phone: that.data.phone,
           service_type: that.data.fuwuType,
           service_item_id: service_item_id,
           popedom_name: that.data.address.popedom,
@@ -152,6 +157,7 @@ Page({
 
         // 提交数据
         Util.createUserOrder(function (data) {
+          wx.hideLoading();
           var code = data.data.code;
           if (code == "1") {
             // 上传数据成功
@@ -213,6 +219,23 @@ Page({
     console.log('onLoad')
     // 获取传送过来的值
     var that = this;
+
+    //获取昵称
+    wx.getStorage({
+      key: 'nickname',
+      success: function (res) {
+        that.setData({uname: res.data})
+      },
+    })
+
+    // 获取uid
+    wx.getStorage({
+      key: 'uid',
+      success: function (res) {
+        that.setData({ userId: res.data })
+      },
+    })
+
     that.setData({
       fuwuType: options.fuwuType
     })

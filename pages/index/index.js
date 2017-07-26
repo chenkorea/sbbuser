@@ -144,5 +144,12 @@ Page({
         that.setData({ userId: res.data })
       },
     })
+    // phone
+    wx.getStorage({
+      key: 'phone',
+      success: function (res) {
+        that.setData({ phone: res.data })
+      },
+    })
   }
 })

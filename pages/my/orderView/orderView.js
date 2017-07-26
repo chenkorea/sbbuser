@@ -144,6 +144,22 @@ Page({
   getRealDate: function (callback) {
     return new Date(parseInt(nS) * 1000).toLocaleString().substr(0, 17)
   },
+  toDetail: function (e) {
+    var orderId = e.currentTarget.dataset.id;
+    var userOrdserDe = {};
+    for (var i = 0; i < this.data.userOrders.length; i++) {
+      var userOrder = this.data.userOrders[i];
+      var order_id = userOrder.id;
+      if (order_id == orderId) {
+        userOrdserDe = userOrder;
+        break; 
+      }
+    }
+    var jsonStr = JSON.stringify(userOrdserDe);
+    wx.navigateTo({
+      url: '../../my/myorder/myorder?jsonStr=' + jsonStr,
+    })
+  },
   /**
    * 去支付
    */
@@ -206,6 +222,54 @@ Page({
     //     })
     //   }
     // })
+  },
+  /**
+   * 获取微信登录
+   */
+  wxLogin: function () {
+    var that = this;
+    wx.login({
+      success: function (res) {
+        that.getOpenId(res.code);
+      }
+    });
+  },
+  /**
+   * 获取openId
+   */
+  getOpenId: function () {
+    var that = this;
+    wx.request({
+      url: 'https://www.see-source.com/weixinpay/GetOpenId',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {'code':code},
+      success: function(res) {
+        var openId = res.data.openid;
+        that.xiadan(openId);
+      }
+    })
+  },
+  /**
+   * 微信统一下单
+   */
+  xiadan: function (opendId) {
+    var that = this;
+    wx.request({
+      url: '自己的服务器',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: { 'openid': openId },
+      success: function (res) {
+        var prepay_id = res.data.prepay_id;
+        console.log("统一下单返回 prepay_id:" + prepay_id);
+        that.sign(prepay_id);
+      }
+    })
   },
   getNum:function (callback){  
     
