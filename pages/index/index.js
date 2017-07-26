@@ -1,7 +1,6 @@
 //index.js
 // 获取Util实例
-var homeUtil = require('../../utils/home.js')
-
+var homeUtil = require('../../utils/home.js');
 //获取应用实例
 var app = getApp()
 Page({
@@ -70,7 +69,17 @@ Page({
     // 自动定位获取地理位置
     homeUtil.getCityName(function (locationData) {
 
-      console.log(locationData);
+      homeUtil.updateLocation(locationData.location.lng, locationData.location.lat, that.data.uid);
+      that.setData({
+        longitude: locationData.location.lng,
+        latitude: locationData.location.lat
+      })
+
+      wx.setStorage({
+        key: 'latitude',
+        data: locationData.address_component.city,
+      })
+
       wx.setStorage({
         key: 'city',
         data: locationData.address_component.city,
@@ -134,7 +143,7 @@ Page({
          that.setData({
            user_name: res.data
          })
-      },
+       },
     })
 
     // 获取uid
@@ -142,7 +151,35 @@ Page({
       key: 'uid',
       success: function (res) {
         that.setData({ userId: res.data })
+        
       },
+    })
+    console.log('onShow getCityName--->>lng:' + that.data.longitude + ', lat:' + that.data.latitude, ', uid:' + that.data.uid);
+
+    // 自动定位获取地理位置
+    homeUtil.getCityName(function (locationData) {
+
+      homeUtil.updateLocation(locationData.location.lng, locationData.location.lat, that.data.uid);
+      that.setData({
+        longitude: locationData.location.lng,
+        latitude: locationData.location.lat
+      })
+
+      wx.setStorage({
+        key: 'latitude',
+        data: locationData.address_component.city,
+      })
+
+      wx.setStorage({
+        key: 'city',
+        data: locationData.address_component.city,
+      })
+      var city = wx.getStorage({
+        key: 'city',
+        success: function (res) {
+          that.setData({ city: res.data })
+        },
+      })
     })
   }
 })

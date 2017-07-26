@@ -19,14 +19,18 @@
   background: #f5f5f5
 }
 
-.desc-content-view {
-  padding: 20rpx;
+.desc-view {
+  padding-left: 20rpx;
+  padding-right:10rpx; 
   display: flex;
   justify-content: left;
-  color: #ffffff;
+  color: #333333;
   font-size: 28rpx;
-  left: 20rpx;
-  background: #f5f5f5
+  font-weight: 200;
+  background: #ffffff;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .content-view {
