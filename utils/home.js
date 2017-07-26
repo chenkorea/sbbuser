@@ -1,3 +1,4 @@
+var urlutil = require('./util.js');
 var PageItems =
   [
     {
@@ -25,7 +26,8 @@ var PageItems =
       id: '4',
       text: '锁具商城',
       icon: 'iconfont icon-gouwucheman',
-      bac: 'mid-icon'
+      bac: 'mid-icon',
+      url: '../keymarkets/keymarkets'
     },
     {
       id: '5',
@@ -93,9 +95,32 @@ var PageItems =
       callback(data);
     })
   }
+
+  function updateLocation(longitude, latitude,uid){
+    console.log(urlutil.url +'updateLocation--->>lng:' + longitude + ', lat:' + latitude, ', uid:' + uid);
+    wx.request({
+      url: urlutil.url + '/phone/userinfor/recordcurloc', //
+      data: {
+        longitude: longitude,
+        latitude: latitude,
+        uid: uid
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      success:function(e){
+        console.log('++++updateLocation success+++' + JSON.stringify(e))
+      },
+      complete:function(e){
+        console.log('++++updateLocation complete+++' + JSON.stringify(e))
+      }
+    })
+  }
 module.exports = {
   PageItems: PageItems,
   getLocationInfo: getLocationInfo,
   getLocationCityByLatLon: getLocationCityByLatLon,
-  getCityName: getCityName
+  getCityName: getCityName,
+  updateLocation: updateLocation
 } 

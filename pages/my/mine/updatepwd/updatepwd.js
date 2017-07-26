@@ -2,7 +2,7 @@
 
 //获取应用实例
 var app = getApp();
-var updaterequest = require('../../../login/datarequest/datarequest.js');
+var updaterequest = require('../../../login/util/datarequest.js');
 Page({
   data: {
     titleText: '',

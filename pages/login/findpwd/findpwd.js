@@ -2,7 +2,7 @@
 
 //获取应用实例
 var app = getApp();
-var fogrequest = require('../datarequest/datarequest.js');
+var fogrequest = require('../util/datarequest.js');
 Page({
   data: {
     titleText: '',
