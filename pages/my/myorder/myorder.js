@@ -23,16 +23,10 @@ Page({
     var typename = e.currentTarget.dataset.type;
     if (typename == 'open') {
       var count = that.data.selectPicAr.length;
-      console.log('index=' + index + '  count=' + count);
-      if (index == count - 1) {
-        // 添加
-        that.selectPic();
-      } else {
-        wx.previewImage({
-          current: that.data.selectPicAr[index], // 当前显示图片的http链接
-          urls: that.data.selectPicAr // 需要预览的图片http链接列表
-        })
-      }
+      wx.previewImage({
+        current: that.data.selectPicAr[index], // 当前显示图片的http链接
+        urls: that.data.selectPicAr // 需要预览的图片http链接列表
+      })
     }
   },
   onLoad: function (optains) {

@@ -28,7 +28,8 @@
     "pages/my/ratings/ratings",
     "pages/keymarkets/keymarkets",
     "pages/keymarkets/goodsclsfy/goodsclsfy",
-    "pages/keymarkets/goodsdetail/goodsdetail"
+    "pages/keymarkets/goodsdetail/goodsdetail",
+    "pages/my/orderprocess/orderprocess"
   ],
   "window": {
     "backgroundTextStyle": "light",

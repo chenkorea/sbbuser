@@ -144,7 +144,7 @@ function updateOrderPayStatus(callback, uid, uname, orderId) {
   })
 }
 
-// 用户支付订单更新状态
+// 评论
 function addServiceComment(callback, uid, uname, orderId, dispatching_id, evaluate, content) {
   var remoteUrl = getApp().globalData.serverIp + "openkey/addServiceComment";
   wx.request({
@@ -166,6 +166,21 @@ function addServiceComment(callback, uid, uname, orderId, dispatching_id, evalua
   })
 }
 
+function getUserOrdersProcess(callback, orderId) {
+  var remoteUrl = getApp().globalData.serverIp + "openkey/getUserOrdersProcess";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      orderid: orderId
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
 
 
 module.exports = {
@@ -177,5 +192,6 @@ module.exports = {
   createUserOrder: createUserOrder,
   getUserOrders: getUserOrders,
   updateOrderPayStatus: updateOrderPayStatus,
-  addServiceComment: addServiceComment
+  addServiceComment: addServiceComment,
+  getUserOrdersProcess: getUserOrdersProcess
 } 
