@@ -97,25 +97,21 @@ var PageItems =
   }
 
   function updateLocation(longitude, latitude,uid){
-    console.log(urlutil.url +'updateLocation--->>lng:' + longitude + ', lat:' + latitude, ', uid:' + uid);
-    wx.request({
-      url: urlutil.url + '/phone/userinfor/recordcurloc', //
-      data: {
-        longitude: longitude,
-        latitude: latitude,
-        uid: uid
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      success:function(e){
-        console.log('++++updateLocation success+++' + JSON.stringify(e))
-      },
-      complete:function(e){
-        console.log('++++updateLocation complete+++' + JSON.stringify(e))
-      }
-    })
+    // wx.request({
+    //   url: urlutil.url + '/phone/userinfor/recordcurloc', //
+    //   data: {
+    //     longitude: longitude,
+    //     latitude: latitude,
+    //     uid: uid
+    //   },
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded'
+    //   },
+    //   method: 'POST',
+    //   complete:function(e){
+    //     console.log('++++updateLocation complete+++' + JSON.stringify(e))
+    //   }
+    // })
   }
 module.exports = {
   PageItems: PageItems,

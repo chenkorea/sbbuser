@@ -20,17 +20,11 @@
 }
 
 .desc-view {
-  padding-left: 20rpx;
-  padding-right:10rpx; 
-  display: flex;
-  justify-content: left;
+  padding: 20rpx;
   color: #333333;
   font-size: 28rpx;
   font-weight: 200;
   background: #ffffff;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .content-view {
@@ -44,7 +38,8 @@
 }
 
 .main-view {
-  background: #ffffff
+  background: #ffffff;
+  width: 100%;
 }
 
 .slide{

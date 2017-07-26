@@ -14,5 +14,28 @@
   font-size: 28rpx;
 }
 
+.item_container{
+  padding: 20rpx;
+  width: 95%;
+  background: #ffffff;
+}
+
+.item_container-time{
+  color: #666666;
+  width: 100%;
+  justify-content: right;
+  right: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  font-size: 28rpx;
+}
+
+.item_container-content{
+  color: #222222;
+  width: 100%;
+  justify-content: left;
+  left: 20rpx;
+}
+
 .main-view {
 }

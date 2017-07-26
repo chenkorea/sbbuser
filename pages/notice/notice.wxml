@@ -2,4 +2,10 @@
 <view class="main-view">
   <view class="title-view">{{titleText}}</view>
   <view class="content-view">{{contentText}}</view>
+  <view class="item_container" wx:for="{{noticecontent}}" wx:key="{{index}}">
+    <view class="item_container-content">{{item.content}}</view>
+    <view class="item_container-time">{{item.send_time}}</view>
+    <view style="margin:0px;height:2rpx;border:0px;background-color:#D5D5D5;color:#D5D5D5;"/>
+    <view/>
+  </view>
 </view>
