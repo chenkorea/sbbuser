@@ -14,10 +14,15 @@
   font-size: 28rpx;
 }
 
+.line-view{
+  border-bottom: 2rpx solid #F0F0F0;
+}
+
 .item_container{
   padding: 20rpx;
   width: 95%;
   background: #ffffff;
+  border-bottom: 2rpx solid #F0F0F0;
 }
 
 .item_container-time{
