@@ -15,22 +15,25 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad: function (e) {
     var that = this
-    datarequest.getnotice(function(e){
-      if(e.data.code == '1'){
-        for (var i = 0; i < e.data.content.length;i++){
-          console.log('-------->>' + new Date(parseInt(e.data.content[i].send_time)).toLocaleString());
-          e.data.content[i].send_time = new Date(parseInt(e.data.content[i].send_time)).toLocaleString().replace(/[\u4E00-\u9FA5]/g, '');
-        }
-        that.setData({
-          noticecontent: e.data.content
-        })
-      }
+    var res = JSON.parse(e.notice)
+    that.setData({
+      noticecontent: res
     })
+
+    // datarequest.getnotice(function(e){
+    //   if(e.data.code == '1'){
+    //     for (var i = 0; i < e.data.content.length;i++){
+    //       e.data.content[i].send_time = new Date(parseInt(e.data.content[i].send_time)).toLocaleString().replace(/[\u4E00-\u9FA5]/g, '');
+    //     }
+          // that.setData({
+          //   noticecontent: e.data.content
+          // })
+    //   }
+    // })
   },
   godetail:function(e){
-    console.log('------->>' + JSON.stringify(e.currentTarget.dataset.detail)) ;
     wx.navigateTo({
       url: './noticedetail/noticedetail?detail=' + JSON.stringify(e.currentTarget.dataset.detail),
     })

@@ -1,6 +1,7 @@
 //index.js
 // 获取Util实例
 var homeUtil = require('../../utils/home.js');
+var noticeutil = require('../notice/util/datarequest.js');
 //获取应用实例
 var app = getApp()
 Page({
@@ -14,7 +15,8 @@ Page({
     longitude:'',
     uid:'',
     user_name:'昵称',
-    user_head:'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg'
+    user_head:'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg',
+    noticecontent:[]
   },
   //事件处理函数
   bindViewTap: function() {
@@ -23,8 +25,9 @@ Page({
     })
   },
   toNoticeDetailView: function () {
+    var that = this;
     wx.navigateTo({
-      url: '../notice/notice'
+      url: '../notice/notice?notice=' + JSON.stringify(that.data.noticecontent)
     })
   },
   selectNewCity: function () {
@@ -178,6 +181,18 @@ Page({
           that.setData({ city: res.data })
         },
       })
+    })
+
+    //获取通知消息
+    noticeutil.getnotice(function(e){
+      if (e.data.code == '1') {
+        for (var i = 0; i < e.data.content.length; i++) {
+          e.data.content[i].send_time = new Date(parseInt(e.data.content[i].send_time)).toLocaleString().replace(/[\u4E00-\u9FA5]/g, '');
+        }
+        that.setData({
+          noticecontent: e.data.content
+        })
+      }
     })
   }
 })
