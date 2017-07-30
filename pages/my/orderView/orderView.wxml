@@ -40,7 +40,7 @@
           <view class="order-status">类   别：{{item.data_name}}-{{item.service_item}}</view>
           <view class="order-status">服务地址：{{item.service_address}}</view>
           <view class="order-status" hidden="{{orderstatus=='1'}}">接单技师：{{item.process_person_name}}</view>
-          <view class="order-status" hidden="{{orderstatus=='1'}}">报   价：服务费{{item.service_price}}元 附加费{{item.additional_service_price>0?item.service_price:0}}元 </view>
+          <view class="order-status" >报   价：{{item.total_price}}元 </view>
           <view class="order-status" hidden="{{orderstatus=='1' || orderstatus=='2'}}">完工时间：{{item.finish_time}}</view>
           <!-- <button class="pay_but" data-id="{{item.id}}" bindtap="cancelOrder" hidden="{{orderstatus!='3'}}">取消订单</button> -->
           <button class="pay_but" data-id="{{item.id}}" catchtap="toPay" hidden="{{orderstatus!='3'}}">去支付</button>

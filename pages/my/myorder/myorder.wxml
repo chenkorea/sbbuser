@@ -10,15 +10,22 @@
   <view class="title_text"></view>
   <view class="info_view">
     <view class="infon_text">服务技师：{{userOrder.process_person_name}}</view>
-    <view class="infon_text">订单总价：{{userOrder.service_price}}</view>
+    <view class="infon_text">订单总价：{{allPrice}}</view>
     <view class="infon_text">完工时间：{{userOrder.finish_time}}</view>
   </view>
 
 
   <view class="title_text"></view>
   <view class="info_view">
-    <view class="infon_text">支付总额：{{userOrder.service_price}}</view>
+    <view class="infon_text">支付总额：{{allPrice}}</view>
     <view class="infon_text">支付方式：在线支付</view>
+  </view>
+
+  
+  <view class="title_text" hidden="{{coment.level != undefined || '' != coment.level}}"></view>
+  <view class="info_view" hidden="{{coment.level != undefined || '' != coment.level}}">
+    <view class="infon_text">评论类型：{{coment.level}}</view>
+    <view class="infon_text">评论内容：{{coment.content}}</view>
   </view>
 
   <view class="title_text"></view>

@@ -182,6 +182,39 @@ function getUserOrdersProcess(callback, orderId) {
   })
 }
 
+function getUserOrderComment(callback, dispatching_id) {
+  var remoteUrl = getApp().globalData.serverIp + "openkey/getUserOrderComment";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      dispatching_id: dispatching_id
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
+
+
+function getUserOrderAllPrice(callback, dispatching_id) {
+  var remoteUrl = getApp().globalData.serverIp + "openkey/getUserOrderAllPrice";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      dispatching_id: dispatching_id
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
+
 
 module.exports = {
   getUserAddress: getUserAddress,
@@ -193,5 +226,7 @@ module.exports = {
   getUserOrders: getUserOrders,
   updateOrderPayStatus: updateOrderPayStatus,
   addServiceComment: addServiceComment,
-  getUserOrdersProcess: getUserOrdersProcess
+  getUserOrdersProcess: getUserOrdersProcess,
+  getUserOrderComment: getUserOrderComment,
+  getUserOrderAllPrice: getUserOrderAllPrice
 } 

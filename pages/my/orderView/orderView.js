@@ -84,6 +84,9 @@ Page({
     that.setData({
       uid: options.uid
     })
+    that.setData({
+      user_name: options.user_name
+    })
 
     wx.getStorage({
       key: 'uid',
@@ -272,8 +275,8 @@ Page({
       success: function (res) {
         // 成功
         var orderId = e.currentTarget.dataset.id;
-        var uname = this.data.user_name;
-        var uid = this.data.uid;
+        var uname = that.data.user_name;
+        var uid = that.data.uid;
         console.log(orderId);
         // 这个应该是支付成功之后调用的，现在是直接跳过支付默认支付成功
         Util.updateOrderPayStatus(function (data) {
