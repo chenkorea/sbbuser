@@ -15,7 +15,7 @@ Page({
     fuwuType: '01',  // 服务类型
     isShowBx:0,   // 是否显示保修选择
     oneTypeTitle: '',   // 开锁类别title
-    twoTypeTitle: '',   // 开锁图片title
+    twoTypeTitle: '',   // 开锁图片dsdsdstitle
     address: {},
     serviceTime: '马上',
     remark:'',
@@ -120,6 +120,7 @@ Page({
   saveData:function () {
     var that = this;
     var service_item_id = that.data.serviceAr[that.data.fdmindex].id;
+    
     var service_time = "01";
     if ("马上" != that.data.serviceTime) {
         service_time = "02";
