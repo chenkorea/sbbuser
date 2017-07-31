@@ -65,14 +65,13 @@ function getlogin(loginname,loginpw){
 }
 
 //忘记密码
-function getupdate(username, uid, updatepw, nickname, callback) {
+function getupdate(username, updatepw,callback) {
   wx.request({
     url: util.url + '/phone/userinfor/updatepasswd' , //
     data: {
       username: username,
-      uid: uid,
+      user_type:'1',
       passwd: updatepw,
-      nickname: nickname
     },
     header: {
       'content-type': 'application/x-www-form-urlencoded'
@@ -81,32 +80,20 @@ function getupdate(username, uid, updatepw, nickname, callback) {
     success: function (res) {
       if (res.data.code == '1') {
         callback(res)
-        wx.showToast({
-          title: '密码更新成功,请返回登录体验吧',
-          duration: 1500,
-        })
       }
     },
-    fail(res) {
-      wx.showToast({
-        title: '密码找回异常...',
-        duration: 1500,
-      })
-    }
-
   })
 }
 
 //密码更新
-function getreset(username, uid, newpwd, oldpwd, nickname,callback) {
+function getreset(username, newpwd, oldpwd, usertype,callback) {
   wx.request({
     url: util.url + '/phone/userinfor/resetpasswd', //
     data: {
       username: username,
-      uid: uid,
       newpwd: newpwd,
       oldpwd: oldpwd,
-      nickname: nickname
+      usertype: usertype
     },
     header: {
       'content-type': 'application/x-www-form-urlencoded'
@@ -115,21 +102,13 @@ function getreset(username, uid, newpwd, oldpwd, nickname,callback) {
     success: function (res) {
       if (res.data.code == '1') {
         callback(res)
-        wx.showToast({
-          title: '密码更新成功,请返回登录体验吧',
-          duration: 1500,
-        })
-      } else if(res.data.code == '-1') {
-        wx.showToast({
-          title: '登录密码错误,请重新确认',
-          duration: 1500,
-        })
       }
     },
     fail(res) {
-      wx.showToast({
-        title: '密码找回异常...',
-        duration: 1500,
+      wx.showModal({
+        title: '提示',
+        content: '密码找回异常...',
+        showCancel: false
       })
     }
 
@@ -150,24 +129,37 @@ function getregist(regname, regpw,nickname) {
     },
     method: 'POST',
     success: function (res) {
-      if (res.data.code == '1') {
-        wx.showToast({
-          title: '注册成功,请登录体验吧',
-          duration: 1500,
-        })
-      } else if (res.data.code == '-1') {
-        wx.showToast({
-          title: '账号已经注册过了，请直接登录吧',
-          duration: 1500,
-        })
-      }
       wx.setStorage({
         key: 'phone',
         data: regname,
       });
-      wx.navigateBack({
+      if (res.data.code == '1') {
+        wx.showModal({
+          title: '提示',
+          content: '注册成功,请登录体验吧',
+          showCancel:false,
+          success:function(e){
+            if(e.confirm){
+              wx.navigateBack({
 
-      })
+              })
+            }
+          }
+        })
+      } else if (res.data.code == '-1') {
+        wx.showModal({
+          title: '提示',
+          content: '账号已经注册过了，请直接登录吧',
+          success: function (e) {
+            if (e.confirm) {
+              wx.navigateBack({
+
+              })
+            }
+          }
+        })
+      }
+      
     },
     fail(res) {
       wx.showToast({

@@ -32,7 +32,7 @@ Page({
           })
         }else{
           wx.redirectTo({
-            url: '../changepwd/changepwd'
+            url: '../changepwd/changepwd?phone=' + that.data.fogphone
           })
         }
       },

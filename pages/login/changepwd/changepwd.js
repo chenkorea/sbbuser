@@ -23,39 +23,38 @@ Page({
         title: '两次填写的密码不一致',
       });
     }else{
-      resetrequest.getupdate(this.data.phone, this.data.uid, this.data.conformpwd
-        , this.data.nickname,function(res){
-              if(res.data.code == '1'){
-                wx.showToast({
-                  title: '重置密码成功,请返回登录体验吧',
-                })
-                wx.setStorage({
-                  key: 'isLogin',
-                  data: '0',
-                })
-                wx.navigateBack({
+      resetrequest.getupdate(this.data.phone, this.data.conformpwd
+        ,function(res){
+          if(res.data.code == '1'){
+            wx.showModal({
+              title: '提示',
+              content: '重置密码成功,请返回登录体验吧',
+              showCancel:false,
+              success: function (res) {
+                if (res.confirm) {
+                  wx.setStorage({
+                    key: 'isLogin',
+                    data: '0',
+                  })
+                  wx.navigateBack({
 
-                })
-              }else{
-                wx.showToast({
-                  title: '重置密码失败了',
-                })
+                  })
+                } 
               }
             })
-
-      
+          }else{
+              wx.showToast({
+                title: '重置密码失败了',
+              })
+            }
+          })
     }
   },
-  onLoad: function () {
+  onLoad: function (e) {
     console.log('onLoad')
     var that = this
-    wx.getStorage({
-      key: 'phone',
-      success: function(res) {
-        that.setData({
-          phone: res.data
-        })
-      },
+    this.setData({
+      phone:e.phone
     })
 
     //获取昵称

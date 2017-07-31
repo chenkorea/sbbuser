@@ -9,7 +9,6 @@ function getnotice(callback){
     },
     method: 'POST',
     complete: function (e) {
-      console.log('++++getnotice complete+++' + JSON.stringify(e))
       if (e.data.code == 1){
         callback(e)
       }else {
