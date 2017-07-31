@@ -42,5 +42,14 @@
   left: 20rpx;
 }
 
+.no_notice-view{
+  display: flex; 
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
 .main-view {
 }

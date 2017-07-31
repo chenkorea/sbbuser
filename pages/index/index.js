@@ -187,7 +187,8 @@ Page({
     })
 
     //获取通知消息
-    noticeutil.getnotice(function(e){
+    var uid = wx.getStorageSync('uid');
+    noticeutil.getnotice(uid,function(e){
       if (e.data.code == '1') {
         for (var i = 0; i < e.data.content.length; i++) {
           e.data.content[i].send_time = new Date(parseInt(e.data.content[i].send_time)).toLocaleString().replace(/[\u4E00-\u9FA5]/g, '');

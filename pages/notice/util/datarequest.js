@@ -1,11 +1,14 @@
 var urlutil = require('../../../utils/util.js');
 
 //获取通知消息
-function getnotice(callback){
+function getnotice(uid,callback){
   wx.request({
     url: urlutil.url + '/phone/userinfor/getnotice', //
+    data: {
+      uid: uid
+    },
     header: {
-      'content-type': 'application/json'
+      'content-type': 'application/x-www-form-urlencoded'
     },
     method: 'POST',
     complete: function (e) {
