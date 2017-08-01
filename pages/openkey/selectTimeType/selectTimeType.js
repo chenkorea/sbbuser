@@ -5,7 +5,9 @@ Page({
   data: {
     selectIndex: 0,
     times: '12:00',
-    dates: '12:00'
+    dates: '12:00',
+    nowtimes: '12:00',
+    nowdates: '12:00'
   },
   changeSelectIndex: function (e) {
     var id = e.currentTarget.dataset.id;
@@ -54,5 +56,7 @@ Page({
     var times = hour + ':' + second;
     that.setData({ dates: dates})
     that.setData({ times: times })
+    that.setData({ nowdates: dates })
+    that.setData({ nowtimes: times })
   }
 })
