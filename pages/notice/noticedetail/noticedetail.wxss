@@ -22,6 +22,14 @@
   font-size: 28rpx;
 }
 
+.item_container-content{
+  color: #222222;
+  width: 100%;
+  justify-content: left;
+  left: 20rpx;
+  font-size: 32rpx;
+}
+
 .time-text {
   display: flex;
   justify-content: center;

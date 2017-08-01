@@ -55,6 +55,7 @@
   width: 100%;
   justify-content: left;
   left: 20rpx;
+  font-size: 32rpx;
 }
 
 .no_notice-view{
