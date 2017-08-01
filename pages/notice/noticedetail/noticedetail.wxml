@@ -1,4 +1,21 @@
 <view class="main-view">
-  <view class="time-text">{{detailObj.send_time}}</view>
-  <view class="content-text">{{detailObj.content}}</view>
+  <!-- notice.wxml -->
+    <!-- <view class="title-view">{{titleText}}</view>
+    <view class="content-view">{{contentText}}</view> -->
+    <!-- <view wx:if="{{noticecontent.length>0}}">  
+      <view class="item_container" wx:for="{{noticecontent}}" wx:key="{{index}}" data-detail="{{noticecontent[index]}}" bindtap="godetail">
+        <view class="order_titile-view">当前状态 {{item.process_stage}}</view>
+        <view class="order_content-view">师傅姓名 {{item.process_person_name}}</view>
+        <view class="order_content-view">师傅电话 {{item.phone}}</view>
+        <view class="order_content-view">处理时间 {{item.process_time}}</view>
+      </view>
+    </view> -->
+      <!--如果无数据，则显示数据-->  
+    <!-- <view wx:else>
+      <view class="no_notice-view">暂无通知信息</view>
+    </view> -->
+    <view class="item_container-content">{{noticecontent.content}}</view>
+    <view class="item_container-time">{{noticecontent.send_time}}</view>
+  <!-- <view class="time-text">{{detailObj.send_time}}</view>
+  <view class="content-text">{{detailObj.content}}</view> -->
 </view>

@@ -6,6 +6,21 @@
   font-size: 35rpx;
 }
 
+.order_titile-view{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80rpx;
+  width: 100%;
+}
+
+.order_content-view{
+  display: flex;
+  align-items: center;
+  height: 60rpx;
+  width: 100%;
+}
+
 .content-view {
   padding: 20rpx;
   display: flex;

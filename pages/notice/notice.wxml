@@ -3,15 +3,27 @@
   <!-- <view class="title-view">{{titleText}}</view>
   <view class="content-view">{{contentText}}</view> -->
   <view class="line-view"></view>
+  <!-- <view wx:if="{{noticecontent.length>0}}">  
+    <view class="item_container" wx:for="{{noticecontent}}" wx:key="{{index}}" data-detail="{{noticecontent[index].processes}}" bindtap="godetail">
+      <view class="order_titile-view">订单号 {{item.orders.order_no}}</view>
+      <view class="order_content-view">服务类型 {{item.orders.service_type}}</view>
+      <view class="order_content-view">发起时间 {{item.orders.create_time}}</view>
+      <view class="order_content-view">服务地点 {{item.orders.service_address}}</view>
+    </view>
+  </view> -->
+    <!--如果无数据，则显示数据-->  
+  <!-- <view wx:else>
+    <view class="no_notice-view">暂无通知信息</view>
+  </view> -->
   <view wx:if="{{noticecontent.length>0}}">  
-    <view class="item_container" wx:for="{{noticecontent}}" wx:key="{{index}}" data-detail="{{noticecontent[index]}}" bindtap="godetail">
+    <view class="item_container" wx:for="{{noticecontent}}" wx:key="{{index}}" data-detail="{{noticecontent[index]}}" data-detail="{{noticecontent[index]}}" bindtap="godetail">
       <view class="item_container-content">{{item.content}}</view>
       <view class="item_container-time">{{item.send_time}}</view>
       <view/>
     </view>
   </view>
     <!--如果无数据，则显示数据-->  
-    <view wx:else>
+     <view wx:else>
       <view class="no_notice-view">暂无通知信息</view>
-    </view>  
+    </view>   
 </view>
