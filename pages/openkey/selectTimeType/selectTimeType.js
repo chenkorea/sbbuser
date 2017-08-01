@@ -4,7 +4,8 @@ var app = getApp()
 Page({
   data: {
     selectIndex: 0,
-    times: '12:00'
+    times: '12:00',
+    dates: '12:00'
   },
   changeSelectIndex: function (e) {
     var id = e.currentTarget.dataset.id;
@@ -22,8 +23,15 @@ Page({
   //  点击时间组件确定事件  
   bindTimeChange: function (e) {
     this.setData({times: e.detail.value})
-    wx.setStorage({ key: 'serviceTime', data: this.data.times,})
-    wx.navigateBack({})
+    var conten = this.data.dates + ' ' + this.data.times;
+    wx.setStorage({ key: 'serviceTime', data: conten, })
+    // wx.navigateBack({})
+  },
+  bindDateChange: function (e) {
+    this.setData({ dates: e.detail.value })
+    var conten = this.data.dates + ' ' + this.data.times;
+    wx.setStorage({ key: 'serviceTime', data: conten, })
+    // wx.navigateBack({})
   },
   //事件处理函数
   bindViewTap: function () {
@@ -34,6 +42,17 @@ Page({
   onLoad: function () {
     console.log('onLoad')
     var that = this
+    var myDate = new Date();    
+    var year = myDate.getFullYear();
+    var month = myDate.getMonth();
+    var day = myDate.getDay();
 
+    var hour = myDate.getHours();
+    var second = myDate.getSeconds();
+
+    var dates = year + '-' + month + '-' + day;
+    var times = hour + ':' + second;
+    that.setData({ dates: dates})
+    that.setData({ times: times })
   }
 })
