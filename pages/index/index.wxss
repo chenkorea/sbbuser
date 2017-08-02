@@ -9,6 +9,7 @@
   width: 100%;
 }
 
+
 .header_left_view {
   height: 100rpx;
   width: 50%;

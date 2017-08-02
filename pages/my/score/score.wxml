@@ -13,7 +13,6 @@
         </view>
           <text class="bottom-text">订单</text>
       </view>
-
       <view class="bottom-bottom-view orsel" data-id="2">
         <view class="bottom-mm">
           <icon class="iconfont icon-jifen orser" />
