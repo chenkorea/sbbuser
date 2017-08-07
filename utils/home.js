@@ -97,21 +97,21 @@ var PageItems =
   }
 
   function updateLocation(longitude, latitude,uid){
-    // wx.request({
-    //   url: urlutil.url + '/phone/userinfor/recordcurloc', //
-    //   data: {
-    //     longitude: longitude,
-    //     latitude: latitude,
-    //     uid: uid
-    //   },
-    //   header: {
-    //     'content-type': 'application/x-www-form-urlencoded'
-    //   },
-    //   method: 'POST',
-    //   complete:function(e){
-    //     console.log('++++updateLocation complete+++' + JSON.stringify(e))
-    //   }
-    // })
+    wx.request({
+      url: urlutil.url + '/phone/userinfor/recordcurloc', //
+      data: {
+        longitude: longitude,
+        latitude: latitude,
+        uid: uid
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      complete:function(e){
+        console.log('++++updateLocation complete+++' + JSON.stringify(e))
+      }
+    })
   }
 module.exports = {
   PageItems: PageItems,
