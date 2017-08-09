@@ -6,63 +6,72 @@ var PageItems =
       text: '开锁服务',
       icon: 'iconfont icon-yaochi',
       bac: 'top-icon',
-      url: '../openkey/openkey?fuwuType=01'
+      url: '../openkey/openkey?fuwuType=01',
+      imagepath: '../images/unlock.png'
     },
     {
       id: '2',
       text: '换锁服务',
       icon: 'iconfont icon-suo',
       bac: 'top-icon',
-      url: '../openkey/openkey?fuwuType=02'
+      url: '../openkey/openkey?fuwuType=02',
+      imagepath: '../images/lock-help.png'
     },
     {
       id: '3',
       text: '报修服务',
       icon: 'iconfont icon-dianhua',
       bac: 'top-icon',
-      url: '../openkey/openkey?fuwuType=03'
+      url: '../openkey/openkey?fuwuType=03',
+      imagepath: '../images/online_support.png'
     },
     {
       id: '4',
       text: '锁具商城',
       icon: 'iconfont icon-gouwucheman',
       bac: 'mid-icon',
-      url: '../keymarkets/keymarkets'
+      url: '../keymarkets/keymarkets',
+      imagepath: '../images/购物.png'
     },
     {
       id: '5',
       text: '汽车解匙',
       icon: 'iconfont icon-fahuo',
       bac: 'mid-icon',
-      url: '../openkey/openkey?fuwuType=04'
+      url: '../openkey/openkey?fuwuType=04',
+      imagepath: '../images/CarRental.png'
     },
     {
       id: '6',
       text: '民用解匙',
       icon: 'iconfont icon-fangwuqiuzu',
       bac: 'mid-icon',
-      url: '../openkey/openkey?fuwuType=05'
+      url: '../openkey/openkey?fuwuType=05',
+      imagepath: '../images/data_encryption.png'
     },
     {
       id: '7',
       text: '法律法规',
       icon: 'iconfont icon-boshimao',
       bac: 'bottom-icon',
-      url: '../index/law/law?lawType=1'
+      url: '../index/law/law?lawType=1',
+      imagepath: '../images/CustomsOfficer.png'
     },
     {
       id: '8',
       text: '安防知识',
       icon: 'iconfont icon-icsaving48px',
       bac: 'bottom-icon',
-      url: '../index/law/law?lawType=2'
+      url: '../index/law/law?lawType=2',
+      imagepath: '../images/rules.png'
     },
     {
       id: '9',
       text: '资质查询',
       icon: 'iconfont icon-chaxun',
       bac: 'bottom-icon',
-      url: '../index/search/search'
+      url: '../index/search/search',
+      imagepath: '../images/diploma_2.png'
     }
   ];
   

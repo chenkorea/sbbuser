@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/indexnew",
     "pages/index/index",
     "pages/logs/logs",
     "pages/openkey/openkey",
@@ -35,7 +36,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#43CD80",
+    "navigationBarBackgroundColor": "#1E90FF",
     "navigationBarTitleText": "锁帮帮",
     "navigationBarTextStyle": "white"
   }

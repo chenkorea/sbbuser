@@ -1,0 +1,54 @@
+<!--index.wxml-->
+<view class="main_view">
+  <!-- 通知和广告 -->
+  <swiper class="ad_view" indicator-dots="{{indicatorDots}}"  
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
+    <block wx:for="{{imgUrls}}" wx:key="{{index}}">  
+      <swiper-item class="ad_item">  
+        <image class="ad_img" src="{{item}}" mode="scaleToFill" />  
+      </swiper-item>  
+    </block>  
+  </swiper>  
+
+  <view class="new_ad_profile_view">
+    <view class="ad_top" bindtap="toNoticeDetailView">
+      <image src="../images/sports_mode.png" class="notice_ic"></image><text class="notice-text">{{noticecontent.length>0?noticecontent[0].content:''}}</text>
+    </view>
+    <view class="header_right_view" bindtap="toMyOrderView">
+      <image class="user_head" src="{{user_head}}"></image>
+
+      <view class="cont-view">
+        <view class="user_name">{{user_name}}</view>
+        <view class="city_name">{{city}}</view>
+      </view>
+      <image src="../images/箭头.png" class="right-img"></image>
+    </view>
+  </view>
+
+
+
+  <view class="null_view"></view>
+
+  <!--以下是gird关键代码-->
+  <view class="page__bd">
+      <view class="weui-grids">
+          <block wx:for-items="{{muenus}}" wx:key="{{index}}">
+              <navigator url="{{item.url}}" class="weui-grid" hover-class="weui-grid_active">
+                  
+                  <image src="{{item.imagepath}}" class="weui-grid__icon"></image>
+                  <view class="weui-grid__label">{{item.text}}</view>
+                  <!-- <icon class="weui-grid__icon iconfont {{item.icon}}" /> -->
+              </navigator>
+          </block>
+      </view>
+  </view>
+  
+  <!-- 公安标示 -->
+  <view class="footer_view">
+    <view class="footer-main-ciew">
+      <image class="gonganlogo" src='../images/gonganlogo.png'></image>
+      <text class="gongan-text">贵州公安备案</text>
+    </view>
+  </view>
+</view>
+

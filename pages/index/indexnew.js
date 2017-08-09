@@ -6,24 +6,27 @@ var noticeutil = require('../notice/util/datarequest.js');
 var app = getApp()
 Page({
   data: {
-    motto: 'Hello World',
+    indicatorDots: true,
+    autoplay: true,
+    interval: 5000,
+    duration: 1000,
+    imgUrls: [
+      'http://wimg.huodongxing.com/logo/201707/6398650164300/962768404440026_v2.jpg@!wmlogo',
+      'http://wimg.huodongxing.com/logo/201707/2397073083400/862771512456759_v2.jpg@!wmlogo',
+      'http://wimg.huodongxing.com/logo/201707/6397953598100/792763801086753_v2.jpg@!wmlogo'
+    ],
     userInfo: {},
-    muenus:[],
+    muenus: [],
     cellHeight: '120rpx',
-    city:'',
-    latitude:'',
-    longitude:'',
-    uid:'',
-    user_name:'昵称',
-    user_head:'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg',
-    noticecontent:[]
+    city: '',
+    latitude: '',
+    longitude: '',
+    uid: '',
+    user_name: '昵称',
+    user_head: 'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg',
+    noticecontent: []
   },
   //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   toNoticeDetailView: function () {
     var that = this;
     wx.navigateTo({
@@ -42,9 +45,9 @@ Page({
   },
   onLoad: function () {
     // 打开调试
-    // wx.setEnableDebug({
-    //   enableDebug: true
-    // })
+    wx.setEnableDebug({
+      enableDebug: true
+    })
     // 获取uid
     wx.getStorage({
       key: 'uid',
@@ -65,10 +68,10 @@ Page({
       })
     }
     //调用应用实例的方法获取全局数据
-    app.getUserInfo(function(userInfo){
+    app.getUserInfo(function (userInfo) {
       //更新数据
       that.setData({
-        userInfo:userInfo,
+        userInfo: userInfo,
         user_head: userInfo.avatarUrl == "" ? "http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg" : userInfo.avatarUrl
       })
     })
@@ -92,12 +95,12 @@ Page({
       })
       var city = wx.getStorage({
         key: 'city',
-        success: function(res) {
+        success: function (res) {
           that.setData({ city: res.data })
         },
       })
     })
-    
+
     // 获取首页菜单
     var pageItems = [];
     var row = [];
@@ -138,19 +141,19 @@ Page({
     var that = this;
     wx.getStorage({
       key: 'city',
-      success: function(res) {
-        that.setData({ city: res.data})
+      success: function (res) {
+        that.setData({ city: res.data })
       },
     }),
-    //获取昵称
-     wx.getStorage({
-       key: 'nickname',
-      success: function (res) {
-         that.setData({
-           user_name: res.data
-         })
-       },
-    })
+      //获取昵称
+      wx.getStorage({
+        key: 'nickname',
+        success: function (res) {
+          that.setData({
+            user_name: res.data
+          })
+        },
+      })
 
     // 获取uid
     wx.getStorage({
@@ -188,7 +191,8 @@ Page({
 
     //获取通知消息
     var uid = wx.getStorageSync('uid');
-    noticeutil.getnotice(uid,function(e){
+    noticeutil.getnotice(uid, function (e) {
+      console.log(e.data.content);
       if (e.data.code == '1') {
         for (var i = 0; i < e.data.content.length; i++) {
           e.data.content[i].send_time = new Date(parseInt(e.data.content[i].send_time)).toLocaleString('chinese', { hour12: false });

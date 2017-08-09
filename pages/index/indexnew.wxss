@@ -1,0 +1,212 @@
+/**index.wxss**/
+.main_view {
+  background: #FFFFFF;
+}
+
+.header_view {
+  display: flex;
+  height: 100rpx;
+  width: 100%;
+}
+
+
+.user_name {
+  font-size: 24rpx;
+  margin-left: 10rpx;
+  color: #333333;
+}
+
+.city_name {
+  font-size: 24rpx;
+  margin-left: 10rpx;
+  margin-top: 5rpx;
+  color: #999999;
+}
+
+.location_city {
+  font-size: 30rpx;
+  line-height: 100rpx;
+  height: 100rpx;
+}
+
+.ad_top {
+  display: flex;
+  height: 60rpx;
+  color: #333333;
+  align-items: center;
+}
+
+.notice_ic {
+  width: 40rpx;
+  height: 40rpx;
+  background-size: 40rpx 40rpx;
+  margin: auto 15rpx;
+}
+
+.notice-text {
+  flex: 1;
+  height: 30rpx;
+  font-size: 25rpx;
+}
+
+.ad-bottom .ad-image {
+  width: 100%;
+  height: 300rpx;
+}
+
+.ad-image {
+  background-repeat: no-repeat;
+  background-size: 100% 300rpx;
+}
+/* 
+.page__bd {
+  margin-top: 1rpx;
+} */
+
+.null_view {
+  background: #F6F6F6;
+  height: 30rpx;
+  width: 100%;
+}
+
+.weui-grids {
+  border-top: 1rpx solid #FFFFFF;
+  border-left: 1rpx solid #FFFFFF;
+}
+.weui-grid {
+  position: relative;
+  float: left;
+  padding: 40rpx 20rpx;
+  width: 33.33333333%;
+  box-sizing: border-box;
+  border-right: 1rpx solid #dbdbdb;
+  border-bottom: 1rpx solid #dbdbdb;
+}
+.weui-grid_active {
+  background-color: #ECECEC;
+}
+.weui-grid__icon {
+  display: block;
+  width: 80rpx;
+  height: 80rpx;
+  margin-top: 10rpx;
+  margin-left: 33%;
+  font-size: 30rpx;
+  color: white;
+}
+.weui-grid__label {
+  margin-top: 30rpx;
+  display: block;
+  text-align: center;
+  color: #444444;
+  font-size: 30rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.top-icon {
+  background: #FF6666;
+}
+
+.mid-icon {
+  background: #5CACEE;
+}
+
+.bottom-icon {
+  background: #43CD80;
+}
+
+.footer_view {
+  background: #F9F9F9;
+  height: 100rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-main-ciew {
+  display: flex;
+  align-items: center;
+}
+
+.gonganlogo {
+  width: 40rpx;
+  height: 40rpx;
+  background-size: 40rpx 40rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+
+.gongan-text {
+  height: 24rpx;
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.iconfont {
+  font-size: 60rpx;
+}
+
+.new_ad_profile_view {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  width: 100%;
+  height: 100rpx;
+}
+
+.right-img {
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 30rpx;
+}
+
+.cont-view {
+  float: left;
+}
+
+.user_head {
+  float: left;
+  vertical-align:middle;
+  width: 60rpx;
+  height: 60rpx;
+  background-size: 60rpx 60rpx;
+  background-repeat: no-repeat;
+  margin-left: 20rpx;
+  border-radius: 50%;
+}
+
+.header_left_view {
+  height: 100rpx;
+  width: 20%;
+  display:flex;
+  align-items: center;
+}
+
+.header_right_view {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30%;
+  height: 100%;
+  border-left: 1rpx solid #dbdbdb;
+}
+
+.ad_view {
+  width: 100%;
+  height: 400rpx;
+}
+
+.ad_item {
+  width: 100%;
+  height: 400rpx;
+}
+.ad_img {
+  width: 100%;
+  height: 400rpx;
+}
