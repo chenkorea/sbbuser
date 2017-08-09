@@ -45,9 +45,9 @@ Page({
   },
   onLoad: function () {
     // 打开调试
-    // wx.setEnableDebug({
-    //   enableDebug: true
-    // })
+    wx.setEnableDebug({
+      enableDebug: true
+    })
     // 获取uid
     wx.getStorage({
       key: 'uid',
