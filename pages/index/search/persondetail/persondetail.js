@@ -20,7 +20,7 @@ Page({
       phone: e.phone,
       grade: e.grade,
       servicetype: e.service_types_str,
-      // imgUrls: e.archives_url
+      imgUrls: e.archives_url
     })
   },
   preview: function (e) {

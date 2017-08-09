@@ -55,7 +55,7 @@ Page({
               }
               res.data.content[i].archives_url = urls
             }
-          }
+        }
           that.setData({
             goods: res.data.content
           })

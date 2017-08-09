@@ -45,9 +45,9 @@ Page({
   },
   onLoad: function () {
     // 打开调试
-    wx.setEnableDebug({
-      enableDebug: true
-    })
+    // wx.setEnableDebug({
+    //   enableDebug: true
+    // })
     // 获取uid
     wx.getStorage({
       key: 'uid',
@@ -190,17 +190,21 @@ Page({
     })
 
     //获取通知消息
-    var uid = wx.getStorageSync('uid');
-    noticeutil.getnotice(uid, function (e) {
-      console.log(e.data.content);
-      if (e.data.code == '1') {
-        for (var i = 0; i < e.data.content.length; i++) {
-          e.data.content[i].send_time = new Date(parseInt(e.data.content[i].send_time)).toLocaleString('chinese', { hour12: false });
-        }
-        that.setData({
-          noticecontent: e.data.content
+    var uid = wx.getStorage({
+      key: 'uid',
+      success: function(res) {
+        noticeutil.getnotice(res.data, function (e) {
+          if (e.data.code == '1') {
+            for (var i = 0; i < e.data.content.length; i++) {
+              e.data.content[i].send_time = new Date(parseInt(e.data.content[i].send_time)).toLocaleString('chinese', { hour12: false });
+            }
+            that.setData({
+              noticecontent: e.data.content
+            })
+          }
         })
-      }
+      },
     })
+    
   }
 })
