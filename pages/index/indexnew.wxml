@@ -21,7 +21,7 @@
         <view class="user_name">{{user_name}}</view>
         <view class="city_name">{{city}}</view>
       </view>
-      <image src="../images/箭头.png" class="right-img"></image>
+      <image src="../images/jiantou.png" class="right-img"></image>
     </view>
   </view>
 

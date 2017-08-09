@@ -31,7 +31,7 @@ var PageItems =
       icon: 'iconfont icon-gouwucheman',
       bac: 'mid-icon',
       url: '../keymarkets/keymarkets',
-      imagepath: '../images/购物.png'
+      imagepath: '../images/gouwu.png'
     },
     {
       id: '5',
