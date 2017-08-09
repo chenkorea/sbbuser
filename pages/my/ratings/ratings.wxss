@@ -40,7 +40,7 @@
 .pay_but {
   height: 90rpx;
   width: 90%;
-  background: #43CD80;
+  background: #FF7F24;
   color: white;
   font-size: 30rpx;
   margin: 20rpx 10rpx 10rpx 10rpx;

@@ -12,7 +12,7 @@
 
   <view class="new_ad_profile_view">
     <view class="ad_top" bindtap="toNoticeDetailView">
-      <image src="../images/sports_mode.png" class="notice_ic"></image><text class="notice-text">{{noticecontent.length>0?noticecontent[0].content:''}}</text>
+      <image src="../images/sports_mode.png" class="notice_ic"></image><text class="notice-text">{{noticecontent.length>0?noticecontent[0].content:'暂无通知消息'}}</text>
     </view>
     <view class="header_right_view" bindtap="toMyOrderView">
       <image class="user_head" src="{{user_head}}"></image>
