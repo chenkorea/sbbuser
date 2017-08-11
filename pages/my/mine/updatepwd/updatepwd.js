@@ -46,7 +46,7 @@ Page({
                     data: '0',
                   })
                   wx.reLaunch({
-                    url: '../../../index/index'
+                    url: '../../../index/indexnew'
                   })
                 }
               }
