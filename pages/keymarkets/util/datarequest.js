@@ -22,6 +22,29 @@ function getallgoods(cid,callback) {
   })
 }
 
+//商品所有分类接口
+function getgoodcategory(callback) {
+  console.log('getgoodcategory------>>' + util.url)
+  wx.request({
+    url: util.url + '/phone/userinfor/getgoodcategory', //
+    header: {
+      'content-type': 'application/json'
+    },
+    method: 'POST',
+    success: function (res) {
+      if (res.data.code == '1') {
+        callback(res)
+      } 
+    },
+    fail(res) {
+      wx.showToast({
+        title: '获取商品分类异常,请重新尝试',
+        duration: 1500,
+      })
+    },
+  })
+}
+
 //商品分类接口
 function getgoodsclsfy(callback) {
   wx.request({
@@ -46,5 +69,6 @@ function getgoodsclsfy(callback) {
 
 module.exports = {
   getallgoods: getallgoods,
-  getgoodsclsfy: getgoodsclsfy
+  getgoodsclsfy: getgoodsclsfy,
+  getgoodcategory: getgoodcategory
 } 
