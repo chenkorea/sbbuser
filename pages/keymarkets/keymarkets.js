@@ -12,11 +12,35 @@ Page({
     categorylist:[],
     curindex:0,
     more_id:0,//更多里面的子项
-    category:['','0101','0201','0102'],
-    tabTxt:['全部','挂锁','电子锁','锁芯','更多'],//tab文案
-    tab: [false, true, true, true, true]
+    category: ['', '01','02',''],
+    moreTab: [],
+    tabTxt: [],//tab文案
+    tab: [],
+    len:0
   },
   onLoad:function(options){
+    var self = this, tt = ['全部'], tb = [false], cg = [''], len=0;
+    request.getgoodcategory(function (res) {
+      for (var i = 0; i < res.data.content.length; i++) {
+        res.data.content[i]['num'] = i
+        if(i<3){
+          tt.push(res.data.content[i].data_name);
+          cg.push(res.data.content[i].data_code);
+          tb.push(true);
+        }
+      }
+      tt.push('更多'); cg.push(''); tb.push('true'); len = tb.length-1
+      if (res.data.code == '1') {
+        self.setData({
+          categorylist: res.data.content,
+          tab: tb,
+          category:cg,
+          tabTxt:tt,
+          len:len
+        })
+      }
+    })
+    /*默认获取所有商品*/
     this.getGoodsData(null)
   },
   chooseclsfy:function(){
@@ -31,35 +55,38 @@ Page({
   },
   // 选项卡
   filterTab: function (e) {
-    var self = this, data = [true, true, true, true, true], index = e.currentTarget.dataset.index;
-    console.log("curindex:" + this.data.curindex + '----filterTab---' + index )
+    var self = this, data = [], index = e.currentTarget.dataset.index;
+    for (var i = 0; i < this.data.tab.length;i++){
+      data.push(true)
+    }
     data[index] = !this.data.tab[index];
     // data[index] = false;
     this.setData({
       tab: data,
       // curindex: index
     })
-    if(index != 4){
+    if (index != (this.data.category.length - 1)){
       this.getGoodsData(this.data.category[index])
     }else{
-      request.getgoodcategory(function (res) {
-        for (var i = 0; i < res.data.content.length;i++){
-          res.data.content[i]['num']=i
-        }
-        if (res.data.code == '1') {
-          self.setData({
-            categorylist: res.data.content,
-          })
-        }
-      })
+      // request.getgoodcategory(function (res) {
+      //   for (var i = 0; i < res.data.content.length;i++){
+      //     res.data.content[i]['num']=i
+      //   }
+      //   if (res.data.code == '1') {
+      //     self.setData({
+      //       categorylist: res.data.content,
+      //     })
+      //   }
+      // })
     }
   },
   //筛选项点击操作
   filtercategory: function (e) {
     //数据筛选
+    console.log("filtercategory:---" + JSON.stringify(e))
     var self = this, num = e.currentTarget.dataset.cur, id = e.currentTarget.dataset.id, code = e.currentTarget.dataset.data_code, name = e.currentTarget.dataset.data_name, txt = e.currentTarget.dataset.txt, tabTxt = this.data.tabTxt;
     switch (e.currentTarget.dataset.index) {
-      case '4':
+      case (this.data.category.length - 1):
         // tabTxt[4] = txt;
         self.setData({
           page: 1,
@@ -70,7 +97,7 @@ Page({
         });
         break;
     }
-    if (e.currentTarget.dataset.index == '4'){
+    if (e.currentTarget.dataset.index == (this.data.category.length - 1)){
       self.getGoodsData(id);
     }
   },

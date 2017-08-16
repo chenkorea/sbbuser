@@ -24,7 +24,6 @@ function getallgoods(cid,callback) {
 
 //商品所有分类接口
 function getgoodcategory(callback) {
-  console.log('getgoodcategory------>>' + util.url)
   wx.request({
     url: util.url + '/phone/userinfor/getgoodcategory', //
     header: {

@@ -3,11 +3,11 @@
   <!--选项卡-->
 	<view class="tabTit box tc bg_f">
 		<view class="flex1{{!tab[index]?' active':''}}" wx:for="{{tabTxt}}" wx:key="" data-index="{{index}}" bindtap="filterTab"><text>{{item}}</text>
-      <image wx:if="{{index == 4}}" src="../images/arrow_down.png"></image>
+      <image wx:if="{{index == len}}" src="../images/arrow_down.png"></image>
     </view>
 	</view>
-  <view class="tabLayer tc" hidden="{{tab[4]}}">
-    <text class="{{more_id==item.num?'active':''}}" style="font-size:34rpx;" wx:for="{{categorylist}}" wx:key="" data-cur="{{item.num}}" data-id="{{item.data_code}}" data-txt="{{item.data_name}}" data-index="4" bindtap="filtercategory">{{item.data_name}}</text>
+  <view class="tabLayer tc" hidden="{{tab[len]}}">
+    <text class="{{more_id==item.num?'active':''}}" style="font-size:34rpx;" wx:for="{{categorylist}}" wx:key="" data-cur="{{item.num}}" data-id="{{item.data_code}}" data-txt="{{item.data_name}}" data-index="{{len}}" bindtap="filtercategory">{{item.data_name}}</text>
 </view>
   <view class="air_container">
     <view class="mv_item" wx:for="{{goods}}" wx:key="movieId" data-item="{{item}}" bindtap="goodsdetail">
