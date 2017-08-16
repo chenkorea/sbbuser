@@ -4,7 +4,7 @@
   </view> -->
 
   <view class="title-log">
-    <image class="lock-log"></image>
+    <image class="lock-log" src="../images/lock_login.png"></image>
     <text class="lock-title">锁帮帮,你身边的开锁专家</text>
   </view>
 

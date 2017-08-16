@@ -30,7 +30,6 @@
 }
 
 .lock-log{
-  background: url('../images/lock_login.png') no-repeat;
   height: 40rpx;
   width: 40rpx;
   margin-right: 20rpx;
