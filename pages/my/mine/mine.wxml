@@ -1,1 +1,19 @@
-<view class="sdsd">mine</view>
+  <!-- 我的界面 -->
+  <view class="my-view" hidden="{{bottomstatus==1 || bottomstatus==2}}">
+    <view class="my-header">
+      <image src="{{user_head}}" class="user-header"></image>
+      <view class="name-view">
+        <view class="phone-val">{{user_name}}</view>
+        <view class="level-val">普通会员</view>
+      </view>
+    </view>
+
+    <view class="seting-view" bindtap="toDialphone">
+      <icon class="iconfont icon-mysss icon-kefu" />
+      <text class="my-title">客服</text>
+    </view>
+    <view class="seting-view" bindtap="tosetting">
+      <icon class="iconfont icon-mysss1 icon-shezhi" />
+      <text class="my-title">重置密码</text>
+    </view>
+  </view>

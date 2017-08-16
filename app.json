@@ -1,10 +1,12 @@
 {
   "pages": [
     "pages/index/indexnew",
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/openkey/openkey",
     "pages/notice/notice",
+    "pages/my/orderView/orderNewView",
+    "pages/my/mine/mine",
+    "pages/my/orderView/orderView",
+    "pages/index/index",
+    "pages/openkey/openkey",
     "pages/notice/noticedetail/noticedetail",
     "pages/selectKeyType/selectKeyType",
     "pages/my/address/address",
@@ -17,8 +19,6 @@
     "pages/index/search/search",
     "pages/index/search/persondetail/persondetail",
     "pages/switchcity/switchcity",
-    "pages/my/orderView/orderView",
-    "pages/my/mine/mine",
     "pages/my/myorder/myorder",
     "pages/my/score/score",
     "pages/login/login",
@@ -32,12 +32,46 @@
     "pages/keymarkets/keymarkets",
     "pages/keymarkets/goodsclsfy/goodsclsfy",
     "pages/keymarkets/goodsdetail/goodsdetail",
-    "pages/my/orderprocess/orderprocess"
+    "pages/my/orderprocess/orderprocess",
+    "pages/index/zhaomu/zhaomu",
+    "pages/my/shifu/shifu"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FF7F24",
     "navigationBarTitleText": "锁帮帮",
     "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#FF7F24",
+    "backgroundColor": "#fff",
+    "borderStyle": "#FFF",
+    "list": [
+      {
+        "pagePath": "pages/index/indexnew",
+        "iconPath": "pages/images/homepage.png",
+        "selectedIconPath": "pages/images/homepage_fill.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/notice/notice",
+        "iconPath": "pages/images/interactive.png",
+        "selectedIconPath": "pages/images/interactive_fill.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/my/orderView/orderNewView",
+        "iconPath": "pages/images/order.png",
+        "selectedIconPath": "pages/images/order_fill.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/my/mine/mine",
+        "iconPath": "pages/images/people.png",
+        "selectedIconPath": "pages/images/people_fill.png",
+        "text": "我的"
+      }
+    ]
   }
 }

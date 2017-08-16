@@ -4,6 +4,7 @@
 }
 
 .title-text {
+  margin: 20rpx auto;
   font-size: 32rpx;
   color: #333333;
 }

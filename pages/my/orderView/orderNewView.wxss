@@ -1,17 +1,14 @@
 
 .top-view {
-  border-bottom: 10rpx solid #F4F4F4;
+  border-bottom: 1rpx solid #F4F4F4;
   display: flex;
   align-items: center;
 }
 
 .left-status-view {
-  display: inline-block;
-  width: 33%;
-  height: 120rpx;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20rpx;
+  width: 50%;
+  height: 90rpx;
+  padding-top: 30rpx;
   color: #666666;
 }
 
@@ -35,8 +32,30 @@
 }
 
 .order-item {
-  border-bottom: 10rpx solid #F4F4F4;
-  padding: 20rpx;
+  padding: 10rpx;
+  background: #F4F4F4
+}
+
+.nei-view {
+  position: relative;
+  background: #FFFFFF;
+  margin: 10rpx;
+  padding-bottom: 10rpx;
+  box-shadow: 3rpx 3rpx 3rpx 3rpx #F0F0F0;
+  border-radius: 6rpx;
+}
+
+.order-process {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: -10rpx;
+  top: 30rpx;
+  height: 60rpx;
+  width: 200rpx;
+  background: #3CB371;
+  color: #FFF;
 }
 
 .order-no {
@@ -45,14 +64,29 @@
 }
 
 .order-status {
-  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  border-bottom: 1rpx solid #F2F2F2;
   color: #333333;
   font-size: 28rpx;
+  height: 100rpx;
+}
+
+.or-title {
+  width: 140rpx;
+  color: #999999;
+}
+
+.price-text {
+  color: #FF7F24;
+  font-size: 46rpx;
 }
 
 .content-view {
   position: absolute;
-  top: 150rpx;
+  top: 90rpx;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -194,10 +228,53 @@
   margin: 20rpx;
 }
 
+.but-lay-view {
+  text-align: right;
+}
+
 .pay_but {
-  height: 90rpx;
+  border: none;
+  height: 75rpx;
   background: #FF7F24;
   color: white;
   font-size: 30rpx;
-  margin: 20rpx 10rpx 10rpx 10rpx;
+  margin: 10rpx;
+  align-items: right;
+}
+
+.tochakan {
+  color: #333333;
+  background: #F0F0F0;
+}
+
+.importtan_status {
+  background-color: #EEAD0E;
+}
+
+.normal_status {
+  background-color: #4F94CD;
+}
+
+.detail_view {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+
+.det_value {
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.to_jaintou {
+  position: absolute;
+  top: 35rpx;
+  right: 20rpx;
+  width: 30rpx;
+  height: 30rpx;
+  background-size: 30rpx 30rpx;
 }

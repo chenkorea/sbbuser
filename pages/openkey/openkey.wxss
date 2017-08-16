@@ -1,4 +1,9 @@
 
+.main-view {
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+
 .type-view {
   position: relative;
   display: flex;
@@ -26,7 +31,7 @@
 }
 
 .type-value {
-  width: 80%;
+  width: 200rpx;
   font-size: 28rpx;
 }
 
@@ -35,13 +40,72 @@
 }
 
 .save-button {
+  margin:20rpx auto;
   height: 100rpx;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   color: #FFFFFF;
   font-size: 32rpx;
   background: #FF7F24;
   border-radius:0;
+}
+
+.tab_detaul_view {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-left: 30%;
+  background: #F4F4F4;
+  border: 1rpx solid #CCCCCC;
+}
+
+.tab_img {
+  display: block;
+  text-align: center;
+  width: 40rpx;
+  margin-left: 23%;
+  height: 40rpx;
+  margin-top: 5rpx;
+}
+
+.tab_text {
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #666666;
+  font-size: 20rpx;
+  margin-top: 5rpx;
+}
+
+.info_view {
+  float: left;
+  width: 25%;
+}
+
+.tab_de_view {
+  height: 120rpx;
+  border-top: 1rpx solid #F0F0F0;
+  border-bottom: 20rpx solid #F0F0F0;
+  padding: 20rpx 0;
+}
+
+.order-info {
+  font-size: 28rpx;
+  color: 666666;
+}
+
+.shuoming-view {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: 666666;
+  height: 80rpx;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+
+.bot_view {
+  padding-left:20rpx;
+  padding-right: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
 }

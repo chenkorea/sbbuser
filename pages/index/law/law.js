@@ -8,7 +8,7 @@ var app = getApp()
 Page({
   data: {
     laws: [],
-    lawType:1  // 1：法律法规  2：安防知识
+    lawType:1  // 1：法律法规
   },
   /**
    * 查询详细
@@ -30,11 +30,7 @@ Page({
     })
     if (options.lawType == 1) {
       wx.setNavigationBarTitle({
-        title: '法律法规',
-      })
-    } else {
-      wx.setNavigationBarTitle({
-        title: '安防知识',
+        title: '关于我们',
       })
     }
   }

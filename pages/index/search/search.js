@@ -9,7 +9,8 @@ Page({
   data: {
     inputValue: '',
     persons: [],
-    temp:[]
+    temp:[],
+    hidePhones: []
   },
   bindKeyInput: function (e) {
     var that = this 
@@ -23,6 +24,7 @@ Page({
       })
     }else{
       var temp = [];
+      var phones = [];
       var persons = this.data.temp;
       for (var i = 0; i < persons.length; i++) {
         var name = persons[i].name
@@ -32,14 +34,17 @@ Page({
           temp.push(persons[i]);
         }
       }
+      console.log(phones);
       this.setData({
-        persons: temp
+        persons: temp,
+        hidePhones: phones
       })
     }
   },
   onLoad: function () {
     var that = this
     datarequest.gettechqual(function (res){
+      var phones = [];
       if (res.data.code == '1'){
         for (var i = 0; i < res.data.content.length; i++) {
             var urls = [];
@@ -55,13 +60,15 @@ Page({
               }
               res.data.content[i].archives_url = urls
             }
+            phones[i] = res.data.content[i].phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
         }
           that.setData({
             goods: res.data.content
           })
         that.setData({
           persons: res.data.content,
-          temp: res.data.content
+          temp: res.data.content,
+          hidePhones: phones
         })
       }
     })

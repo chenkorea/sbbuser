@@ -1,6 +1,7 @@
 //index.js
 // 获取Util实例
 var Util = require('../../utils/address.js')
+var homeUtil = require('../../utils/home.js');
 
 //获取应用实例
 // fuwuType服务类型  01：开锁服务  02：换锁服务  03：报修服务  04：汽车解匙  05：民用解匙
@@ -25,7 +26,9 @@ Page({
     filePaths: [],
     userId: '',
     uname: '',
-    phone: ''
+    phone: '',
+    longitude: '',
+    latitude: ''
   },
   /**
    * 监听普通picker选择器
@@ -220,6 +223,16 @@ Page({
     console.log('onLoad')
     // 获取传送过来的值
     var that = this;
+
+    // 自动定位获取地理位置
+    homeUtil.getCityName(function (locationData) {
+      homeUtil.updateLocation(locationData.location.lng, locationData.location.lat, that.data.uid);
+      that.setData({
+        address: locationData,
+        longitude: locationData.location.lng,
+        latitude: locationData.location.lat
+      })
+    })
 
     //获取昵称
     wx.getStorage({

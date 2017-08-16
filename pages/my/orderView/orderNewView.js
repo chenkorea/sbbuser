@@ -1,7 +1,7 @@
 // 获取Util实例
 var Util = require('../../../utils/address.js')
 
-var MD5Util = require('../../../utils/md5.js')   
+var MD5Util = require('../../../utils/md5.js')
 
 //获取应用实例
 var app = getApp()
@@ -11,28 +11,25 @@ Page({
     classtwo: '',
     classThree: '',
     classFour: '',
-    orderstatus: '1',   // 待派工  2 开工  3待支付  4已完成
+    orderstatus: '1',   // 1 当前订单  2 历史订单1
     bottomstatus: 1,  // 1 订单  2  积分  3 我的
     bottomone: 'bottomsel',
     bottomtwo: '',
     bottomthree: '',
-    uid:'',
+    uid: '',
     userOrders: [],
-    user_name:'昵称',
-    user_head:'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg'
+    user_name: '昵称',
+    user_head: 'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg',
+    status_cla: 'impoerta'
   },
   //事件处理函数
   bindStatusViewTap: function (e) {
     var that = this;
     var id = e.currentTarget.dataset.id;
     if (id == 1) {
-      that.setData({ classone: 'selected', classtwo: '', classThree: '', classFour: '', orderstatus: '1'})
+      that.setData({ classone: 'selected', classtwo: '', classThree: '', classFour: '', orderstatus: '1' })
     } else if (id == 2) {
       that.setData({ classone: '', classtwo: 'selected', classThree: '', classFour: '', orderstatus: '2' })
-    } else if (id == 3) {
-      that.setData({ classone: '', classtwo: '', classThree: 'selected', classFour: '',orderstatus: '3' })
-    } else if (id == 4) {
-      that.setData({ classone: '', classtwo: '', classThree: '', classFour: 'selected',orderstatus: '4' })
     }
     // 查询订单
     that.getUserOrder(that.data.uid, that.data.orderstatus);
@@ -54,14 +51,23 @@ Page({
       url: '../../my/score/score',
     })
   },
- 
-  tosetting:function(){
+
+  tosetting: function () {
     wx.navigateTo({
       url: '../mine/updatepwd/updatepwd',
     })
   },
   onLoad: function (options) {
     console.log('onLoad')
+
+    wx.getStorage({
+      key: 'phone',
+      success: function(res) {
+        console.log("phone --------  " + res.data);
+
+      },
+    })
+
     var that = this
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function (userInfo) {
@@ -90,15 +96,16 @@ Page({
 
     wx.getStorage({
       key: 'uid',
-      success: function(res) {
+      success: function (res) {
         that.setData({
           uid: res.data
         })
+        that.getUserOrder(that.data.uid, that.data.orderstatus);
       },
     })
 
     console.log(that.data.uid + "--------" + that.data.orderstatus)
-    that.getUserOrder(that.data.uid, that.data.orderstatus);
+    
 
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function (userInfo) {
@@ -119,25 +126,21 @@ Page({
     })
 
   },
-  getUserOrder: function(uid, status) {
-    wx.showLoading({title: '数据加载中...',})
+  getUserOrder: function (uid, status) {
+    wx.showLoading({ title: '数据加载中...', })
     var that = this;
     // 提交数据
     var process_status = '';
     if (status == '1') {
       process_status = "('01','02','03','04','05','06')";
     } else if (status == '2') {
-      process_status = "('05')";
-    } else if (status == '3') {
-      process_status = "('06')";
-    } else if (status == '4') {
       process_status = "('07', '08')";
     }
     Util.getUserOrders(function (data) {
       wx.hideLoading();
       var code = data.data.code;
       if (code == "1") {
-        that.setData({ userOrders: data.data.content})
+        that.setData({ userOrders: data.data.content })
       } else {
         // 失败
         that.setData({ userOrders: [] })
@@ -155,7 +158,7 @@ Page({
       var order_id = userOrder.id;
       if (order_id == orderId) {
         userOrdserDe = userOrder;
-        break; 
+        break;
       }
     }
     var jsonStr = JSON.stringify(userOrdserDe);
@@ -169,7 +172,7 @@ Page({
   toPay: function (e) {
 
     this.wxLogin(e);
-    
+
   },
   /**
    * 获取微信登录
@@ -199,8 +202,8 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      data: { code:code},
-      success: function(res) {
+      data: { code: code },
+      success: function (res) {
         wx.hideLoading();
         var openIdStr = res.data.content[0];
         // "{"session_key":"WX39zL8sZsFPOu4ajGQ1pQ== ","expires_in":7200,"openid":"ov9Hv0PDYNOv- tdbSM7Nv2beapSk"}"
@@ -223,7 +226,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      data: { 'openid': opendId, 'orderId': orderId},
+      data: { 'openid': opendId, 'orderId': orderId },
       success: function (res) {
         wx.hideLoading();
         var code = res.data.code;
@@ -236,7 +239,7 @@ Page({
             })
           } else {
             console.log('prepay_id == ' + prepay_id);
-            that.sign(prepay_id, e);  
+            that.sign(prepay_id, e);
           }
         }
       }
@@ -283,7 +286,7 @@ Page({
           wx.hideLoading();
           var code = data.data.code;
           if (code == "1") {
-            wx.showToast({title: '支付成功',})
+            wx.showToast({ title: '支付成功', })
             // 直接跳转到查询已完成的
             that.setData({ classone: '', classtwo: '', classThree: '', classFour: 'selected', orderstatus: '4' })
             // 查询已完成订单
@@ -304,10 +307,10 @@ Page({
       }
     })
   },
-  getNum:function (callback){  
-    
-    return nums;  
-  },  
+  getNum: function (callback) {
+
+    return nums;
+  },
   toRating: function (e) {
     var that = this;
     var orderId = e.currentTarget.dataset.id;

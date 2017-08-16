@@ -122,6 +122,20 @@ Page({
       },
     })
   },
+  selectMap: function() {
+    var that = this;
+    wx.chooseLocation({
+      success: function (res) {
+        that.setData({
+          address: res,
+          longitude: res.longitude,
+          latitude: res.latitude
+        })
+        wx.setStorage({ key: 'selAddr', data: res, })
+        wx.navigateBack({})
+      },
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -15,6 +15,7 @@
       </view>
     </view>
   </view>
+  <view class="map_view" bindtap="selectMap">在地图上选地址</view>
   <view class="add_view" bindtap="toAddNewAddress">添加新地址</view>
   
 </view>

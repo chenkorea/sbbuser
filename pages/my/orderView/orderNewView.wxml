@@ -1,0 +1,43 @@
+<!-- 我的订单页面 -->
+<view class="main-view">
+
+  <!-- 订单界面 -->
+  <view class="order_view" hidden="{{bottomstatus==2 || bottomstatus==3}}">
+    <view class="top-view">
+      <view class="left-status-view {{classone}}" data-id="1" bindtap="bindStatusViewTap">
+          <text class="status-text">当前订单</text>
+      </view>
+
+      <view class="left-status-view {{classtwo}}" data-id="2" bindtap="bindStatusViewTap">
+        <text class="status-text">历史订单</text>
+      </view>
+    </view>
+      <scroll-view class="content-view" scroll-y="true">
+        <view class="order-item" wx:for="{{userOrders}}" wx:key="{{index}}" data-id="{{item.id}}">
+
+          <view class="nei-view">
+            <view class="order-status"><text class="or-title">订单号：</text><text class="or_value">{{item.order_no}}</text></view>
+
+            <view class="order-process {{item.process_stage=='06' ? 'importtan_status':'normal_status'}}">{{item.process_stage_str}}</view>
+
+            <view class="order-status"><text class="or-title">发起时间：</text><text class="or_value">{{item.create_time_ttr}}</text></view>
+            <view class="order-status"><text class="or-title">类   别：</text><text class="or_value">{{item.data_name}}-{{item.service_item}}</text></view>
+            <view class="order-status"><text class="or-title">服务地址：</text><text class="or_value">{{item.service_address}}</text></view>
+            <view class="order-status" hidden="{{orderstatus=='1'}}"><text class="or-title">接单技师：</text><text class="or_value">{{item.process_person_name}}</text></view>
+            <view class="order-status" hidden="{{item.process_stage=='01' || item.process_stage=='02' || item.process_stage=='03' || item.process_stage=='04' || item.process_stage=='05'}}" ><text class="or-title">报   价：</text><text class="or_value price-text">{{item.total_price}}元</text></view>
+            <view class="order-status" hidden="{{orderstatus=='1' || orderstatus=='2'}}"><text class="or-title">完工时间：</text><text class="or_value">{{item.finish_time}}</text></view>
+            <!-- <button class="pay_but" data-id="{{item.id}}" bindtap="cancelOrder" hidden="{{orderstatus!='3'}}">取消订单</button> -->
+            <view class="detail_view" data-id="{{item.id}}" catchtap="toDetail">
+              <text class="det_value">查看详细</text><image class="to_jaintou" src="../../images/jiantou.png"></image>
+            </view>
+            <view class="but-lay-view">
+              <button class="pay_but" data-id="{{item.id}}" catchtap="toPay" hidden="{{item.process_stage!='06'}}">去支付</button>
+              <button class="pay_but" data-id="{{item.id}}" data-dis="{{item.dispatching_id}}" catchtap="toRating" hidden="{{item.process_stage!='07'}}">去评价</button>
+            </view>
+            
+          </view>
+          
+        </view>
+      </scroll-view>
+  </view>
+</view>

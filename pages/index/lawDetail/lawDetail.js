@@ -16,12 +16,8 @@ Page({
     });
     if (options.lawType == 1) {
       wx.setNavigationBarTitle({
-        title: '法律法规',
+        title: '关于',
       })
-    } else {
-      wx.setNavigationBarTitle({
-        title: '安防知识',
-      })
-    }
+    } 
   }
 })
