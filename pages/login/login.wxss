@@ -63,7 +63,6 @@
   position: absolute;
   left: 10rpx;
   top: 30rpx;
-  background: url('../images/head_account.png') no-repeat;
   width: 40rpx;
   height: 40rpx;
 }
@@ -72,7 +71,6 @@
   position: absolute;
   left: 10rpx;
   top: 30rpx;
-  background: url('../images/key_pwd_nor.png') no-repeat;
   width: 40rpx;
   height: 40rpx;
 }
