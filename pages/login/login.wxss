@@ -4,7 +4,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background: url('http://b.zol-img.com.cn/sjbizhi/images/6/320x510/1395732915539.jpg');
+  /* background: url('http://b.zol-img.com.cn/sjbizhi/images/6/320x510/1395732915539.jpg'); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -20,11 +20,71 @@
 }
 
 .login-view {
+}
+
+.title-log{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100rpx;
+}
+
+.lock-log{
+  background: url('../images/lock_login.png') no-repeat;
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 20rpx;
+}
+
+.content-log{
   position: absolute;
-  left: 60rpx;
-  top: 60rpx;
-  bottom: 60rpx;
-  right: 60rpx;
+  height: 40rpx;
+  width: 100%;
+  top: 16%;
+}
+
+.account-cls{
+  position: absolute;
+  left: 5%;
+  font-size: 34rpx;
+  border-bottom-width: 100%;
+  border-bottom-color: #FF7F24;
+}
+
+.account-pic{
+  position: relative;
+  background: url('../images/head_account.png') no-repeat;
+  left: 5%;
+  height: 24rpx;
+  top: 100rpx;
+}
+
+.user_img {
+  position: absolute;
+  left: 10rpx;
+  top: 30rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.pwd_img {
+  position: absolute;
+  left: 10rpx;
+  top: 30rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.passwd-cls{
+  position: absolute;
+  left: 5%;
+  font-size: 34rpx;
+  top: 65rpx;
+}
+
+.lock-title{
+  color: #333333;
+  font-size: 30rpx;
 }
 
 .login-title {
@@ -56,12 +116,11 @@
 .login_btn {
   width: 80%;
   height: 90rpx;
-  background: #228B22;
+  background: #FF7F24;
   border-radius: 40rpx;
   color: #FFFFFF;
   margin-left: 60rpx;
   font-size: 30rpx;
-  margin-top: 30rpx;
   text-align: center;
 }
 
@@ -77,21 +136,22 @@
 }
 
 .user-view {
+  position: relative;
   width: 80%;
+  margin-left: 10%;
+  margin-top: 30rpx;
   height: 90rpx;
-  border-radius: 40rpx;
-  margin-left: 60rpx;
-  margin-top: 50rpx;
-  background: #999999;
   font-size: 30rpx;
   display: flex;
-  flex-direction:row;
-  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2rpx solid #FF7F24;
+  border-left: 1rpx solid #F0F0F0;
+  border-right: 1rpx solid #F0F0F0;
 }
 
 .pwd-view {
   width: 80%;
-  height: 90rpx;
+  height: 80rpx;
   margin-left: 60rpx;
   border-radius: 40rpx;
   background: #999999;
@@ -100,20 +160,21 @@
 }
 
 .forget-text {
-  margin-left: 60rpx;
-  margin-top: 30rpx;
+  position: absolute;
+  height: 60rpx;
+  top: 0;
+  right: 0;
   font-size: 28rpx;
-  color: #666666;
-  border-bottom: 2rpx solid #666666;
+  color: #2375c7;
 }
 
 .user-text {
   position: absolute;
-  color: #FFFFFF;
-  left: 120rpx;
-  top: 210rpx;
-  padding-top: 15rpx;
-  width: 60%;
+  color: #333333;
+  margin-top: 20rpx;
+  height: 70rpx;
+  left: 80rpx;
+  top: 0;
 }
 
 .pwd-text {
@@ -123,4 +184,25 @@
   top: 330rpx;
   padding-top: 15rpx;
   width: 60%;
+}
+
+.forget-view {
+  position: relative;
+  margin: 30rpx;
+  height: 60rpx;
+}
+
+.register_view{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50rpx;
+  color: #333333;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+}
+
+.register_text
+{
+  color: #FF7F24;
 }
