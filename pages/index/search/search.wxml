@@ -6,7 +6,7 @@
   </view>
   <view class="result-list-view" wx:for="{{persons}}" wx:key="{{index}}" data-item="{{persons[index]}}" bindtap="gopersondetail">
      <view class="name-text">姓名：{{item.name}}</view>
-     <view class="phone-text">电话号码：{{item.phone}}</view>
+     <view class="phone-text">电话号码：{{hidePhones[index]}}</view>
      <view class="level-text">资质：{{item.service_types_str}}</view>
   </view>
 </view>

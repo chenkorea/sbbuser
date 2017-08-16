@@ -16,6 +16,16 @@
   color: #FFFFFF;
 }
 
+.map_view {
+  display: flex;
+  height: 100rpx;
+  border-bottom: 1rpx solid #F0F0F0;
+  justify-content: center;
+  align-items: center;
+  color: #333333;
+  font-size: 30rpx;
+}
+
 .list-view {
 }
 

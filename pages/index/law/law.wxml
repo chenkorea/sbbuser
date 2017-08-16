@@ -2,6 +2,5 @@
 <view class="main-view">
   <view class="law-item" wx:for="{{laws}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap="lookDetailView">
     <view class="title-text">{{item.title}}</view>
-    <view class="time-text">{{item.time}}</view>
   </view>
 </view>

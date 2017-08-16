@@ -30,6 +30,12 @@ Page({
       url: '../../my/myorder/myorder?jsonStr=' + jsonStr,
     })
   },
+  toShiFuDetail: function () {
+    var tech_id = this.data.userOrder.process_person_id;
+    wx.navigateTo({
+      url: '../../index/search/persondetail/persondetail?tech_id=' + tech_id,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

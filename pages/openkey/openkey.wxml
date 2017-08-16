@@ -56,4 +56,51 @@
 
   <!-- 提交按钮 -->
   <button class="save-button" bindtap="saveData">提交</button>
+
+  <view class="tab_de_view">
+    <view class="info_view">
+      <view class="tab_detaul_view">
+        <image src="../images/kuaisu.png" class="tab_img"></image>
+        <view class="tab_text">快速</view>
+      </view>
+      <view class="tab_text">30分钟内到达</view>
+    </view>
+    <view class="info_view">
+      <view class="tab_detaul_view">
+        <image src="../images/anquan.png" class="tab_img"></image>
+        <view class="tab_text">安全</view>
+      </view>
+      <view class="tab_text">公安备案实名认证</view>
+    </view>
+    <view class="info_view">
+      <view class="tab_detaul_view">
+        <image src="../images/zhuanye.png" class="tab_img"></image>
+        <view class="tab_text">专业</view>
+      </view>
+      <view class="tab_text">资深技师技术精湛</view>
+    </view>
+    <view class="info_view">
+      <view class="tab_detaul_view">
+        <image src="../images/quanmian.png" class="tab_img"></image>
+        <view class="tab_text">全面</view>
+      </view>
+      <view class="tab_text">锁与匙应有尽有</view>
+    </view>
+  </view>
+
+  <view class="bot_view">
+    <view class="shuoming-view">服务说明</view>
+    <text class="order-info">
+  1、	提交订单锁哥会在2分钟内联系客户、核对相关信息。
+  2、	紧急开锁15分钟内到达现场、最慢不超过30分钟。
+  3、	锁哥上门服务流程：核对用户信息---服务施工---完工确认---费用支付。
+  4、	郊区及偏远地区双方协商加收燃油费或远程费。
+  5、	深夜00:00—凌晨06：00加收50元加班费。
+  6、	锁哥到达现场后、如因客户自身原因放弃服务，锁帮帮不退还预付定金、请谨慎下单。
+  7、	锁哥到达现场后、如因锁哥自身原因不能为客户完成服务，锁帮帮不收取任何费用。客户如有需要或改派其他锁哥前往服务。
+  8、	军警烈士家属开锁费用全免、119火警开锁费用全免、特困群众开锁费用减免或酌情全免。
+  9、	如需开具发票、可在锁帮帮平台备注栏填写发票相关信息，或致电400 0851 323联系客服后由快递统一寄送。
+
+    </text>
+  </view>
 </view>

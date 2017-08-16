@@ -51,7 +51,7 @@ var PageItems =
     },
     {
       id: '7',
-      text: '法律法规',
+      text: '关于我们',
       icon: 'iconfont icon-boshimao',
       bac: 'bottom-icon',
       url: '../index/law/law?lawType=1',
@@ -59,10 +59,10 @@ var PageItems =
     },
     {
       id: '8',
-      text: '安防知识',
+      text: '锁哥招募',
       icon: 'iconfont icon-icsaving48px',
       bac: 'bottom-icon',
-      url: '../index/law/law?lawType=2',
+      url: '../index/zhaomu/zhaomu',
       imagepath: '../images/rules.png'
     },
     {

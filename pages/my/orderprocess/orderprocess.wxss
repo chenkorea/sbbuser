@@ -75,3 +75,38 @@
   font-weight: 500;
   color: #333333;
 }
+
+.order-status {
+  display: flex;
+  align-items: center;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  border-bottom: 1rpx solid #F2F2F2;
+  color: #333333;
+  font-size: 28rpx;
+  height: 100rpx;
+}
+
+.or-title {
+  width: 140rpx;
+  color: #999999;
+}
+
+.price-text {
+  color: #FF7F24;
+  font-size: 46rpx;
+}
+
+.jiantou-view {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.jiantou {
+  position: absolute;
+  top: 35rpx;
+  right: -10rpx;
+  width: 30rpx;
+  height: 30rpx;
+}

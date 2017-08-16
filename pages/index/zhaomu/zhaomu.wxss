@@ -25,3 +25,11 @@
   color: #333333;
   margin-top: 20rpx;
 }
+.save-button {
+  margin:10rpx;
+  height: 100rpx;
+  color: #FFFFFF;
+  font-size: 32rpx;
+  background: #FF7F24;
+  border-radius:0;
+}

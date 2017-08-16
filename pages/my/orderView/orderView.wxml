@@ -50,8 +50,7 @@
   </view>
   
   <!-- 积分界面 -->
-  <view class="order_view" hidden="{{bottomstatus==1 || bottomstatus==3}}">
-    <!-- 积分列表 -->
+  <!-- <view class="order_view" hidden="{{bottomstatus==1 || bottomstatus==3}}">
     <scroll-view class="score-list-view">
       <view class="score-item">
         <icon class="iconfont icon-jifen score-icon"/>
@@ -66,28 +65,9 @@
         <text class="score-text">好友邀请获得积分</text>
       </view>
     </scroll-view>
-  </view>
+  </view> -->
 
-  <!-- 我的界面 -->
-  <view class="my-view" hidden="{{bottomstatus==1 || bottomstatus==2}}">
-    <view class="my-header">
-      <image src="{{user_head}}" class="user-header"></image>
-      <view class="name-view">
-        <view class="phone-val">{{user_name}}</view>
-        <view class="level-val">普通会员</view>
-      </view>
-    </view>
-
-    <view class="seting-view">
-      <icon class="iconfont icon-mysss icon-kefu" />
-      <text class="my-title">客服</text>
-    </view>
-    <view class="seting-view" bindtap="tosetting">
-      <icon class="iconfont icon-mysss1 icon-shezhi" />
-      <text class="my-title">重置密码</text>
-    </view>
-  </view>
-  
+<!--   
   <view class="botton-view">
     <view class="bottom-bottom-view {{bottomone}}" data-id="1" bindtap="bindBottomViewTap">
         <view class="bottom-mm">
@@ -109,5 +89,5 @@
         </view>
         <text class="bottom-text">我的</text>
       </view>
-  </view>
+  </view> -->
 </view>
