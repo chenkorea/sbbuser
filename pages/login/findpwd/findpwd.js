@@ -8,7 +8,8 @@ Page({
     titleText: '',
     fogcode:'',
     fogphone:'',
-    nextstep:'next_un_btn'
+    nextstep:'next_un_btn',
+    animation: ''
   },
   //事件处理函数
   bindViewTap: function () {
@@ -21,7 +22,7 @@ Page({
       },
       fail: function (res) { },
       complete: function (res) {
-        if (that.fogphone.length != 11) {
+        if (that.data.fogphone.length != 11) {
           wx.showToast({
             title: '手机号码格式有误',
           })
@@ -45,7 +46,9 @@ Page({
       key: 'phone',
       success: function (res) {
         console.log('onLoad success: ' + JSON.stringify(res))
-        that.fogphone = res.data;
+        that.setData({
+          fogphone:res.data
+        })
       },
     })
   },
