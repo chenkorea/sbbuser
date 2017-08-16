@@ -109,3 +109,8 @@
   margin-left: 20rpx;
   margin-right: 20rpx;
 }
+
+
+.add-view-text {
+  height: 30rpx;
+}

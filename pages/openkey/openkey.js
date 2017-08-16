@@ -28,7 +28,9 @@ Page({
     uname: '',
     phone: '',
     longitude: '',
-    latitude: ''
+    latitude: '',
+    showAddress:'',
+    showRemark:''
   },
   /**
    * 监听普通picker选择器
@@ -223,6 +225,23 @@ Page({
     console.log('onLoad')
     // 获取传送过来的值
     var that = this;
+    wx.removeStorage({
+      key: 'selAddr',
+      success: function(res) {},
+    })
+    wx.removeStorage({
+      key: 'remark',
+      success: function(res) {},
+    })
+    wx.removeStorage({
+      key: 'serviceTime',
+      success: function(res) {},
+    })
+    wx.removeStorage({
+      key: 'selectPics',
+      success: function (res) { },
+    })
+
 
     // 自动定位获取地理位置
     homeUtil.getCityName(function (locationData) {
@@ -230,8 +249,14 @@ Page({
       that.setData({
         address: locationData,
         longitude: locationData.location.lng,
-        latitude: locationData.location.lat
+        latitude: locationData.location.lat,
+        showAddress: locationData.address
       })
+      if (locationData.address.length > 20) {
+        that.setData({
+          showAddress: locationData.address.substr(0, 20)
+        })
+      }
     })
 
     //获取昵称
@@ -310,7 +335,15 @@ Page({
     wx.getStorage({
       key: 'selAddr',
       success: function(res) {
-        that.setData({ address: res.data})
+        that.setData({ 
+          address: res.data,
+          showAddress: res.data.address
+        })
+        if (res.data.address.length > 20) {
+          that.setData({
+            showAddress: res.data.address.substr(0, 20)
+          })
+        }
       },
     })
     // 服务时间
@@ -325,6 +358,12 @@ Page({
       key: 'remark',
       success: function(res) {
         that.setData({ remark: res.data})
+
+        if (res.data.length > 20) {
+          that.setData({
+            showRemark: res.data.substr(0, 20)
+          })
+        }
       },
     })
     // 选择图片

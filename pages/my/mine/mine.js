@@ -45,6 +45,11 @@ Page({
       },
     })
   },
+  tosetting: function () {
+    wx.navigateTo({
+      url: '../mine/updatepwd/updatepwd',
+    })
+  },
   toDialphone: function () {
     wx.makePhoneCall({
       phoneNumber: '4000851323',

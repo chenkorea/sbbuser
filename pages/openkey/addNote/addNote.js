@@ -4,7 +4,7 @@
 var app = getApp()
 Page({
   data: {
-    remark: '轻快一点来吧，我赶时间呢！'
+    remark: '请快一点来吧，我赶时间呢！'
   },
   onLoad: function () {
     console.log('onLoad')
@@ -16,8 +16,15 @@ Page({
       },
     })
   },
+  onHide: function () {
+
+  },
   saveRemark: function (e) {
     var rema = e.detail.value;
+    console.log(rema);
+    if (rema.length == 0) {
+      rema = this.data.remark;
+    }
     wx.setStorage({
       key: 'remark',
       data: rema,
