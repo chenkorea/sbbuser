@@ -8,15 +8,22 @@ Page({
     titleText: '',
     regusername:'',
     regpasswd:'',
+    conformpwd:'',
     nickname:'',
     regverifycode:'',
     isagree:false,
     agreeBg:'#FF7F24',
     agreeBg:'agreeunselect',
-    register_btn:'register_un_btn'
+    register_btn:'reg_un_btn'
   },
   //事件处理函数
+  bindlogin:function(){
+    wx.navigateBack({
+      
+    })
+  },
   bindViewTap: function () {
+
     var verifycode = '';
     var that = this;
     wx.getStorage({
@@ -36,6 +43,11 @@ Page({
           } else if (that.data.regpasswd.length < 6) {
             wx.showToast({
               title: '请设置至少六位登录密码',
+              duration: 1500,
+            })
+          } else if (that.data.regpasswd != that.data.conformpwd) {
+            wx.showToast({
+              title: '两次输入的密码不一致',
               duration: 1500,
             })
           } else if (that.data.regverifycode != verifycode) {
@@ -97,6 +109,11 @@ Page({
       regpasswd: e.detail.value
     })
   },
+  getconformpasswd: function (e) {
+    this.setData({
+      conformpwd: e.detail.value
+    })
+  },
   getverifycode: function (e) {
     this.setData({
       regverifycode: e.detail.value
@@ -111,12 +128,12 @@ Page({
     if(isagree){
       this.setData({
         agreeBg:'agreeselect',
-        register_btn:'register_en_btn'
+        register_btn:'reg_en_btn'
       })
     }else{
       this.setData({
         agreeBg: 'agreeunselect',
-        register_btn: 'register_un_btn'
+        register_btn: 'reg_un_btn'
       })
     }
   }
