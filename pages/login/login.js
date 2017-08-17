@@ -7,7 +7,12 @@ Page({
   data: {
     titleText: '',
     username:'',
-    passwd:''
+    passwd:'',
+    name_icon:'../images/head_account_nos.png',
+    bold_name_line:'bolder-un-line',
+    pwd_icon:'../images/key_pwd_nor.png',
+    bold_name_line: 'bolder-un-line',
+    bold_pwd_line: 'bolder-un-line',
   },
   //事件处理函数
   bindViewTap: function () {
@@ -57,5 +62,29 @@ Page({
         that.setData({ username:res.data})
       },
     })
-  }
+  },
+  bindnamefocus: function (e) {
+    this.setData({
+      bold_name_line: 'bolder-en-line',
+      name_icon: '../images/head_account_sel.png',
+    })
+  },
+  bindnameblur: function (e) {
+    this.setData({
+      bold_name_line: 'bolder-un-line',
+      name_icon: '../images/head_account_nos.png',
+    })
+  },
+  bindpwdfocus: function (e) {
+    this.setData({
+      bold_pwd_line: 'bolder-en-line',
+      pwd_icon: "../images/key_pwd_sel.png",
+    })
+  },
+  bindpwdblur: function (e) {
+    this.setData({
+      bold_pwd_line: 'bolder-un-line',
+      pwd_icon: "../images/key_pwd_nor.png",
+    })
+  },
 })

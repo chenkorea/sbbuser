@@ -143,7 +143,7 @@
   font-size: 30rpx;
   display: flex;
   align-items: center;
-  border-bottom: 2rpx solid #FF7F24;
+  /* border-bottom: 2rpx solid #FF7F24; */
 }
 
 .pwd-view {
@@ -202,4 +202,16 @@
 .register_text
 {
   color: #FF7F24;
+}
+
+.bolder-en-line{
+  border-bottom: 2rpx solid #FF7F24;
+  border-left: 1rpx solid #F0F0F0;
+  border-right: 1rpx solid #F0F0F0;
+}
+
+.bolder-un-line{
+  border-bottom: 2rpx solid #aaaaaa;
+  border-left: 1rpx solid #F0F0F0;
+  border-right: 1rpx solid #F0F0F0;
 }
