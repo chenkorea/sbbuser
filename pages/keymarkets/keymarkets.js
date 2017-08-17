@@ -83,15 +83,16 @@ Page({
   //筛选项点击操作
   filtercategory: function (e) {
     //数据筛选
-    console.log("filtercategory:---" + JSON.stringify(e))
     var self = this, num = e.currentTarget.dataset.cur, id = e.currentTarget.dataset.id, code = e.currentTarget.dataset.data_code, name = e.currentTarget.dataset.data_name, txt = e.currentTarget.dataset.txt, tabTxt = this.data.tabTxt;
     switch (e.currentTarget.dataset.index) {
       case (this.data.category.length - 1):
         // tabTxt[4] = txt;
+        var tab = self.data.tab
+        tab[self.data.len] = !tab[self.data.len]
         self.setData({
           page: 1,
           data: [],
-          // tab: [true, true, true, true, false],
+          tab: tab,
           // tabTxt: tabTxt,
           more_id: num
         });
