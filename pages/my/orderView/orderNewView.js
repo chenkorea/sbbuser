@@ -127,7 +127,10 @@ Page({
 
   },
   getUserOrder: function (uid, status) {
-    wx.showLoading({ title: '数据加载中...', })
+    // wx.showLoading({
+    //   title: '数据加载中...',
+    // })
+    // wx.showLoading({ title: '数据加载中...', })
     var that = this;
     // 提交数据
     var process_status = '';
@@ -137,7 +140,7 @@ Page({
       process_status = "('07', '08')";
     }
     Util.getUserOrders(function (data) {
-      wx.hideLoading();
+      // wx.hideLoading();
       var code = data.data.code;
       if (code == "1") {
         that.setData({ userOrders: data.data.content })

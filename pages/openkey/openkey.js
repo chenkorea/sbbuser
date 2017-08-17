@@ -225,22 +225,22 @@ Page({
     console.log('onLoad')
     // 获取传送过来的值
     var that = this;
-    wx.removeStorage({
-      key: 'selAddr',
-      success: function(res) {},
-    })
-    wx.removeStorage({
-      key: 'remark',
-      success: function(res) {},
-    })
-    wx.removeStorage({
-      key: 'serviceTime',
-      success: function(res) {},
-    })
-    wx.removeStorage({
-      key: 'selectPics',
-      success: function (res) { },
-    })
+    // wx.removeStorage({
+    //   key: 'selAddr',
+    //   success: function(res) {},
+    // })
+    // wx.removeStorage({
+    //   key: 'remark',
+    //   success: function(res) {},
+    // })
+    // wx.removeStorage({
+    //   key: 'serviceTime',
+    //   success: function(res) {},
+    // })
+    // wx.removeStorage({
+    //   key: 'selectPics',
+    //   success: function (res) { },
+    // })
 
 
     // 自动定位获取地理位置

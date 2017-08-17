@@ -50,7 +50,7 @@
   <view class="type-view" bindtap="addNote">
     <text class="type-nmae">备注</text>
     <view class="val-view">
-      <text class="type-value remarks">{{showRemark}}</text><icon class="iconfont icon-jiantou1" />
+      <text class="type-value remarks">{{remark}}</text><icon class="iconfont icon-jiantou1" />
     </view>
   </view>
 
