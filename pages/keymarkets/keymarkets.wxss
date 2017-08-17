@@ -52,8 +52,7 @@
 .mv_name {
   position: absolute;
   top: 20%;
-  color: #666666;
-  font-weight: 200;
+  color: #333333;
   font-size: 34rpx;
   padding-top: 10rpx;
   padding-left: 10rpx;
@@ -65,7 +64,7 @@
 .mv_price {
   position: absolute;
   color: #FF7F24;
-  font-weight: 200;
+  font-weight: 700;
   font-size: 34rpx;
   padding-top: 10rpx;
   padding-left: 10rpx;
