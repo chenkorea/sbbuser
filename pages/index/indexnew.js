@@ -77,9 +77,7 @@ Page({
     })
     // 自动定位获取地理位置
     homeUtil.getCityName(function (locationData) {
-      console.log("----------");
-      console.log(locationData);
-      homeUtil.updateLocation(locationData.location.lng, locationData.location.lat, that.data.uid);
+      // homeUtil.updateLocation(locationData.location.lng, locationData.location.lat, that.data.uid);
       that.setData({
         longitude: locationData.location.lng,
         latitude: locationData.location.lat
