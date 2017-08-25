@@ -11,6 +11,7 @@
     <view class="seting-view" bindtap="toDialphone">
       <icon class="iconfont icon-mysss icon-kefu" />
       <text class="my-title">客服</text>
+      <text class="my-title cons"> 400 0851 323</text>
     </view>
     <view class="seting-view" bindtap="tosetting">
       <icon class="iconfont icon-mysss1 icon-shezhi" />

@@ -35,7 +35,7 @@ var PageItems =
     },
     {
       id: '5',
-      text: '汽车解匙',
+      text: '汽车钥匙',
       icon: 'iconfont icon-fahuo',
       bac: 'mid-icon',
       url: '../openkey/openkey?fuwuType=04',
@@ -43,7 +43,7 @@ var PageItems =
     },
     {
       id: '6',
-      text: '民用解匙',
+      text: '民用钥匙',
       icon: 'iconfont icon-fangwuqiuzu',
       bac: 'mid-icon',
       url: '../openkey/openkey?fuwuType=05',

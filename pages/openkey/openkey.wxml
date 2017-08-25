@@ -70,21 +70,21 @@
         <image src="../images/anquan.png" class="tab_img"></image>
         <view class="tab_text">安全</view>
       </view>
-      <view class="tab_text">公安备案实名认证</view>
+      <view class="tab_text">公安备案 实名认证</view>
     </view>
     <view class="info_view">
       <view class="tab_detaul_view">
         <image src="../images/zhuanye.png" class="tab_img"></image>
         <view class="tab_text">专业</view>
       </view>
-      <view class="tab_text">资深技师技术精湛</view>
+      <view class="tab_text">资深技师 技术精湛</view>
     </view>
     <view class="info_view">
       <view class="tab_detaul_view">
         <image src="../images/quanmian.png" class="tab_img"></image>
         <view class="tab_text">全面</view>
       </view>
-      <view class="tab_text">锁与匙应有尽有</view>
+      <view class="tab_text">锁与匙 应有尽有</view>
     </view>
   </view>
 

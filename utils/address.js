@@ -231,6 +231,22 @@ function gettechqual(callback, tech_id) {
   })
 }
 
+function gettechlocation(callback, tech_id) {
+  var remoteUrl = getApp().globalData.serverIp + "openkey/gettechlocation";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      tech_id: tech_id
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
+
 
 module.exports = {
   getUserAddress: getUserAddress,
@@ -245,5 +261,6 @@ module.exports = {
   getUserOrdersProcess: getUserOrdersProcess,
   getUserOrderComment: getUserOrderComment,
   getUserOrderAllPrice: getUserOrderAllPrice,
-  gettechqual: gettechqual
+  gettechqual: gettechqual,
+  gettechlocation: gettechlocation
 } 

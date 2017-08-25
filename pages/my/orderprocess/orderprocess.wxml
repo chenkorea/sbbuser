@@ -11,7 +11,11 @@
       <image class="jiantou" src="../../images/jiantou.png"></image>
     </view>
     <view class="order-status" hidden="{{userOrder.process_stage=='01' || userOrder.process_stage=='02' || userOrder.process_stage=='03' || userOrder.process_stage=='04' || userOrder.process_stage=='05'}}" ><text class="or-title">报   价：</text><text class="or_value price-text">{{userOrder.total_price}}元</text></view>
-    
+    <view class="order-status jiantou-view" catchtap="showLocation">
+      <text class="or-title">技师位置：</text>
+      <text class="or_value">点击查看</text>
+      <image class="jiantou" src="../../images/jiantou.png"></image>
+    </view>
   </view>
   
   <view class="process_view" wx:for="{{ordersProcess}}" wx:key="{{index}}">

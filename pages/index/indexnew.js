@@ -11,9 +11,10 @@ Page({
     interval: 5000,
     duration: 1000,
     imgUrls: [
-      'http://wimg.huodongxing.com/logo/201707/6398650164300/962768404440026_v2.jpg@!wmlogo',
-      'http://wimg.huodongxing.com/logo/201707/2397073083400/862771512456759_v2.jpg@!wmlogo',
-      'http://wimg.huodongxing.com/logo/201707/6397953598100/792763801086753_v2.jpg@!wmlogo'
+      'http://gywnks.com/EESaiUp/H6700HLEZ.jpg',
+      'http://gywnks.com/EESaiUp/H6700HK46.jpg',
+      'http://gywnks.com/EESaiUp/H6700HKLO.jpg',
+      'http://gywnks.com/EESaiUp/H6700HL98.jpg'
     ],
     userInfo: {},
     muenus: [],
@@ -25,6 +26,11 @@ Page({
     user_name: '昵称',
     user_head: 'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg',
     noticecontent: []
+  },
+  toCallPhone: function () {
+    wx.makePhoneCall({
+      phoneNumber: '4000851323',
+    })
   },
   //事件处理函数
   toNoticeDetailView: function () {
@@ -39,8 +45,11 @@ Page({
     })
   },
   toMyOrderView: function () {
-    wx.navigateTo({
-      url: '../my/orderView/orderView?uid=' + this.data.uid + "&user_name=" + this.data.user_name
+    // wx.navigateTo({
+    //   url: '../my/orderView/orderView?uid=' + this.data.uid + "&user_name=" + this.data.user_name
+    // })
+    wx.switchTab({
+      url: '../my/orderView/orderNewView',
     })
   },
   onLoad: function () {

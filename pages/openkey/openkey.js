@@ -310,8 +310,8 @@ Page({
       wx.setNavigationBarTitle({ title: that.data.titleAr[1], })
     } else if (type == '03') {
       that.setData({
-        oneTypeTitle: '保修锁具类别',
-        twoTypeTitle: '保修锁具图片'
+        oneTypeTitle: '报修锁具类别',
+        twoTypeTitle: '报修锁具图片'
       })
       wx.setNavigationBarTitle({ title: that.data.titleAr[2], })
     } else if (type == '04') {

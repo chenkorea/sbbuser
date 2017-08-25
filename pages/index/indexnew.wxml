@@ -5,23 +5,26 @@
     autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">  
     <block wx:for="{{imgUrls}}" wx:key="{{index}}">  
       <swiper-item class="ad_item">  
-        <image class="ad_img" src="{{item}}" mode="scaleToFill" />  
+        <image class="ad_img" src="{{item}}" mode="scaleToFit" />  
       </swiper-item>  
     </block>  
   </swiper>  
 
   <view class="new_ad_profile_view">
-    <view class="ad_top" bindtap="toNoticeDetailView">
+    <!-- <view class="ad_top" bindtap="toNoticeDetailView">
       <image src="../images/sports_mode.png" class="notice_ic"></image><text class="notice-text">{{noticecontent.length>0?noticecontent[0].content:'暂无通知消息'}}</text>
+    </view> -->
+    <view class="header_right_view" bindtap="toCallPhone">
+      <image src="../images/newphone.png" class="notice_ic"></image><text class="notice-text">呼叫客服</text>
     </view>
-    <view class="header_right_view" bindtap="toMyOrderView">
+    <view class="ad_top" bindtap="toMyOrderView">
       <image class="user_head" src="{{user_head}}"></image>
 
       <view class="cont-view">
         <view class="user_name">{{user_name}}</view>
         <view class="city_name">{{city}}</view>
       </view>
-      <image src="../images/jiantou.png" class="right-img"></image>
+      <!-- <image src="../images/jiantou.png" class="right-img"></image> -->
     </view>
   </view>
 
@@ -47,7 +50,7 @@
   <view class="footer_view">
     <view class="footer-main-ciew">
       <image class="gonganlogo" src='../images/gonganlogo.png'></image>
-      <text class="gongan-text">贵州公安备案</text>
+      <text class="gongan-text">贵州公安备案 社区民警邀请您来注册</text>
     </view>
   </view>
 </view>
