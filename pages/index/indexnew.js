@@ -11,10 +11,10 @@ Page({
     interval: 5000,
     duration: 1000,
     imgUrls: [
-      'http://gywnks.com/EESaiUp/H6700HLEZ.jpg',
-      'http://gywnks.com/EESaiUp/H6700HK46.jpg',
-      'http://gywnks.com/EESaiUp/H6700HKLO.jpg',
-      'http://gywnks.com/EESaiUp/H6700HL98.jpg'
+      'https://www.gywnks.com/sbb-web/upload/headericon/H6700HLEZ.jpg',
+      'https://www.gywnks.com/sbb-web/upload/headericon/H6700HK46.jpg',
+      'https://www.gywnks.com/sbb-web/upload/headericon/H6700HKLO.jpg',
+      'https://www.gywnks.com/sbb-web/upload/headericon/H6700HL98.jpg'
     ],
     userInfo: {},
     muenus: [],

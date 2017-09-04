@@ -18,6 +18,6 @@ function formatNumber(n) {
 
 module.exports = {
   formatTime: formatTime,
-  url: 'http://106.14.217.147/sbb-web',
+  url: 'https://www.gywnks.com/sbb-web',
   no_pic:'http://img.hb.aicdn.com/e1432b68297d3faed808ebac7007556596d9a3be1462-mA26Of_fw658'
 }
