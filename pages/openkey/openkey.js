@@ -30,7 +30,8 @@ Page({
     longitude: '',
     latitude: '',
     showAddress:'',
-    showRemark:''
+    showRemark:'',
+    updalodcount: 0
   },
   /**
    * 监听普通picker选择器
@@ -166,12 +167,7 @@ Page({
           wx.hideLoading();
           var code = data.data.code;
           if (code == "1") {
-            // 上传数据成功
-            wx.showModal({
-              title: '提交订单成功',
-              content: '请稍等，将会有师傅和您联系！',
-              showCancel: false,
-            })
+            
             // 订单生成成功，上传订单图片(获取订单ID)
             var orderID = data.data.content[0].id;
             that.uploadOrderPics(orderID);
@@ -195,6 +191,10 @@ Page({
    * 上传订单图片
    */
   uploadOrderPics: function (orderId) {
+    var that = this;
+    wx.showLoading({
+      title: '图片上传中...',
+    })
     var tempPics = this.data.filePaths;
     for (var i = 0; i < tempPics.length; i++) {
       console.log(tempPics[i]);
@@ -208,12 +208,21 @@ Page({
         },
         header: { 'content-type': 'application/x-www-form-urlencoded' },
         success: function (res) {
-          console.log(res);
-          var code = res.data.code;
+        
+          var alldata = {};
+          alldata = JSON.parse(res.data); 
+          var code = alldata.code;
+          
           // 成功
-          if (code == '1') {
-            wx.showToast({
-              title: '图片上传成功',
+          that.setData({ updalodcount: that.data.updalodcount + 1})
+          if (that.data.updalodcount == that.data.filePaths.length) {
+            that.setData({ updalodcount: 0 })
+            wx.hideLoading();
+            // 上传数据成功
+            wx.showModal({
+              title: '提交订单成功',
+              content: '请稍等，将会有师傅和您联系！',
+              showCancel: false,
             })
           }
         }
