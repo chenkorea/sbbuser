@@ -36,6 +36,10 @@ function getlogin(loginname,loginpw){
             key: 'nickname',
             data: res.data.content[0].name,
           });
+          wx.setStorage({
+            key: 'is_vip',
+            data: res.data.content[0].is_vip,
+          });
         }
         wx.navigateBack({
 

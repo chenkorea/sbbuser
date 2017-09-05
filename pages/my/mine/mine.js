@@ -4,6 +4,7 @@ var app = getApp()
 Page({
   data: {
     uid: '',
+    user_level:'普通会员',
     userInfo: {},
     titleText: '',
     user_name: '昵称',
@@ -32,6 +33,23 @@ Page({
       success: function (res) {
         that.setData({
           user_name: res.data
+        })
+      },
+    })
+
+    //获取等级
+    wx.getStorage({
+      key: 'is_vip',
+      success: function (res) {
+        console.log('is_vip--->' + JSON.stringify(res))
+        var level = "普通会员"
+        if (res.data == '1'){
+          level = "皇冠VIP"
+        } else if (res.data == '2'){
+          level = "蓝钻VIP"
+        }
+        that.setData({
+          user_level: level
         })
       },
     })
