@@ -3,6 +3,7 @@
 var homeUtil = require('../../utils/home.js');
 var noticeutil = require('../notice/util/datarequest.js');
 //获取应用实例
+
 var app = getApp()
 Page({
   data: {
