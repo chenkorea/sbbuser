@@ -1,6 +1,7 @@
 
 //获取应用实例
 var app = getApp()
+var updaterequest = require('../../login/util/datarequest.js');
 Page({
   data: {
     uid: '',
@@ -28,35 +29,37 @@ Page({
       })
     })
     //获取昵称
-    wx.getStorage({
-      key: 'nickname',
-      success: function (res) {
-        that.setData({
-          user_name: res.data
-        })
-      },
-    })
-
-    //获取等级
-    wx.getStorage({
-      key: 'is_vip',
-      success: function (res) {
-        console.log('is_vip--->' + JSON.stringify(res))
-        var level = "普通会员"
-        if (res.data == '1'){
-          level = "皇冠VIP"
-        } else if (res.data == '2'){
-          level = "蓝钻VIP"
-        }
-        that.setData({
-          user_level: level
-        })
-      },
-    })
-
+    // wx.getStorage({
+    //   key: 'nickname',
+    //   success: function (res) {
+    //     that.setData({
+    //       user_name: res.data
+    //     })
+    //   },
+    // })
+  },
+  onShow:function(){
+    var that = this
     wx.getStorage({
       key: 'uid',
       success: function (res) {
+        updaterequest.getuserlevel(res.data, function (res) {
+          if (res.data.code == '1') {
+            if (res.data.content != null && res.data.content.length > 0) {
+              var level = "普通会员"
+              var is_vip = res.data.content[0].is_vip;
+              if (is_vip == '1') {
+                level = "皇冠VIP"
+              } else if (is_vip == '2') {
+                level = "蓝钻VIP"
+              }
+              that.setData({
+                user_level: level,
+                user_name: res.data.content[0].name
+              })
+            }
+          }
+        })
         that.setData({
           uid: res.data
         })

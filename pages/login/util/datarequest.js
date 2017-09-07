@@ -227,10 +227,30 @@ function getverifycode(callback){
   })
 }
 
+//查询会员等级
+function getuserlevel(uid, callback) {
+  wx.request({
+    url: util.url + '/phone/userinfor/getuserlevel', //
+    data: {
+      uid: uid,
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    method: 'POST',
+    success: function (res) {
+      if (res.data.code == '1') {
+        callback(res)
+      }
+    },
+  })
+}
+
 module.exports = {
   getlogin: getlogin,
   getregist: getregist,
   getverifycode: getverifycode,
   getupdate: getupdate,
-  getreset: getreset
+  getreset: getreset,
+  getuserlevel: getuserlevel
 } 
