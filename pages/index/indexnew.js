@@ -26,7 +26,8 @@ Page({
     uid: '',
     user_name: '昵称',
     user_head: 'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg',
-    noticecontent: []
+    noticecontent: [],
+    open_id: '0000'
   },
   toCallPhone: function () {
     wx.makePhoneCall({
@@ -51,6 +52,61 @@ Page({
     // })
     wx.switchTab({
       url: '../my/orderView/orderNewView',
+    })
+  },
+
+  /**
+   * 获取微信登录
+   */
+  wxLogin: function (e) {
+    var that = this;
+    wx.login({
+      success: function (res) {
+        that.getOpenId(res.code, e);
+      }
+    });
+  },
+  /**
+   * 获取openId
+   */
+  getOpenId: function (code, e) {
+    var that = this;
+    wx.request({
+      url: getApp().globalData.serverIp + 'openkey/getWXopenId',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: { code: code },
+      success: function (res) {
+        var openIdStr = res.data.content[0];
+        var jsonObj = JSON.parse(openIdStr);
+        console.log('open_id = ' + jsonObj.openid);
+        that.setData({ open_id: jsonObj.openid});
+        wx.getStorage({
+          key: 'uid',
+          success: function (res) {
+            that.saveOpenId(jsonObj.openid, res.data);
+          },
+        })
+      }
+    })
+  },
+  // 保存open_id
+  saveOpenId: function (open_id, uid) {
+    var that = this;
+    wx.request({
+      url: getApp().globalData.serverIp + 'openkey/saveWXopenId',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: { 
+        open_id: open_id,
+        uid: uid
+       },
+      success: function (res) {
+      }
     })
   },
   onLoad: function () {
@@ -215,5 +271,10 @@ Page({
       },
     })
     
+    // 获取用户open_id
+    console.log('// 获取用户open_id');
+    if ('0000' == that.data.open_id) {
+      that.wxLogin();
+    }
   }
 })

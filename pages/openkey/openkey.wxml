@@ -55,7 +55,10 @@
   </view>
 
   <!-- 提交按钮 -->
-  <button class="save-button" bindtap="saveData">提交</button>
+  <form report-submit bindsubmit='saveData'>
+    <button class="save-button" form-type="submit">提交</button>
+  </form>
+  <!-- <button class="save-button" bindtap="saveData">提交</button> -->
 
   <view class="tab_de_view">
     <view class="info_view">

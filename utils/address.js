@@ -231,12 +231,53 @@ function gettechqual(callback, tech_id) {
   })
 }
 
+/**
+ * 获取技师位置
+ */
 function gettechlocation(callback, tech_id) {
   var remoteUrl = getApp().globalData.serverIp + "openkey/gettechlocation";
   wx.request({
     url: remoteUrl,
     data: {
       tech_id: tech_id
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
+
+/**
+ * 保存微信表单ID
+ */
+function saveWXFormId(callback, form_id, uid) {
+  var remoteUrl = getApp().globalData.serverIp + "openkey/saveWXFormId";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      form_id: form_id,
+      uid: uid
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
+
+function saveWXOrderFormId(callback, form_id, order_id, utype) {
+  var remoteUrl = getApp().globalData.serverIp + "openkey/saveWXOrderFormId";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      form_id: form_id,
+      order_id: order_id,
+      utype: utype
     },
     method: 'POST',
     header: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -262,5 +303,7 @@ module.exports = {
   getUserOrderComment: getUserOrderComment,
   getUserOrderAllPrice: getUserOrderAllPrice,
   gettechqual: gettechqual,
-  gettechlocation: gettechlocation
+  gettechlocation: gettechlocation,
+  saveWXFormId: saveWXFormId,
+  saveWXOrderFormId: saveWXOrderFormId
 } 

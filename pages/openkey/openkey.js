@@ -123,10 +123,13 @@ Page({
   /**
    * 上传数据
    */
-  saveData:function () {
+  saveData:function (e) {
     var that = this;
+    // 保存表单ID
+    var formId = e.detail.formId;
+    // 提交数据
     var service_item_id = that.data.serviceAr[that.data.fdmindex].id;
-    
+
     var service_time = "01";
     if ("马上" != that.data.serviceTime) {
         service_time = "02";
@@ -140,12 +143,14 @@ Page({
     if (type != '03') {
       guaran = '0'
     }
-    wx.showLoading({ title: '图片上传中...', })
+    wx.showLoading({ title: '数据上传中...', })
     wx.getStorage({
       key: 'uid',
       success: function(res) {
         var uid = res.data;
 
+        that.saveWXFormId(formId, uid);
+        
         // 组合订单对象
         var order = {
           user_id: uid,
@@ -170,8 +175,11 @@ Page({
             
             // 订单生成成功，上传订单图片(获取订单ID)
             var orderID = data.data.content[0].id;
-            that.uploadOrderPics(orderID);
 
+            that.saveWXOrderFormId(formId, orderID);
+
+            that.uploadOrderPics(orderID);
+            
             // 清空当前订单界面的数据
             wx.removeStorage({ key: 'remark', success: function (res) { }, })
             wx.removeStorage({ key: 'selectPics', success: function (res) { }, })
@@ -193,43 +201,65 @@ Page({
   uploadOrderPics: function (orderId) {
     var that = this;
     wx.showLoading({
-      title: '图片上传中...',
+      title: '数据上传中...',
     })
     var tempPics = this.data.filePaths;
-    for (var i = 0; i < tempPics.length; i++) {
-      console.log(tempPics[i]);
-      wx.uploadFile({
-        url: getApp().globalData.serverIp + 'openkey/uploadMobileFile',
-        filePath: tempPics[i],
-        name: 'file',
-        formData: {
-          'file_type': '5',
-          'parent_id': orderId
-        },
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
-        success: function (res) {
-        
-          var alldata = {};
-          alldata = JSON.parse(res.data); 
-          var code = alldata.code;
-          
-          // 成功
-          that.setData({ updalodcount: that.data.updalodcount + 1})
-          if (that.data.updalodcount == that.data.filePaths.length) {
-            that.setData({ updalodcount: 0 })
-            wx.hideLoading();
-            // 上传数据成功
-            wx.showModal({
-              title: '提交订单成功',
-              content: '请稍等，将会有师傅和您联系！',
-              showCancel: false,
-            })
-          }
-        }
+    if (tempPics.length == 0) {
+      wx.hideLoading();
+      wx.showModal({
+        title: '提交订单成功',
+        content: '请稍等，将会有师傅和您联系！',
+        showCancel: false,
       })
+    } else {
+      for (var i = 0; i < tempPics.length; i++) {
+        console.log(tempPics[i]);
+        wx.uploadFile({
+          url: getApp().globalData.serverIp + 'openkey/uploadMobileFile',
+          filePath: tempPics[i],
+          name: 'file',
+          formData: {
+            'file_type': '5',
+            'parent_id': orderId
+          },
+          header: { 'content-type': 'application/x-www-form-urlencoded' },
+          success: function (res) {
+
+            var alldata = {};
+            alldata = JSON.parse(res.data);
+            var code = alldata.code;
+
+            // 成功
+            that.setData({ updalodcount: that.data.updalodcount + 1 })
+            if (that.data.updalodcount == that.data.filePaths.length) {
+              that.setData({ updalodcount: 0 })
+              wx.hideLoading();
+              // 上传数据成功
+              wx.showModal({
+                title: '提交订单成功',
+                content: '请稍等，将会有师傅和您联系！',
+                showCancel: false,
+              })
+            }
+          }
+        })
+      }
     }
   },
+  /**
+   * 保存form_id
+   */
+  saveWXFormId: function (form_id, uid) {
+    Util.saveWXFormId(function (data) {
+      // 不做任何操作
+    }, form_id, uid);
+  },
 
+  saveWXOrderFormId: function (form_id, order_id) {
+    Util.saveWXOrderFormId(function (data) {
+      // 不做任何操作
+    }, form_id, order_id, "1");
+  },
   onLoad: function (options) {
     console.log('onLoad')
     // 获取传送过来的值

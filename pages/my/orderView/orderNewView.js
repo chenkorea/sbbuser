@@ -126,6 +126,19 @@ Page({
     })
 
   },
+  /**
+   * 保存form_id
+   */
+  saveWXFormId: function (form_id, uid) {
+    Util.saveWXFormId(function (data) {
+      // 不做任何操作
+    }, form_id, uid);
+  },
+  saveWXOrderFormId: function (form_id, order_id) {
+    Util.saveWXOrderFormId(function (data) {
+      // 不做任何操作
+    }, form_id, order_id, "1");
+  },
   getUserOrder: function (uid, status) {
     // wx.showLoading({
     //   title: '数据加载中...',
@@ -173,7 +186,7 @@ Page({
    * 去支付
    */
   toPay: function (e) {
-
+    
     this.wxLogin(e);
 
   },
@@ -186,7 +199,7 @@ Page({
     wx.login({
       success: function (res) {
         wx.hideLoading();
-        console.log(res.code);
+        console.log('code = ' + res.code);
         that.getOpenId(res.code, e);
       }
     });
@@ -208,10 +221,11 @@ Page({
       data: { code: code },
       success: function (res) {
         wx.hideLoading();
+        console.log(res);
         var openIdStr = res.data.content[0];
         // "{"session_key":"WX39zL8sZsFPOu4ajGQ1pQ== ","expires_in":7200,"openid":"ov9Hv0PDYNOv- tdbSM7Nv2beapSk"}"
         var jsonObj = JSON.parse(openIdStr);
-        console.log(jsonObj.openid);
+        console.log('open_id = ' + jsonObj.openid);
         that.xiadan(jsonObj.openid, e);
       }
     })
@@ -271,7 +285,11 @@ Page({
   requestPayment: function (objj, e) {
     wx.showLoading({ title: '启动微信支付中...', })
     var that = this;
+    var formId = e.detail.formId;
     var obj = JSON.parse(objj);
+
+    var orderObj = e.currentTarget.dataset.item;
+    
     wx.requestPayment({
       timeStamp: obj.timeStamp,
       nonceStr: obj.nonceStr,
@@ -294,6 +312,13 @@ Page({
             that.setData({ classone: '', classtwo: '', classThree: '', classFour: 'selected', orderstatus: '4' })
             // 查询已完成订单
             that.getUserOrder(that.data.uid, that.data.orderstatus);
+            // 发送通知给师傅端
+            that.sendMsgForStatus(orderId, '07', orderObj.process_person_id);
+
+            //pay success update form_id
+            that.saveWXFormId(formId, uid);
+
+            that.saveWXOrderFormId(formId, orderId);
           } else {
             // 失败
             wx.showModal({
@@ -307,6 +332,22 @@ Page({
       fail: function (res) {
         // 失败
         wx.showToast({ title: '支付失败', })
+      }
+    })
+  },
+  sendMsgForStatus: function (orderId, status, jsId) {
+    var that = this;
+    wx.request({
+      url: getApp().globalData.serverIp + 'openkey/sendMsgForStatus',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: { 
+        orderId: orderId,
+        status: status,
+        jsId: jsId },
+      success: function (res) {
       }
     })
   },
