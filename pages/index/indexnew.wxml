@@ -50,7 +50,7 @@
   <view class="footer_view">
     <view class="footer-main-ciew">
       <image class="gonganlogo" src='../images/gonganlogo.png'></image>
-      <text class="gongan-text">贵州公安备案 社区民警邀请您来注册</text>
+      <text class="gongan-text">社区民警邀请您来注册</text>
     </view>
   </view>
 </view>

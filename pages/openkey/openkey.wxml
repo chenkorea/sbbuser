@@ -60,6 +60,11 @@
   </form>
   <!-- <button class="save-button" bindtap="saveData">提交</button> -->
 
+
+  <view class="bot_view">
+    <view class="shuoming-view">服务优势</view>
+  </view>
+
   <view class="tab_de_view">
     <view class="info_view">
       <view class="tab_detaul_view">
