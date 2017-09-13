@@ -49,9 +49,9 @@ Page({
               var level = "普通会员"
               var is_vip = res.data.content[0].is_vip;
               if (is_vip == '1') {
-                level = "皇冠VIP"
+                level = "1"
               } else if (is_vip == '2') {
-                level = "蓝钻VIP"
+                level = "2"
               }
               that.setData({
                 user_level: level,

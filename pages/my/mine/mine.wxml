@@ -4,7 +4,11 @@
       <image src="{{user_head}}" class="user-header"></image>
       <view class="name-view">
         <view class="phone-val">{{user_name}}</view>
-        <view class="level-val">{{user_level}}</view>
+        <view class="level-val">
+          <text hidden="{{user_level != '普通会员'}}">{{user_level}} </text>
+          <image src="../../images/blue_or.png" class="vip_icon" hidden="{{user_level != '2'}}"></image>
+          <image src="../../images/oragin_or.png" class="vip_icon" hidden="{{user_level != '1'}}"></image>
+        </view>
       </view>
     </view>
 

@@ -65,3 +65,8 @@
   color: #FF7F24;
   margin-left: 20rpx;
 }
+
+.vip_icon {
+  width: 40rpx;
+  height: 40rpx;
+}
