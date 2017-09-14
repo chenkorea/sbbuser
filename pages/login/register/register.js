@@ -17,6 +17,7 @@ Page({
     bold_cpwd_line: 'bolder-un-line',
     nickname:'',
     regverifycode: '',
+    verifycode:'',
     verify_icon: '../../images/verify_reg_nos.png',
     bold_verify_line: 'bolder-un-line',
     isagree:false,
@@ -31,50 +32,37 @@ Page({
     })
   },
   bindViewTap: function () {
-
-    var verifycode = '';
     var that = this;
-    wx.getStorage({
-      key: 'regverifycode',
-      success: function(res) {
-        verifycode = res.data;
-      },
-      fail: function(res) {},
-      complete: function(res) {
-
-        if (that.data.isagree) {
-          if (that.data.regusername.length != 11) {
-            wx.showToast({
-              title: '手机号码格式有误',
-              duration: 1500,
-            })
-          } else if (that.data.regpasswd.length < 6) {
-            wx.showToast({
-              title: '请设置至少六位登录密码',
-              duration: 1500,
-            })
-          } else if (that.data.regpasswd != that.data.conformpwd) {
-            wx.showToast({
-              title: '两次输入的密码不一致',
-              duration: 1500,
-            })
-          } else if (that.data.regverifycode != verifycode) {
-            wx.showToast({
-              title: '验证码错误',
-              duration: 1500,
-            })
-          } else {
-            regrequest.getregist(that.data.regusername, that.data.regpasswd, that.data.nickname);
-          }
-        } else {
+    if (that.data.isagree) {
+      if (!app.phoneRe.test(that.data.regusername)) {
           wx.showToast({
-            title: '请先确认服务协议',
+            title: '手机号码格式有误',
             duration: 1500,
-          })
-        }
-      },
-    });
-    
+           })
+      } else if (that.data.regpasswd.length < 6) {
+          wx.showToast({
+             title: '请设置至少六位登录密码',
+             duration: 1500,
+           })
+      } else if (that.data.regpasswd != that.data.conformpwd) {
+          wx.showToast({
+            title: '两次输入的密码不一致',
+             duration: 1500,
+           })
+      } else if (that.data.regverifycode != that.data.verifycode) {
+          wx.showToast({
+            title: '验证码错误',
+            duration: 1500,
+           })
+       } else {
+          regrequest.getregist(that.data.regusername, that.data.regpasswd, that.data.nickname);
+       }
+     } else {
+        wx.showToast({
+           title: '请先确认服务协议',
+           duration: 1500,
+         })
+      }
   },
   onLoad: function () {
     console.log('onLoad')
@@ -88,19 +76,15 @@ Page({
   },
   getcode:function(){
     var that = this;
-    if (this.data.regusername.length != 11){
+    if (!app.phoneRe.test(this.data.regusername)){
       wx.showToast({
         title: '手机号码格式有误',
       })
     }else{
-      regrequest.getverifycode(function (res){
+      regrequest.getverifycode(that.data.regusername,function (res){
         if (res.data.code == '1') {
-          wx.setStorage({
-            key: "regverifycode",
-            data: res.data.content[0],
-          });
           that.setData({
-            regverifycode: res.data.content[0]
+            verifycode: res.data.content[0]
           });
         }
       })

@@ -7,38 +7,29 @@ Page({
   data: {
     titleText: '',
     fogcode:'',
+    verifycode:'',
     fogphone:'',
     nextstep:'next_un_btn',
     animation: ''
   },
   //事件处理函数
   bindViewTap: function () {
-    var verifycode = '';
     var that = this;
-    wx.getStorage({
-      key: 'fogcode',
-      success: function (res) {
-        verifycode = res.data;
-      },
-      fail: function (res) { },
-      complete: function (res) {
-        if (that.data.fogphone.length != 11) {
-          wx.showToast({
-            title: '手机号码格式有误',
-          })
-        } else if (that.data.fogcode != verifycode){
+    
+    if (!app.phoneRe.test(that.data.fogphone)) {
+      wx.showToast({
+        title: '手机号码格式有误',
+      })
+    } else if (that.data.fogcode != that.data.verifycode){
           wx.showToast({
             title: '验证码错误',
             duration: 1500,
           })
-        }else{
-          wx.redirectTo({
-            url: '../changepwd/changepwd?phone=' + that.data.fogphone
-          })
-        }
-      },
-    });
-   
+    }else{
+       wx.redirectTo({
+        url: '../changepwd/changepwd?phone=' + that.data.fogphone
+       })
+    }
   },
   onLoad: function () {
     var that = this
@@ -55,19 +46,15 @@ Page({
   //获取验证码
   getcode: function () {
     var that = this;
-    if (this.data.fogphone.length != 11) {
+    if (!app.phoneRe.test(this.data.fogphone)) {
       wx.showToast({
         title: '手机号码格式有误',
       })
     } else {
-      fogrequest.getverifycode(function (res) {
+      fogrequest.getverifycode(that.data.fogphone,function (res) {
         if (res.data.code == '1') {
-          wx.setStorage({
-            key: "fogcode",
-            data: res.data.content[0],
-          });
           that.setData({
-            fogcode: res.data.content[0],
+            verifycode: res.data.content[0],
             nextstep:'next_en_btn'
           });
         }
@@ -85,7 +72,7 @@ Page({
     this.setData({
       fogphone: e.detail.value
     })
-    if (this.data.fogphone.length==11){
+    if (app.phoneRe.test(this.data.fogphone)){
       this.setData({
         nextstep: 'next_en_btn'
       })

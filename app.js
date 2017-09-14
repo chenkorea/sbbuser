@@ -6,7 +6,8 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
   },
-
+  // 手机号正则表达式
+  phoneRe: /^1[3-9]\d{9}$/i,
   getUserInfo: function(cb) {
     var that = this
     if (this.globalData.userInfo) {
@@ -25,9 +26,9 @@ App({
 
   globalData: {
     userInfo: null,
-    serverIp:"https://www.gywnks.com/sbb-web/phone/",
-    imageServerIp: "https://www.gywnks.com/sbb-web/"
-    // serverIp: "https://www.gywnks.com/sbb-web/phone/",
-    // imageServerIp: "https://www.gywnks.com/sbb-web/"
+    serverIp:"http://192.200.200.71:9000/sbb-web/phone/",
+    imageServerIp: "http://192.200.200.71:9000/sbb-web/"
+    // serverIp: "http://106.14.217.147/sbb-web/phone/",
+    // imageServerIp: "http://106.14.217.147/sbb-web/"
   }
 })
