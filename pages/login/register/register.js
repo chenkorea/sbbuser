@@ -23,7 +23,10 @@ Page({
     isagree:false,
     agreeBg:'#FF7F24',
     agreeBg:'agreeunselect',
-    register_btn:'reg_un_btn'
+    register_btn:'reg_un_btn',
+    tips: '获取验证码',
+    is_click: true,
+    second: 60,
   },
   //事件处理函数
   bindlogin:function(){
@@ -76,19 +79,48 @@ Page({
   },
   getcode:function(){
     var that = this;
-    if (!app.phoneRe.test(this.data.regusername)){
-      wx.showToast({
-        title: '手机号码格式有误',
-      })
-    }else{
-      regrequest.getverifycode(that.data.regusername,function (res){
-        if (res.data.code == '1') {
-          that.setData({
-            verifycode: res.data.content[0]
-          });
-        }
-      })
+    if (that.data.is_click){
+      if (!app.phoneRe.test(this.data.regusername)) {
+        wx.showToast({
+          title: '手机号码格式有误',
+        })
+      } else {
+        regrequest.getverifycode(that.data.regusername, function (res) {
+          if (res.data.code == '1') {
+            that.setData({
+              verifycode: res.data.content[0],
+              is_click: false
+            });
+            that.countdown()
+          }
+        })
+      }
     }
+    
+  },
+
+  //倒计时
+  countdown: function () {
+    var that = this
+    var id = setInterval(function () {
+      //定时执行的代码
+      var second = that.data.second;
+      if (second == 0) {
+        that.setData({
+          second: 60,
+          is_click: true,
+          tips: '获取验证码'
+        })
+        clearInterval(id);//关闭定时器
+      } else {
+        second = second - 1;
+        that.setData({
+          second: second,
+          tips: second + '秒后再次获取'
+        })
+      }
+
+    }, 1000);
   },
 
   getregname: function (e) {

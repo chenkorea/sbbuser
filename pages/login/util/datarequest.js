@@ -204,7 +204,7 @@ function getconfirmlogin(loginname, loginpw,callback) {
 }
 
 //获取验证码
-function getverifycode(phone,callback){
+function getverifycode(phone, callback) {
   wx.request({
     url: util.url + '/phone/userinfor/getverifycode', //
     data: {
@@ -215,7 +215,7 @@ function getverifycode(phone,callback){
     },
     method: 'POST',
     success: function (res) {
-      if(res.data.code = '-1'){
+      if(res.data.code == '-1'){
         wx.showModal({
           title: '提示',
           content: res.data.errmsg,
@@ -232,7 +232,6 @@ function getverifycode(phone,callback){
       })
     },
     complete: function (res){
-      console.log('getverifycode-------->>' + JSON.stringify(res))
     }
   })
 }
