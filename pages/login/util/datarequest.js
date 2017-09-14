@@ -215,7 +215,15 @@ function getverifycode(phone,callback){
     },
     method: 'POST',
     success: function (res) {
-      callback(res)
+      if(res.data.code = '-1'){
+        wx.showModal({
+          title: '提示',
+          content: res.data.errmsg,
+          showCancel:false
+        })
+      }else{
+        callback(res)
+      }
     },
     fail(res) {
       wx.showToast({
