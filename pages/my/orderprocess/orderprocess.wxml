@@ -28,4 +28,8 @@
   
   </view>
 
+  <view hidden="{{hideDelete}}" bindtap="deleorder" class="classfy">
+    <text>取消订单</text>
+  </view>
+
 </view>
