@@ -104,29 +104,37 @@ Page({
     if (this.data.hideDelete){
       return
     }
+    var that = this
+    wx.showModal({
+      title: '提示',
+      content: '确定取消该订单吗?',
+      success:function(res){
+        if(res.confirm){
+          Util.cancelOrders(that.data.userOrder.id, function (res) {
+            if (res.data.code == '1') {
+              wx.showModal({
+                title: '提示',
+                content: '订单取消成功',
+                showCancel: false,
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.navigateBack({
 
-    Util.cancelOrders(this.data.userOrder.id,function(res){
-      if(res.data.code == '1'){
-        wx.showModal({
-          title: '提示',
-          content: '订单取消成功',
-          showCancel:false,
-          success:function(res){
-            if(res.confirm){
-              wx.navigateBack({
-                
+                    })
+                  }
+                }
+              })
+            } else if (res.data.code == '-1') {
+              wx.showModal({
+                title: '提示',
+                content: res.data.errmsg,
+                showCancel: false,
               })
             }
-          }
-        })
-      } else if (res.data.code == '-1') {
-        wx.showModal({
-          title: '提示',
-          content: res.data.errmsg,
-          showCancel: false,
-        })
+          });
+        }
       }
-    });
+    })
 
   },
   /**
