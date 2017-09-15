@@ -8,7 +8,8 @@ Page({
   data: {
     userOrder: {},
     ordersProcess:[],
-    userLocation: {}
+    userLocation: {},
+    hideDelete: true
   },
   getUserOrdersProcess: function (orderId) {
     wx.showLoading({ title: '数据加载中...', })
@@ -76,7 +77,19 @@ Page({
   onLoad: function (options) {
     var jsonStr = options.jsonStr;
     var userOrder = JSON.parse(jsonStr);
-    this.setData({ userOrder: userOrder})
+    var deleteshow = false
+    var stage = userOrder.process_stage;
+    if ('06' == stage || '07' == stage || '08' == stage || '09' == stage){
+      deleteshow = true
+      this.setData({ hideDelete: true});
+    } else {
+      deleteshow = false
+      this.setData({ hideDelete: false });
+    }
+    this.setData(
+      {
+       userOrder: userOrder,
+       })
 
     this.getUserOrdersProcess(userOrder.id);
 
@@ -84,6 +97,38 @@ Page({
     this.getUserLocation(tech_id);
   },
 
+  /**
+   * 取消订单
+  */
+  deleorder:function(){
+    if (this.data.hideDelete){
+      return
+    }
+
+    Util.cancelOrders(this.data.userOrder.id,function(res){
+      if(res.data.code == '1'){
+        wx.showModal({
+          title: '提示',
+          content: '订单取消成功',
+          showCancel:false,
+          success:function(res){
+            if(res.confirm){
+              wx.navigateBack({
+                
+              })
+            }
+          }
+        })
+      } else if (res.data.code == '-1') {
+        wx.showModal({
+          title: '提示',
+          content: res.data.errmsg,
+          showCancel: false,
+        })
+      }
+    });
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

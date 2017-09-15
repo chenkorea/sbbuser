@@ -288,6 +288,22 @@ function saveWXOrderFormId(callback, form_id, order_id, utype) {
   })
 }
 
+function cancelOrders(order_id, callback) {
+  var remoteUrl = getApp().globalData.serverIp + "userinfor/cancelOrder";
+
+  wx.request({
+    url: remoteUrl,
+    data: {
+      order_id: order_id,
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      callback(res);
+    }
+  })
+}
+
 
 module.exports = {
   getUserAddress: getUserAddress,
@@ -305,5 +321,6 @@ module.exports = {
   gettechqual: gettechqual,
   gettechlocation: gettechlocation,
   saveWXFormId: saveWXFormId,
-  saveWXOrderFormId: saveWXOrderFormId
+  saveWXOrderFormId: saveWXOrderFormId,
+  cancelOrders: cancelOrders
 } 

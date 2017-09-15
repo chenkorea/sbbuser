@@ -204,25 +204,34 @@ function getconfirmlogin(loginname, loginpw,callback) {
 }
 
 //获取验证码
-function getverifycode(callback){
+function getverifycode(phone, callback) {
   wx.request({
     url: util.url + '/phone/userinfor/getverifycode', //
-    // data: {
-    //   username: '111111',
-    //   passwd: '000000'
-    // },
+    data: {
+      phone: phone,
+    },
     header: {
-      'content-type': 'application/json'
+      'content-type': 'application/x-www-form-urlencoded'
     },
     method: 'POST',
     success: function (res) {
-      callback(res)
+      if(res.data.code == '-1'){
+        wx.showModal({
+          title: '提示',
+          content: res.data.errmsg,
+          showCancel:false
+        })
+      }else{
+        callback(res)
+      }
     },
     fail(res) {
       wx.showToast({
         title: '获取验证码异常...',
         duration: 1500,
       })
+    },
+    complete: function (res){
     }
   })
 }

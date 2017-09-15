@@ -17,12 +17,16 @@ Page({
     bold_cpwd_line: 'bolder-un-line',
     nickname:'',
     regverifycode: '',
+    verifycode:'',
     verify_icon: '../../images/verify_reg_nos.png',
     bold_verify_line: 'bolder-un-line',
     isagree:false,
     agreeBg:'#FF7F24',
     agreeBg:'agreeunselect',
-    register_btn:'reg_un_btn'
+    register_btn:'reg_un_btn',
+    tips: '获取验证码',
+    is_click: true,
+    second: 60,
   },
   //事件处理函数
   bindlogin:function(){
@@ -31,50 +35,37 @@ Page({
     })
   },
   bindViewTap: function () {
-
-    var verifycode = '';
     var that = this;
-    wx.getStorage({
-      key: 'regverifycode',
-      success: function(res) {
-        verifycode = res.data;
-      },
-      fail: function(res) {},
-      complete: function(res) {
-
-        if (that.data.isagree) {
-          if (that.data.regusername.length != 11) {
-            wx.showToast({
-              title: '手机号码格式有误',
-              duration: 1500,
-            })
-          } else if (that.data.regpasswd.length < 6) {
-            wx.showToast({
-              title: '请设置至少六位登录密码',
-              duration: 1500,
-            })
-          } else if (that.data.regpasswd != that.data.conformpwd) {
-            wx.showToast({
-              title: '两次输入的密码不一致',
-              duration: 1500,
-            })
-          } else if (that.data.regverifycode != verifycode) {
-            wx.showToast({
-              title: '验证码错误',
-              duration: 1500,
-            })
-          } else {
-            regrequest.getregist(that.data.regusername, that.data.regpasswd, that.data.nickname);
-          }
-        } else {
+    if (that.data.isagree) {
+      if (!app.phoneRe.test(that.data.regusername)) {
           wx.showToast({
-            title: '请先确认服务协议',
+            title: '手机号码格式有误',
             duration: 1500,
-          })
-        }
-      },
-    });
-    
+           })
+      } else if (that.data.regpasswd.length < 6) {
+          wx.showToast({
+             title: '请设置至少六位登录密码',
+             duration: 1500,
+           })
+      } else if (that.data.regpasswd != that.data.conformpwd) {
+          wx.showToast({
+            title: '两次输入的密码不一致',
+             duration: 1500,
+           })
+      } else if (that.data.regverifycode != that.data.verifycode) {
+          wx.showToast({
+            title: '验证码错误',
+            duration: 1500,
+           })
+       } else {
+          regrequest.getregist(that.data.regusername, that.data.regpasswd, that.data.nickname);
+       }
+     } else {
+        wx.showToast({
+           title: '请先确认服务协议',
+           duration: 1500,
+         })
+      }
   },
   onLoad: function () {
     console.log('onLoad')
@@ -88,23 +79,48 @@ Page({
   },
   getcode:function(){
     var that = this;
-    if (this.data.regusername.length != 11){
-      wx.showToast({
-        title: '手机号码格式有误',
-      })
-    }else{
-      regrequest.getverifycode(function (res){
-        if (res.data.code == '1') {
-          wx.setStorage({
-            key: "regverifycode",
-            data: res.data.content[0],
-          });
-          that.setData({
-            regverifycode: res.data.content[0]
-          });
-        }
-      })
+    if (that.data.is_click){
+      if (!app.phoneRe.test(this.data.regusername)) {
+        wx.showToast({
+          title: '手机号码格式有误',
+        })
+      } else {
+        regrequest.getverifycode(that.data.regusername, function (res) {
+          if (res.data.code == '1') {
+            that.setData({
+              verifycode: res.data.content[0],
+              is_click: false
+            });
+            that.countdown()
+          }
+        })
+      }
     }
+    
+  },
+
+  //倒计时
+  countdown: function () {
+    var that = this
+    var id = setInterval(function () {
+      //定时执行的代码
+      var second = that.data.second;
+      if (second == 0) {
+        that.setData({
+          second: 60,
+          is_click: true,
+          tips: '获取验证码'
+        })
+        clearInterval(id);//关闭定时器
+      } else {
+        second = second - 1;
+        that.setData({
+          second: second,
+          tips: second + '秒后再次获取'
+        })
+      }
+
+    }, 1000);
   },
 
   getregname: function (e) {
