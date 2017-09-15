@@ -8,6 +8,12 @@ Page({
   
   },
 
+  saveData: function() {
+    wx.previewImage({
+      urls: ['https://www.gywnks.com/sbb-web/upload/headericon/server_app.jpg'],
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
