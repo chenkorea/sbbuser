@@ -1,0 +1,5 @@
+<!--pages/my/share/share.wxml-->
+<view class='share_main'>
+
+  <image class='qr_img' src='{{qrimg}}'></image>
+</view>

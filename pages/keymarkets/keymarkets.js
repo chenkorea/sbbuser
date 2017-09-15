@@ -23,7 +23,7 @@ Page({
     request.getgoodcategory(function (res) {
       for (var i = 0; i < res.data.content.length; i++) {
         res.data.content[i]['num'] = i
-        if(i<2){
+        if(i<3){
           tt.push(res.data.content[i].data_name);
           cg.push(res.data.content[i].data_code);
           tb.push(true);

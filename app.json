@@ -34,7 +34,8 @@
     "pages/keymarkets/goodsdetail/goodsdetail",
     "pages/my/orderprocess/orderprocess",
     "pages/index/zhaomu/zhaomu",
-    "pages/my/shifu/shifu"
+    "pages/my/shifu/shifu",
+    "pages/my/share/share"
   ],
   "window": {
     "backgroundTextStyle": "light",
