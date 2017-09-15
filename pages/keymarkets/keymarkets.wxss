@@ -161,7 +161,7 @@ page{padding:90rpx 0 50px;}
     flex: 1;
     overflow: hidden;
     display: block;
-    font-size: 34rpx;
+    font-size: 30rpx;
 }
 
 /* .addressadd {

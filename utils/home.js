@@ -118,7 +118,6 @@ var PageItems =
       },
       method: 'POST',
       complete:function(e){
-        console.log('++++updateLocation complete+++' + JSON.stringify(e))
       }
     })
   }
