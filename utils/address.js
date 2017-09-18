@@ -304,6 +304,18 @@ function cancelOrders(order_id, callback) {
   })
 }
 
+function getAppAbleCity(callback) {
+  var remoteUrl = getApp().globalData.serverIp + "openkey/getAppAbleCity";
+
+  wx.request({
+    url: remoteUrl,
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      callback(res);
+    }
+  })
+}
 
 module.exports = {
   getUserAddress: getUserAddress,
@@ -322,5 +334,6 @@ module.exports = {
   gettechlocation: gettechlocation,
   saveWXFormId: saveWXFormId,
   saveWXOrderFormId: saveWXOrderFormId,
-  cancelOrders: cancelOrders
+  cancelOrders: cancelOrders,
+  getAppAbleCity: getAppAbleCity
 } 

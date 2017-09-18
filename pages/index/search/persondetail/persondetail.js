@@ -62,6 +62,7 @@ Page({
   },
   gettechqual: function (tech_id) {
     var that = this;
+    console.log('tech_id = ' + tech_id)
     Util.gettechqual(function (data) {
       wx.hideLoading();
       var code = data.data.code;

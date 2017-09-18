@@ -34,6 +34,9 @@ Page({
   },
   toShiFuDetail: function () {
     var tech_id = this.data.userOrder.process_person_id;
+    console.log('--------------')
+    console.log(this.data.userOrder)
+    console.log('--------------')
     wx.navigateTo({
       url: '../../index/search/persondetail/persondetail?tech_id=' + tech_id,
     })

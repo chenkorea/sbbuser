@@ -31,7 +31,9 @@ Page({
     latitude: '',
     showAddress:'',
     showRemark:'',
-    updalodcount: 0
+    updalodcount: 0,
+    ableCity: [],
+    city_name:''
   },
   /**
    * 监听普通picker选择器
@@ -119,12 +121,50 @@ Page({
       url: '../openkey/addNote/addNote',
     })
   },
+  getAppAbleCity: function () {
+    var that = this;
+    Util.getAppAbleCity(function (data) {
+      var code = data.data.code;
+      if (code == "1") {
 
+        // 订单生成成功，上传订单图片(获取订单ID)
+        var ableCity = data.data.content;
+        console.log(ableCity)
+        that.setData({ ableCity: ableCity})
+        console.log(that.data.ableCity)
+      }
+    });
+  },
+  isContains: function(str, substr) {
+    return new RegExp(substr).test(str);
+  },
   /**
    * 上传数据
    */
   saveData:function (e) {
     var that = this;
+    // 判断当前城市是否支持服务
+    var is_able = false;
+    
+    for (var i = 0; i < that.data.ableCity.length; i++) {
+      var nowcity = that.data.ableCity[i];
+      var city_name = nowcity.city;
+      
+      if (that.data.showAddress.indexOf(city_name) >= 0) {
+        is_able = true;
+        break;
+      }
+    }
+    if (!is_able) {
+      wx.showModal({
+        title: '提示',
+        content: '当前城市暂未开放服务！',
+        showCancel: false
+      })
+      return;
+    }
+
+    
     // 保存表单ID
     var formId = e.detail.formId;
     // 提交数据
@@ -142,6 +182,13 @@ Page({
     }
     if (type != '03') {
       guaran = '0'
+    }
+    if (that.data.address.address == undefined || "" == that.data.address.address) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择服务地址',
+      })
+      return;
     }
     wx.showLoading({ title: '数据上传中...', })
     wx.getStorage({
@@ -281,16 +328,21 @@ Page({
     //   success: function (res) { },
     // })
 
+    // 获取服务城市
+    that.getAppAbleCity();
 
     // 自动定位获取地理位置
     homeUtil.getCityName(function (locationData) {
       homeUtil.updateLocation(locationData.location.lng, locationData.location.lat, that.data.uid);
+      console.log(locationData)
       that.setData({
         address: locationData,
         longitude: locationData.location.lng,
         latitude: locationData.location.lat,
-        showAddress: locationData.address
+        showAddress: locationData.address,
+        city_name: locationData.address_component.city
       })
+      
       if (locationData.address.length > 20) {
         that.setData({
           showAddress: locationData.address.substr(0, 20)
@@ -374,13 +426,19 @@ Page({
     wx.getStorage({
       key: 'selAddr',
       success: function(res) {
+        console.log('地址-----------')
+        console.log(res.data)
+        console.log('地址-----------')
         that.setData({ 
           address: res.data,
-          showAddress: res.data.address
+          showAddress: res.data.popedom + res.data.address,
+          city_name: res.data.popedom + res.data.address
         })
-        if (res.data.address.length > 20) {
+        // city_name: locationData.address_component.city
+        var adds = res.data.popedom + res.data.address
+        if (adds.length > 20) {
           that.setData({
-            showAddress: res.data.address.substr(0, 20)
+            showAddress: adds.substr(0, 20)
           })
         }
       },
@@ -413,6 +471,13 @@ Page({
         that.setData({ picnumStr: '已经选择' + res.data.length + '张图片' });
         that.setData({ picnum: res.data.length });
       },
+    })
+  },
+  onUnload: function () {
+    that.setData({
+      address: {},
+      showAddress: '',
+      city_name: ''
     })
   },
   /**
