@@ -81,10 +81,8 @@ function getupdate(username, updatepw,callback) {
       'content-type': 'application/x-www-form-urlencoded'
     },
     method: 'POST',
-    success: function (res) {
-      if (res.data.code == '1') {
+    complete: function (res) {
         callback(res)
-      }
     },
   })
 }

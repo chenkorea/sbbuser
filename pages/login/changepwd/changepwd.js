@@ -42,12 +42,18 @@ Page({
                 } 
               }
             })
-          }else{
-              wx.showToast({
-                title: '重置密码失败了',
+          } else if (res.data.code == '-1') {
+              wx.showModal({
+                title: '提示',
+                content: '您尚未在平台注册信息，请先注册吧',
+                showCancel:false
               })
-            }
-          })
+          }else{
+            wx.showToast({
+              title: '重置密码异常',
+            })
+          }
+        })
     }
   },
   onLoad: function (e) {
