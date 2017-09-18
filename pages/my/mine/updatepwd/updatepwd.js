@@ -16,21 +16,23 @@ Page({
   //事件处理函数
   bindViewTap: function () {
     if (this.data.oldpwd.length < 6){
-      wx.showToast({
-        title: '登录密码不得少于6位',
+      wx.showModal({
+        title: '提示',
+        content: '登录密码不得少于6位',
+        showCancel:false
       })
     } else if (this.data.newpwd != this.data.conformpwd) {
-      wx.showToast({
-        title: '确认密码和新密码不一致',
-      });
-    } else if (this.data.newpwd.length < 6) {
-      wx.showToast({
-        title: '设置登录密码不得少于6位',
-      });
+      wx.showModal({
+        title: '提示',
+        content: '确认密码和新密码不一致',
+        showCancel: false
+      })
     } else if (this.data.newpwd == this.data.oldpwd) {
-      wx.showToast({
-        title: '新设置的密码不能和原来的密码一样',
-      });
+      wx.showModal({
+        title: '提示',
+        content: '新设置的密码不能和原来的密码一样',
+        showCancel: false
+      })
     }else{
       updaterequest.getreset(this.data.phone, this.data.conformpwd
         , this.data.oldpwd, '1',function (res) {
@@ -51,10 +53,10 @@ Page({
                 }
               }
             })
-          }else{
+          } else if (res.data.code == '-1'){
             wx.showModal({
               title: '提示',
-              content: '重置密码失败,请重试',
+              content: '登录密码错误，请重新尝试..',
               showCancel: false,
             })
           }

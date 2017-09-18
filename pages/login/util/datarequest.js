@@ -103,17 +103,15 @@ function getreset(username, newpwd, oldpwd, usertype,callback) {
       'content-type': 'application/x-www-form-urlencoded'
     },
     method: 'POST',
-    success: function (res) {
-      if (res.data.code == '1') {
-        callback(res)
-      }
-    },
     fail(res) {
       wx.showModal({
         title: '提示',
         content: '密码找回异常...',
         showCancel: false
       })
+    },
+    complete:function(res){
+      callback(res)
     }
 
   })
