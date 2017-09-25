@@ -4,7 +4,8 @@
     <input value='{{inputValue}}' bindinput="bindKeyInput" placeholder="搜索技师姓名/手机号码" class="search-text"/>
     <text class="cancel-text" bindtap="cancelsearch">取消</text>
   </view>
-  <view class="result-list-view" wx:for="{{persons}}" wx:key="{{index}}" data-item="{{persons[index]}}" bindtap="gopersondetail">
+  <view class='no-text-content' hidden='{{is_show}}'>请输入技师名字或手机号进行查询</view>
+  <view class="result-list-view" wx:for="{{persons}}" wx:key="{{index}}" data-item="{{persons[index]}}" bindtap="gopersondetail" hidden='{{!is_show}}'>
      <view class="name-text">姓名：{{item.name}}</view>
      <view class="phone-text">电话号码：{{hidePhones[index]}}</view>
      <view class="level-text">资质：{{item.service_types_str}}</view>

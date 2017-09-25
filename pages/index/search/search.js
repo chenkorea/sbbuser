@@ -10,17 +10,20 @@ Page({
     inputValue: '',
     persons: [],
     temp:[],
-    hidePhones: []
+    hidePhones: [],
+    is_show: false
   },
   bindKeyInput: function (e) {
     var that = this 
     this.setData({
-      inputValue: e.detail.value
+      inputValue: e.detail.value,
+      is_show:true
     })
     if (e.detail.value.length == 0){
-    var temp = this.data.temp
+      var temp = this.data.temp
       this.setData({
-        persons: temp
+        persons: temp,
+        is_show: false
       })
     }else{
       var temp = [];
@@ -43,32 +46,36 @@ Page({
   },
   onLoad: function () {
     var that = this
-    datarequest.gettechqual(function (res){
+    that.getAllTecher();
+  },
+  getAllTecher: function () {
+    var that = this
+    datarequest.gettechqual(function (res) {
       var phones = [];
-      if (res.data.code == '1'){
+      if (res.data.code == '1') {
         for (var i = 0; i < res.data.content.length; i++) {
-            var urls = [];
-            if (res.data.content[i].archives_url == undefined){
-              urls.push(urlutil.no_pic);
-              res.data.content[i]['archives_url'] = urls
-            }else{
-              var url = res.data.content[i].archives_url.split(',');
-              for (var j = 0; j < url.length; j++) {
-                if (url[j] != '') {
-                  urls.push(urlutil.url + '/' + url[j])
-                }
+          var urls = [];
+          if (res.data.content[i].archives_url == undefined) {
+            urls.push(urlutil.no_pic);
+            res.data.content[i]['archives_url'] = urls
+          } else {
+            var url = res.data.content[i].archives_url.split(',');
+            for (var j = 0; j < url.length; j++) {
+              if (url[j] != '') {
+                urls.push(urlutil.url + '/' + url[j])
               }
-              res.data.content[i].archives_url = urls
             }
-            phones[i] = res.data.content[i].phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
+            res.data.content[i].archives_url = urls
+          }
+          phones[i] = res.data.content[i].phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
         }
-          that.setData({
-            goods: res.data.content
-          })
+        that.setData({
+          goods: res.data.content
+        })
         that.setData({
           persons: res.data.content,
           temp: res.data.content,
-          hidePhones: phones
+          chidePhones: phones
         })
       }
     })
