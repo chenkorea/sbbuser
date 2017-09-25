@@ -67,9 +67,7 @@ Page({
             }
             res.data.content[i].archives_url = urls
           }
-          console.log('phone000 --------------- ' + res.data.content[i].phone)
           phones[i] = res.data.content[i].phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
-          console.log('phone111 --------------- ' + res.data.content[i].phone)
         }
 
         if (res.data.content.length > 0){
