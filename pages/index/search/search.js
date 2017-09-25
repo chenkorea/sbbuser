@@ -69,9 +69,17 @@ Page({
           }
           phones[i] = res.data.content[i].phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
         }
+
+        if (res.data.content.length > 0){
+          that.setData({
+            is_show: true
+          })
+        }
+
         that.setData({
           goods: res.data.content
         })
+
         that.setData({
           persons: res.data.content,
           temp: res.data.content,

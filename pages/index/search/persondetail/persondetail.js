@@ -16,7 +16,8 @@ Page({
   },
   onLoad: function (info){
     var that = this;
-    var tech_id = info.tech_id;
+    info = JSON.parse(info.infor)
+    var tech_id = info.id;
     if (tech_id) {
       // 查询
       that.gettechqual(tech_id);
@@ -69,7 +70,11 @@ Page({
       if (code == "1") {
         var users = data.data.content;
         var shifu = users[0];
-        var imgs = shifu.archives_url.split(",");
+        var imgs = []
+        if (shifu.archives_url != undefined){
+          shifu.archives_url.split(",");
+        }
+        
         for (var i = 0; i < imgs.length; i++) {
           imgs[i] = getApp().globalData.imageServerIp + imgs[i];
         }
