@@ -132,16 +132,16 @@
 }
 
 .gonganlogo {
-  width: 40rpx;
-  height: 40rpx;
-  background-size: 40rpx 40rpx;
+  width: 56rpx;
+  height: 56rpx;
+  background-size: 56rpx 56rpx;
   margin-left: 10rpx;
   margin-right: 10rpx;
 }
 
 .gongan-text {
-  height: 24rpx;
-  font-size: 24rpx;
+  height: 34rpx;
+  font-size: 34rpx;
   color: #999999;
 }
 
