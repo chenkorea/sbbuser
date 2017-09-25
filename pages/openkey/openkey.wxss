@@ -113,3 +113,45 @@
 .add-view-text {
   height: 30rpx;
 }
+
+
+.price-view {
+  width: 100%;
+  position: relative;
+  border: 1rpx solid #DBDBDB;
+  margin-top: -1rpx;
+}
+
+
+.price-view::after {
+  border-top: none;
+}
+
+.left-price {
+  display: flex;
+  font-size: 30rpx;
+  color: black;
+  width: 40%;
+  height: 100rpx;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 5rpx;
+  border-right: 1rpx solid #DBDBDB;
+}
+
+.right-price {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 40%;
+  right: 10%;
+  font-size: 30rpx;
+  color: black;
+  width: 60%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rpx;
+}
