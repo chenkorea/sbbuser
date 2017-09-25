@@ -17,9 +17,15 @@ Page({
     var that = this;
     var id = e.currentTarget.dataset.id;
     let str = JSON.stringify(that.data.laws[id-1]);
-    wx.navigateTo({
-      url: '../../index/lawDetail/lawDetail?&detail=' + str + '&lawType=' + that.data.lawType,
-    })
+    if (id == '3') {
+      wx.navigateTo({
+        url: '../../index/price/price',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../../index/lawDetail/lawDetail?&detail=' + str + '&lawType=' + that.data.lawType,
+      })
+    }
   },
   onLoad: function (options) {
     console.log('onLoad')

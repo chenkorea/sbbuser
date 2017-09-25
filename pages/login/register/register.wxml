@@ -29,8 +29,8 @@
      <input class="user-text" bindfocus="bindcpwdfocus" bindblur="bindcpwdblur" bindinput="getconformpasswd" type="password" placeholder="再次输入密码"/>
    </view>
 
-   <view class="law-view">
-       <icon class="iconfont icon-xuanze1 {{agreeBg}}"  bindtap="chooseagree"/>
+   <view class="law-view" bindtap='chooseagree'>
+       <icon class="iconfont icon-xuanze1 {{agreeBg}}" />
        <text class="law-text">我同意《锁帮帮平台服务协议》</text>
   </view>
 

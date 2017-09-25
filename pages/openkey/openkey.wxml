@@ -60,13 +60,6 @@
   </form>
   <!-- <button class="save-button" bindtap="saveData">提交</button> -->
 
-  <view class="bot_view">
-    <view class="shuoming-view">服务价格</view>
-  </view>
-
-  <view class='price-view' wx:for="{{serviceAr}}" wx:key="{{index}}">
-    <view class='left-price'>{{item.service_item}}</view><view class='right-price'>{{item.pricing_method == '01'?item.price:'议价'}}{{item.pricing_method == '01'?'元':''}}</view>
-  </view>
 
   <view class="bot_view">
     <view class="shuoming-view">服务优势</view>

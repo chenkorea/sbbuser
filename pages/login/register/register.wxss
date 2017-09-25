@@ -119,10 +119,12 @@
 
 .agreeselect {
   color: #FF7F24;
+  font-size: 40rpx;
 }
 
 .agreeunselect{
   color: #BEBEBE; 
+  font-size: 40rpx;
 }
 
 .lock-log{

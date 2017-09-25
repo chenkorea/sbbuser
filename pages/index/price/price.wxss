@@ -1,0 +1,64 @@
+/* pages/index/price/price.wxss */
+
+.main-view {
+ padding: 10rpx;
+}
+
+.shuoming-view {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #FF7F24;
+  height: 80rpx;
+  border-bottom: 1rpx solid #F0F0F0;
+  margin-top: 20rpx;
+}
+
+.bot_view {
+  padding-left:20rpx;
+  padding-right: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+
+.price-view {
+  width: 100%;
+  position: relative;
+  border: 1rpx solid #DBDBDB;
+  margin-top: -1rpx;
+}
+
+
+.price-view::after {
+  border-top: none;
+}
+
+.left-price {
+  display: flex;
+  font-size: 30rpx;
+  color: black;
+  width: 40%;
+  height: 100rpx;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 5rpx;
+  border-right: 1rpx solid #DBDBDB;
+}
+
+.right-price {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 40%;
+  right: 10%;
+  font-size: 30rpx;
+  color: black;
+  width: 60%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rpx;
+}
