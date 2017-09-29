@@ -429,13 +429,17 @@ Page({
         console.log('地址-----------')
         console.log(res.data)
         console.log('地址-----------')
+        var popedom = '' + res.data.popedom
+        if ('undefined' == popedom) {
+            popedom = ''
+        }
         that.setData({ 
           address: res.data,
-          showAddress: res.data.popedom + res.data.address,
-          city_name: res.data.popedom + res.data.address
+          showAddress: popedom + res.data.address,
+          city_name: popedom + res.data.address
         })
         // city_name: locationData.address_component.city
-        var adds = res.data.popedom + res.data.address
+        var adds = popedom + res.data.address
         if (adds.length > 20) {
           that.setData({
             showAddress: adds.substr(0, 20)

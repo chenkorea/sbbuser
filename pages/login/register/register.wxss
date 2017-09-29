@@ -80,6 +80,7 @@
   height: 40rpx;
   margin-left: 10%;
   margin-top: 20rpx;
+  margin-bottom: 20rpx;
   color: #666666;
   font-size: 28rpx;
 }
@@ -90,7 +91,10 @@
 }
 
 .law-text {
-  margin-left: 20rpx;
+  height: 30rpx;
+  margin-left: 30rpx;
+  margin-top: -30rpx;
+  font-size: 30rpx;
 }
 
 .register_en_btn {

@@ -6,7 +6,7 @@
   </view>
 
   <view class='price-view' wx:for="{{serviceAr1}}" wx:key="{{index}}">
-    <view class='left-price'>{{item.service_item}}</view><view class='right-price'>{{item.pricing_method == '01'?item.price:'议价'}}{{item.pricing_method == '01'?'元':''}}</view>
+    <view class='left-price'>{{item.service_item}}</view><view class='right-price'>{{item.price_info}}</view>
   </view>
 
   <view class="bot_view">
@@ -14,7 +14,7 @@
   </view>
 
   <view class='price-view' wx:for="{{serviceAr2}}" wx:key="{{index}}">
-    <view class='left-price'>{{item.service_item}}</view><view class='right-price'>{{item.pricing_method == '01'?item.price:'议价'}}{{item.pricing_method == '01'?'元':''}}</view>
+    <view class='left-price'>{{item.service_item}}</view><view class='right-price'>{{item.price_info}}</view>
   </view>
 
   <view class="bot_view">
@@ -22,7 +22,7 @@
   </view>
 
   <view class='price-view' wx:for="{{serviceAr3}}" wx:key="{{index}}">
-    <view class='left-price'>{{item.service_item}}</view><view class='right-price'>{{item.pricing_method == '01'?item.price:'议价'}}{{item.pricing_method == '01'?'元':''}}</view>
+    <view class='left-price'>{{item.service_item}}</view><view class='right-price'>{{item.price_info}}</view>
   </view>
 
   <view class="bot_view">
@@ -30,7 +30,7 @@
   </view>
 
   <view class='price-view' wx:for="{{serviceAr4}}" wx:key="{{index}}">
-    <view class='left-price'>{{item.service_item}}</view><view class='right-price'>{{item.pricing_method == '01'?item.price:'议价'}}{{item.pricing_method == '01'?'元':''}}</view>
+    <view class='left-price'>{{item.service_item}}</view><view class='right-price'>{{item.price_info}}</view>
   </view>
 
   <view class="bot_view">
@@ -38,7 +38,7 @@
   </view>
 
   <view class='price-view' wx:for="{{serviceAr5}}" wx:key="{{index}}">
-    <view class='left-price'>{{item.service_item}}</view><view class='right-price'>{{item.pricing_method == '01'?item.price:'议价'}}{{item.pricing_method == '01'?'元':''}}</view>
+    <view class='left-price'>{{item.service_item}}</view><view class='right-price'>{{item.price_info}}</view>
   </view>
 
 </view>
