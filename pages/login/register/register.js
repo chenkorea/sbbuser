@@ -38,21 +38,25 @@ Page({
     var that = this;
     if (that.data.isagree) {
       if (!app.phoneRe.test(that.data.regusername)) {
-          wx.showToast({
-            title: '手机号码格式有误',
-            duration: 1500,
-           })
+          wx.showModal({
+            title: '提示',
+            content: '手机号码格式有误',
+            showCancel: false
+          })
       } else if (that.data.regpasswd.length < 6) {
-          wx.showToast({
-             title: '请设置至少六位登录密码',
-             duration: 1500,
-           })
+          wx.showModal({
+            title: '提示',
+            content: '请设置至少六位登录密码',
+            showCancel: false
+          })
       } else if (that.data.regpasswd != that.data.conformpwd) {
-          wx.showToast({
-            title: '两次输入的密码不一致',
-             duration: 1500,
+           wx.showModal({
+             title: '提示',
+             content: '两次输入的密码不一致',
+             showCancel:false
            })
-      } else if (that.data.regverifycode != that.data.verifycode) {
+      } else if (that.data.verifycode.length == 0 || that.data.regverifycode !=
+          that.data.verifycode) {
           wx.showToast({
             title: '验证码错误',
             duration: 1500,
