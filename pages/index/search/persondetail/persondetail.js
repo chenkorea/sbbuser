@@ -1,5 +1,6 @@
 
 var Util = require('../../../../utils/address.js');
+var weburl = require('../../../../utils/util.js');
 
 //获取应用实例
 var app = getApp()
@@ -11,8 +12,15 @@ Page({
     name: '',
     phone: '',
     grade: '',
-    servicetype: '',
-    hidePhone:''
+    servicetype: [],
+    hidePhone:'',
+    test:[
+      'http://imge.kugou.com/stdmusic/20170423/20170423114015440967.jpg',
+      'http://imge.kugou.com/stdmusic/20151218/20151218200608401755.jpg',
+      'http://imge.kugou.com/stdmusic/20170423/20170423114015440967.jpg',
+      'http://imge.kugou.com/stdmusic/20151218/20151218200608401755.jpg',
+      'http://imge.kugou.com/stdmusic/20170423/20170423114015440967.jpg',
+    ]
   },
   onLoad: function (info){
     var that = this;
@@ -28,7 +36,7 @@ Page({
         name: e.name,
         phone: e.phone,
         grade: e.grade,
-        servicetype: e.service_types_str,
+        servicetype: e.service_types,
         imgUrls: e.archives_url,
         hidePhone: e.phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
       })
@@ -72,18 +80,23 @@ Page({
         var shifu = users[0];
         var imgs = []
         if (shifu.archives_url != undefined){
-          shifu.archives_url.split(",");
+          imgs = shifu.archives_url.split(",");
+          for (var i = 0; i < imgs.length;i++){
+            imgs[i] = (getApp().globalData.imageServerIp + imgs[i])
+          }
         }
-        
-        for (var i = 0; i < imgs.length; i++) {
-          imgs[i] = getApp().globalData.imageServerIp + imgs[i];
+
+        if (shifu.service_types != undefined) {
+          that.setData({
+            servicetype: shifu.service_types.split(','),
+          })
         }
+
         console.log(imgs);
         that.setData({
           name: shifu.name,
           phone: shifu.phone,
           grade: shifu.grade,
-          servicetype: shifu.service_types_str,
           imgUrls: imgs,
           hidePhone: shifu.phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
         })

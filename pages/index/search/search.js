@@ -67,6 +67,10 @@ Page({
             }
             res.data.content[i].archives_url = urls
           }
+
+          if (res.data.content[i].service_types != undefined){
+            res.data.content[i].service_types = res.data.content[i].service_types.split(',')
+          }
           phones[i] = res.data.content[i].phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
         }
 
