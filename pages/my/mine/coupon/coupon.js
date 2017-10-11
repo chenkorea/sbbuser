@@ -13,23 +13,28 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    wx.request({
-      url: getApp().globalData.serverIp + 'userinfor/getUserCoupon', //
-      data:{
-        uid:'404848c75f053701015f0537f2770000'
+    wx.getStorage({
+      key: 'uid',
+      success: function (res) {
+        wx.request({
+          url: getApp().globalData.serverIp + 'userinfor/getUserCoupon', //
+          data: {
+            uid: res.data
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          method: 'POST',
+          complete: function (e) {
+            if (e.data.code == '1') {
+              that.setData({
+                couponList: e.data.content
+              })
+            }
+          }
+        })
       },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      complete: function (e) {
-        console.log('complete----' + JSON.stringify(e))
-        if (e.data.code == '1'){
-          that.setData({
-            couponList: e.data.content
-          })
-        }
-      }
     })
+
   }
 })
