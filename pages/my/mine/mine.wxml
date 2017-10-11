@@ -22,4 +22,8 @@
       <icon class="iconfont icon-mysss1 icon-shezhi" />
       <text class="my-title">重置密码</text>
     </view>
+    <view class="seting-view" bindtap="tocoupon">
+      <icon class="iconfont icon-mysss1 icon-duihuan" />
+      <text class="my-title">我的卡券</text>
+    </view>
   </view>

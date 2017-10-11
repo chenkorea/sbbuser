@@ -76,5 +76,10 @@ Page({
       phoneNumber: '4000851323',
       phoneNumber: '13037817127',
     })
+  },
+  tocoupon:function(){
+    wx.navigateTo({
+      url: '../mine/coupon/coupon',
+    })
   }
 })
