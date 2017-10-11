@@ -1,7 +1,7 @@
 <!--pages/my/mine/coupon/coupon.wxml-->
 <view style='background:#eeeeee;height:100%;width:100%;position:fixed'>
   <view wx:if="{{couponList.length>0}}">
-    <view class='coupon-list-view' wx:for="{{couponList}}" wx:key="{{item}}">
+    <view bindtap="selcoupon" data-item="{{item}}" class='coupon-list-view' wx:for="{{couponList}}" wx:key="{{item}}">
       <text wx:if="{{item.is_able==1}}" class='title-text' style='color:#FF7F24'>可使用</text>
       <text wx:if="{{item.is_able==0}}" class='title-text'>已使用</text>
       <image style='display:flex;width:240rpx;height:90rpx;' src='../../../images/ico_coupon.png'></image>
