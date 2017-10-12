@@ -16,10 +16,19 @@
 }
 
 .title-text {
-  display: flex;
-   justify-content: flex-end;
-   bottom: 2rpx;
-   align-content:center; 
+  position: relative;
+  justify-content: flex-end;
+  align-content:center;
+  left: 85%;
+  font-size: 32rpx;
+  color: #333333;
+  /* margin-top: 10rpx; */
+}
+
+.title-desc {
+  position: relative;
+  right: 15%;
+  justify-content: flex-start;
   font-size: 32rpx;
   color: #333333;
   /* margin-top: 10rpx; */
@@ -32,4 +41,15 @@
   width: 100%;
   align-items: center;
   justify-content: center;
+}
+
+.price-style{
+   display: block;
+   color: #ffffff;
+   position: relative;
+   size: 30rpx;
+   z-index: 5;
+   left: 3%;
+   bottom: 100rpx;
+   text-align: left;
 }
