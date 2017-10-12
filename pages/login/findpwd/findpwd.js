@@ -18,12 +18,13 @@ Page({
   //事件处理函数
   bindViewTap: function () {
     var that = this;
-    
     if (!app.phoneRe.test(that.data.fogphone)) {
-      wx.showToast({
-        title: '手机号码格式有误',
+      wx.showModal({
+        title: '提示',
+        content: '手机号码格式有误',
+        showCancel: false
       })
-    } else if (that.data.fogcode != that.data.verifycode){
+    } else if (that.data.verifycode.length == 0 || that.data.fogcode != that.data.verifycode){
           wx.showToast({
             title: '验证码错误',
             duration: 1500,
@@ -48,6 +49,7 @@ Page({
   //获取验证码
   getcode: function () {
     var that = this;
+
     if (that.data.is_click) {
       if (!app.phoneRe.test(this.data.fogphone)) {
         wx.showToast({

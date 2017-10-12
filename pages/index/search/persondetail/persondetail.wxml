@@ -1,20 +1,28 @@
 <!--goodsdetail.wxml-->
-<swiper indicator-dots="{{indicatorDots}}" autoplay="false">
+<!-- <swiper indicator-dots="{{indicatorDots}}" autoplay="false">
   <block wx:for="{{imgUrls}}" wx:key="{{index}}">
     <swiper-item>
       <image src="{{item}}" model="scaleToFit" style="width: {{imageWidth}}px;" data-url="{{imgUrls[index]}}" bindtap="preview"/>
     </swiper-item>
   </block>
-</swiper>
+</swiper> -->
 <!--商品信息描述  -->
 <view class="title-view">基本信息</view>
 <view class="main-view">
-<view class="order-status"><text class="or-title">姓名：</text><text class="or_value">{{name}}</text></view>
-<view class="order-status jiantou-view" catchtap="dialphone"><text class="or-title">电话：</text><text class="or_value">{{hidePhone}}</text>
-  <image class="jiantou" src="../../../images/phone_dial.png"></image>
+  <view class="order-status"><text class="or-title">姓名：</text><text class="or_value">{{name}}</text></view>
+  <view class="order-status jiantou-view" catchtap="dialphone"><text class="or-title">电话：</text><text class="or_value">{{hidePhone}}</text>
+    <image class="jiantou" src="../../../images/phone_dial.png"></image>
+  </view>
+  <view class="order-status">
+    <text class="or-title">评级：</text>
+    <image style='align-items: center;justify-content: center;display:flex;' wx:for="{{servicetype}}" wx:key="{{index}}" src='../../../images/start.png' style='height:40rpx;width:40rpx'></image>
+  </view>
+  <!-- <view class="order-status"><text class="or-title">服务项目：</text><text class="or_value">{{servicetype}}</text></view> -->
 </view>
-<view class="order-status"><text class="or-title">评级：</text><text class="or_value">{{grade}}</text></view>
-<view class="order-status"><text class="or-title">服务项目：</text><text class="or_value">{{servicetype}}</text></view>
+<!--商品信息描述  -->
+<view class="title-view">证照信息</view>
+<view  class="main-view" style='margin-left:20rpx'>
+  <image wx:for="{{imgUrls}}" wx:key="{{index}}" style='width:30%;height:240rpx;margin:5rpx' src='{{item}}' data-url="{{item}}" bindtap="preview"></image>
 </view>
 <!--商品简介  -->
 <!-- <view class="main-view">

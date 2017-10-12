@@ -8,6 +8,8 @@
   <view class="result-list-view" wx:for="{{persons}}" wx:key="{{index}}" data-item="{{persons[index]}}" bindtap="gopersondetail" hidden='{{!is_show}}'>
      <view class="name-text">姓名：{{item.name}}</view>
      <view class="phone-text">电话号码：{{hidePhones[index]}}</view>
-     <view class="level-text">资质：{{item.service_types_str}}</view>
+     <view class="level-text">资质：
+        <image wx:for="{{item.service_types}}" wx:key="{{index}}" src='../../images/start.png' style='height:40rpx;width:40rpx'></image>
+     </view>
   </view>
 </view>

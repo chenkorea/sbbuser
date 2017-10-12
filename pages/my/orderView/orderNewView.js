@@ -183,31 +183,69 @@ Page({
     })
   },
   /**
+   * 查询是否有卡券可使用
+   *
+  */
+  getCoupon: function (e) {
+    var that = this
+    wx.request({
+      url: getApp().globalData.serverIp + 'userinfor/getUserCoupon',
+      data: {
+        uid: this.data.uid,
+        is_able:'1'
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      complete: function (res) {
+        wx.hideLoading();
+        if (res.data.code == 1 && res.data.content.length>0){
+          wx.showModal({
+            title: '提示',
+            content: '您有卡券可抵部分费用，使用卡券？',
+            success: function (res) {
+              if (res.confirm){
+                wx.navigateTo({
+                  url: '../mine/coupon/coupon?order_infor=' + JSON.stringify(e)
+                })
+              } else {
+                that.wxLogin(e, "", 0,'');
+              }
+            }
+          })
+        } else {
+          that.wxLogin(e,"",0,'');
+        }
+      }
+    })
+  },
+
+  /**
    * 去支付
    */
   toPay: function (e) {
-    
-    this.wxLogin(e);
-
+    this.getCoupon(e);
   },
   /**
    * 获取微信登录
    */
-  wxLogin: function (e) {
+  wxLogin: function (e, coupon_type, coupon_price, coupon_id) {
+    console.log('coupon_type:' + coupon_type + ', coupon_price:' + coupon_price)
     wx.showLoading({ title: '启动微信支付中...', })
     var that = this;
     wx.login({
       success: function (res) {
         wx.hideLoading();
         console.log('code = ' + res.code);
-        that.getOpenId(res.code, e);
+        that.getOpenId(res.code, e, coupon_type, coupon_price, coupon_id);
       }
     });
   },
   /**
    * 获取openId
    */
-  getOpenId: function (code, e) {
+  getOpenId: function (code, e, coupon_type, coupon_price, coupon_id) {
     wx.showLoading({ title: '启动微信支付中...', })
     var that = this;
     // http://192.200.200.21:9000/sbb-web/phone/openkey/getWXopenId
@@ -226,14 +264,14 @@ Page({
         // "{"session_key":"WX39zL8sZsFPOu4ajGQ1pQ== ","expires_in":7200,"openid":"ov9Hv0PDYNOv- tdbSM7Nv2beapSk"}"
         var jsonObj = JSON.parse(openIdStr);
         console.log('open_id = ' + jsonObj.openid);
-        that.xiadan(jsonObj.openid, e);
+        that.xiadan(jsonObj.openid, e, coupon_type, coupon_price, coupon_id);
       }
     })
   },
   /**
    * 微信统一下单
    */
-  xiadan: function (opendId, e) {
+  xiadan: function (opendId, e, coupon_type, coupon_price, coupon_id) {
     wx.showLoading({ title: '启动微信支付中...', })
     var orderId = e.currentTarget.dataset.id;
     var that = this;
@@ -243,7 +281,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      data: { 'openid': opendId, 'orderId': orderId },
+      data: { 'openid': opendId, 'orderId': orderId, 'coupon_type': coupon_type, 'coupon_price': coupon_price },
       success: function (res) {
         wx.hideLoading();
         var code = res.data.code;
@@ -256,13 +294,13 @@ Page({
             })
           } else {
             console.log('prepay_id == ' + prepay_id);
-            that.sign(prepay_id, e);
+            that.sign(prepay_id, e,coupon_id);
           }
         }
       }
     })
   },
-  sign: function (prepay_id, e) {
+  sign: function (prepay_id, e,coupon_id) {
     wx.showLoading({ title: '启动微信支付中...', })
     var that = this;
     wx.request({
@@ -277,12 +315,12 @@ Page({
         var code = res.data.code;
         if (code == '1') {
           console.log(res.data.content[0].prepay_id);
-          that.requestPayment(res.data.content[0].prepay_id, e);
+          that.requestPayment(res.data.content[0].prepay_id, e,coupon_id);
         }
       }
     })
   },
-  requestPayment: function (objj, e) {
+  requestPayment: function (objj, e,coupon_id) {
     wx.showLoading({ title: '启动微信支付中...', })
     var that = this;
     var formId = e.detail.formId;
@@ -308,6 +346,8 @@ Page({
           var code = data.data.code;
           if (code == "1") {
             wx.showToast({ title: '支付成功', })
+            //更新卡券状态(使用过后不能被再次使用)
+            that.updateCouponStatus(coupon_id)
             // 直接跳转到查询已完成的
             that.setData({ classone: '', classtwo: '', classThree: '', classFour: 'selected', orderstatus: '4' })
             // 查询已完成订单
@@ -332,6 +372,21 @@ Page({
       fail: function (res) {
         // 失败
         wx.showToast({ title: '支付失败', })
+      }
+    })
+  },
+  updateCouponStatus: function (coupon_id) {
+    wx.request({
+      url: getApp().globalData.serverIp + 'userinfor/updateCouponStatus',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        coupon_id: coupon_id,
+      },
+      complete: function (res) {
+        // console.log(res)
       }
     })
   },

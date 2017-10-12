@@ -21,6 +21,12 @@ Page({
         content: '登录密码不得少于6位',
         showCancel:false
       })
+    } else if (this.data.newpwd.length < 6) {
+      wx.showModal({
+        title: '提示',
+        content: '新密码设置不得少于6位',
+        showCancel: false
+      })
     } else if (this.data.newpwd != this.data.conformpwd) {
       wx.showModal({
         title: '提示',
