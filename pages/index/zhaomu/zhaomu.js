@@ -10,7 +10,7 @@ Page({
 
   saveData: function() {
     wx.previewImage({
-      urls: ['https://www.gywnks.com/sbb-web/upload/headericon/server_app.jpg'],
+      urls: ['https://www.gzwnks.com/sbb-web/upload/headericon/server_app.jpg'],
     })
   },
 

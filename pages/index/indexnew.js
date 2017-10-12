@@ -12,9 +12,9 @@ Page({
     interval: 5000,
     duration: 1000,
     imgUrls: [
-      'https://www.gywnks.com/sbb-web/upload/headericon/H6700HLEZ.jpg',
-      'https://www.gywnks.com/sbb-web/upload/headericon/H6700HK46.jpg',
-      'https://www.gywnks.com/sbb-web/upload/headericon/H6700HKLO.jpg'
+      'https://www.gzwnks.com/sbb-web/upload/headericon/H6700HLEZ.jpg',
+      'https://www.gzwnks.com/sbb-web/upload/headericon/H6700HK46.jpg',
+      'https://www.gzwnks.com/sbb-web/upload/headericon/H6700HKLO.jpg'
     ],
     userInfo: {},
     muenus: [],
