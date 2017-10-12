@@ -9,7 +9,7 @@
       </view>
       <view style='position:relative'>
         <image style='display:flex;width:400rpx;height:160rpx;' src='../../../images/ico_coupon.png'></image>
-         <text class='price-style'>{{item.coupon_type=='1'?'全免优惠券':'￥' + item.coupon_price}}</text>
+         <text class='price-style'>{{item.coupon_type=='1'?'服务免费':'￥' + item.coupon_price}}</text>
       </view>
 
     </view>
