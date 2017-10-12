@@ -15,7 +15,7 @@
   </view>
   <view class="order-status">
     <text class="or-title">评级：</text>
-    <image style='align-items: center;justify-content: center;display:flex;' wx:for="{{servicetype}}" wx:key="{{index}}" src='../../../images/start.png' style='height:40rpx;width:40rpx'></image>
+    <image style='align-items: center;justify-content: center;display:flex;' wx:for="{{servicetype}}" wx:key="{{index}}" src='../../../images/start.png' style='height:30rpx;width:30rpx;padding:5rpx'></image>
   </view>
   <!-- <view class="order-status"><text class="or-title">服务项目：</text><text class="or_value">{{servicetype}}</text></view> -->
 </view>
