@@ -36,7 +36,8 @@
     "pages/index/zhaomu/zhaomu",
     "pages/my/shifu/shifu",
     "pages/my/share/share",
-    "pages/index/price/price"
+    "pages/index/price/price",
+    "pages/my/mine/coupon/coupon"
   ],
   "window": {
     "backgroundTextStyle": "light",
