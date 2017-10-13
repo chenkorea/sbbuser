@@ -2,9 +2,16 @@
 <view style='background:#eeeeee;height:100%;width:100%;position:fixed'>
   <view wx:if="{{couponList.length>0}}">
     <view bindtap="selcoupon" data-item="{{item}}" class='coupon-list-view' wx:for="{{couponList}}" wx:key="{{item}}">
-      <text wx:if="{{item.is_able==1}}" class='title-text' style='color:#FF7F24'>可使用</text>
-      <text wx:if="{{item.is_able==0}}" class='title-text'>已使用</text>
-      <image style='display:flex;width:240rpx;height:90rpx;' src='../../../images/ico_coupon.png'></image>
+      <view style='margin-bottom:5rpx'>
+        <text wx:if="{{item.is_able==1}}" class='title-text' style='color:#FF7F24'>可使用</text>
+        <text wx:if="{{item.is_able==0}}" class='title-text'>已使用</text>
+        <text class='title-desc'>{{item.coupon_nam}}</text>
+      </view>
+      <view style='position:relative'>
+        <image style='display:flex;width:400rpx;height:160rpx;' src='../../../images/ico_coupon.png'></image>
+         <text class='price-style'>{{item.coupon_type=='1'?'服务免费':'￥' + item.coupon_price}}</text>
+      </view>
+
     </view>
   </view>
   <view wx:else>

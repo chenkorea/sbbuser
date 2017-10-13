@@ -14,10 +14,15 @@ Page({
    */
   onLoad: function (options) {
     if (options.order_infor != undefined){
-      var test = JSON.parse(options.order_infor)
       this.setData({
         order_infor: JSON.parse(options.order_infor)
       })
+    }
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];  //上一个页面
+    var is_able = ''
+    if (prevPage.__route__.indexOf('pages/my/orderView/orderNewView') != -1) {
+      is_able='1'
     }
     var that = this
     wx.getStorage({
@@ -26,7 +31,8 @@ Page({
         wx.request({
           url: getApp().globalData.serverIp + 'userinfor/getUserCoupon', //
           data: {
-            uid: res.data
+            uid: res.data,
+            is_able: is_able
           },
           header: {
             'content-type': 'application/x-www-form-urlencoded'
