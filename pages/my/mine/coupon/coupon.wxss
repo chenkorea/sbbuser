@@ -46,10 +46,10 @@
 .price-style{
    display: block;
    color: #ffffff;
-   position: relative;
+   position: absolute;
+   top:60rpx;
    size: 30rpx;
    z-index: 5;
    left: 3%;
-   bottom: 100rpx;
    text-align: left;
 }
