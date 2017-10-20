@@ -172,6 +172,22 @@
   margin-top: 100rpx;
 }
 
+.ct-user-view {
+  position: relative;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 30rpx;
+  height: 90rpx;
+  font-size: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: flex-start;
+  align-self: flex-start;
+  align-items: center;
+
+}
+
 .user-view {
   position: relative;
   width: 80%;
@@ -200,6 +216,15 @@
   top: 30rpx;
   width: 40rpx;
   height: 40rpx;
+}
+
+.ct-user-text {
+  position: relative;
+  width: 320rpx;
+  color: #333333;
+  height: 70rpx;
+  left: 80rpx;
+  top: 0;
 }
 
 .user-text {
