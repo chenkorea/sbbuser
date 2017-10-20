@@ -132,6 +132,16 @@
   top: 0;
 }
 
+.verifycode-text {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 180rpx;
+  height: 90rpx;
+  width: 45%;
+  top: 0;
+}
+
 .pwd-text {
   position: absolute;
   padding-left:30rpx; 
@@ -161,8 +171,6 @@
   align-items: center;
   justify-content: center;
   border-left: 1rpx solid #F0F0F0;
-  padding-left: 40rpx;
-  padding-right: 40rpx;
   color: #00B2EE;
   font-size: 30rpx;
 }

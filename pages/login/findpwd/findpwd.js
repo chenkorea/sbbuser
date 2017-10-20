@@ -52,8 +52,10 @@ Page({
 
     if (that.data.is_click) {
       if (!app.phoneRe.test(this.data.fogphone)) {
-        wx.showToast({
-          title: '手机号码格式有误',
+        wx.showModal({
+          title: '提示',
+          content: '手机号码格式有误',
+          showCancel: false
         })
       } else {
         fogrequest.getverifycode(that.data.fogphone, function (res) {
