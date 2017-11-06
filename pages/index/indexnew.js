@@ -114,6 +114,8 @@ Page({
     //   enableDebug: true
     // })
     // 获取uid
+
+    var that = this
     wx.getStorage({
       key: 'uid',
       success: function (res) {
@@ -123,7 +125,6 @@ Page({
 
     console.log('onLoad')
 
-    var that = this
     var islogin = wx.getStorageSync('isLogin');
     if (islogin != '1') {
       wx.navigateTo({

@@ -28,7 +28,7 @@ App({
     userInfo: null,
     serverIp:"https://www.gzwnks.com/sbb-web/phone/",
     imageServerIp: "https://www.gzwnks.com/sbb-web/"
-    // serverIp: "http://106.14.217.147/sbb-web/phone/",
-    // imageServerIp: "http://106.14.217.147/sbb-web/"
+    // serverIp: "http://192.200.200.21:9000/sbb-web/phone/",
+    // imageServerIp: "http://192.200.200.21:9000/sbb-web/"
   }
 })

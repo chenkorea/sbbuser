@@ -478,6 +478,7 @@ Page({
     })
   },
   onUnload: function () {
+    var that = this;
     that.setData({
       address: {},
       showAddress: '',
