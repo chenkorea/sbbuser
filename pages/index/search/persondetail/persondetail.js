@@ -73,7 +73,9 @@ Page({
     var that = this;
     console.log('tech_id = ' + tech_id)
     Util.gettechqual(function (data) {
-      wx.hideLoading();
+      if (wx.hideLoading) {
+        wx.hideLoading();
+      }
       var code = data.data.code;
       if (code == "1") {
         var users = data.data.content;

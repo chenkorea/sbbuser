@@ -51,9 +51,13 @@ Page({
       confirmText: '确定',
       success: function (res) {
         if (res.confirm) {
-          wx.showLoading({ title: '正在删除...', })
+          if (wx.showLoading) {
+            wx.showLoading({ title: '正在删除...', })
+          }
           Util.deleteUserAddress(function (data) {
-            wx.hideLoading();
+            if (wx.hideLoading) {
+              wx.hideLoading();
+            }
             var code = data.data.code;
             if (code == "1") {
               
@@ -122,7 +126,7 @@ Page({
       },
     })
   },
-  selectMap: function() {
+  chooseLocationMap: function() {
     var that = this;
     wx.chooseLocation({
       success: function (res) {

@@ -41,11 +41,15 @@ Page({
     }
 
     console.log(that.data.uid + '----' + that.data.uname + '----' + that.data.orderId + '----' + that.data.dispatching_id + '----' + that.data.rating + '----' + remaks);
-    wx.showLoading({
-      title: '数据提交中...',
-    })
+    if (wx.showLoading) {
+      wx.showLoading({
+        title: '数据提交中...',
+      })
+    }
     Util.addServiceComment(function (data) {
-      wx.hideLoading();
+      if (wx.hideLoading) {
+        wx.hideLoading();
+      }
       var code = data.data.code;
       if (code == "1") {
         wx.showToast({

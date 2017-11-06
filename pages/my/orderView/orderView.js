@@ -120,7 +120,9 @@ Page({
 
   },
   getUserOrder: function(uid, status) {
-    wx.showLoading({title: '数据加载中...',})
+    if (wx.showLoading) {
+      wx.showLoading({title: '数据加载中...',})
+    }
     var that = this;
     // 提交数据
     var process_status = '';
@@ -134,7 +136,9 @@ Page({
       process_status = "('07', '08')";
     }
     Util.getUserOrders(function (data) {
-      wx.hideLoading();
+      if (wx.hideLoading) {
+        wx.hideLoading();
+      }
       var code = data.data.code;
       if (code == "1") {
         that.setData({ userOrders: data.data.content})
@@ -175,11 +179,15 @@ Page({
    * 获取微信登录
    */
   wxLogin: function (e) {
-    wx.showLoading({ title: '启动微信支付中...', })
+    if (wx.showLoading) {
+      wx.showLoading({ title: '启动微信支付中...', })
+    }
     var that = this;
     wx.login({
       success: function (res) {
-        wx.hideLoading();
+        if (wx.hideLoading) {
+          wx.hideLoading();
+        }
         console.log(res.code);
         that.getOpenId(res.code, e);
       }
@@ -189,7 +197,9 @@ Page({
    * 获取openId
    */
   getOpenId: function (code, e) {
-    wx.showLoading({ title: '启动微信支付中...', })
+    if (wx.showLoading) {
+      wx.showLoading({ title: '启动微信支付中...', })
+    }
     var that = this;
     // http://192.200.200.21:9000/sbb-web/phone/openkey/getWXopenId
     // code=013Bu1c00iFzsD1klvc00RS3c00Bu1ch
@@ -201,7 +211,9 @@ Page({
       },
       data: { code:code},
       success: function(res) {
-        wx.hideLoading();
+        if (wx.hideLoading) {
+          wx.hideLoading();
+        }
         var openIdStr = res.data.content[0];
         // "{"session_key":"WX39zL8sZsFPOu4ajGQ1pQ== ","expires_in":7200,"openid":"ov9Hv0PDYNOv- tdbSM7Nv2beapSk"}"
         var jsonObj = JSON.parse(openIdStr);
@@ -214,7 +226,9 @@ Page({
    * 微信统一下单
    */
   xiadan: function (opendId, e) {
-    wx.showLoading({ title: '启动微信支付中...', })
+    if (wx.showLoading) {
+      wx.showLoading({ title: '启动微信支付中...', })
+    }
     var orderId = e.currentTarget.dataset.id;
     var that = this;
     wx.request({
@@ -225,7 +239,9 @@ Page({
       },
       data: { 'openid': opendId, 'orderId': orderId},
       success: function (res) {
-        wx.hideLoading();
+        if (wx.hideLoading) {
+          wx.hideLoading();
+        }
         var code = res.data.code;
         if (code == '1') {
           // 成功
@@ -243,7 +259,9 @@ Page({
     })
   },
   sign: function (prepay_id, e) {
-    wx.showLoading({ title: '启动微信支付中...', })
+    if (wx.showLoading) {
+      wx.showLoading({ title: '启动微信支付中...', })
+    }
     var that = this;
     wx.request({
       url: getApp().globalData.serverIp + 'openkey/sign',
@@ -253,7 +271,9 @@ Page({
       },
       data: { prepay_id: prepay_id },
       success: function (res) {
-        wx.hideLoading();
+        if (wx.hideLoading) {
+          wx.hideLoading();
+        }
         var code = res.data.code;
         if (code == '1') {
           console.log(res.data.content[0].prepay_id);
@@ -263,7 +283,9 @@ Page({
     })
   },
   requestPayment: function (objj, e) {
-    wx.showLoading({ title: '启动微信支付中...', })
+    if (wx.showLoading) {
+      wx.showLoading({ title: '启动微信支付中...', })
+    }
     var that = this;
     var obj = JSON.parse(objj);
     wx.requestPayment({
@@ -280,7 +302,9 @@ Page({
         console.log(orderId);
         // 这个应该是支付成功之后调用的，现在是直接跳过支付默认支付成功
         Util.updateOrderPayStatus(function (data) {
-          wx.hideLoading();
+          if (wx.hideLoading) {
+            wx.hideLoading();
+          }
           var code = data.data.code;
           if (code == "1") {
             wx.showToast({title: '支付成功',})

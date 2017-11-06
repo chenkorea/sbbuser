@@ -12,11 +12,15 @@ Page({
     hideDelete: true
   },
   getUserOrdersProcess: function (orderId) {
-    wx.showLoading({ title: '数据加载中...', })
+    if (wx.showLoading) {
+      wx.showLoading({ title: '数据加载中...', })
+    }
     var that = this;
     
     Util.getUserOrdersProcess(function (data) {
-      wx.hideLoading();
+      if (wx.hideLoading) {
+        wx.hideLoading();
+      }
       var code = data.data.code;
       if (code == "1") {
         that.setData({ ordersProcess: data.data.content })

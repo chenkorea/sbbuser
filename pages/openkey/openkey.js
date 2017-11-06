@@ -190,7 +190,10 @@ Page({
       })
       return;
     }
-    wx.showLoading({ title: '数据上传中...', })
+    if (wx.showLoading) {
+      wx.showLoading({ title: '数据上传中...', })
+    }
+    
     wx.getStorage({
       key: 'uid',
       success: function(res) {
@@ -216,7 +219,10 @@ Page({
 
         // 提交数据
         Util.createUserOrder(function (data) {
-          wx.hideLoading();
+          if (wx.hideLoading)
+          {
+            wx.hideLoading();
+          }
           var code = data.data.code;
           if (code == "1") {
             
@@ -247,12 +253,17 @@ Page({
    */
   uploadOrderPics: function (orderId) {
     var that = this;
-    wx.showLoading({
-      title: '数据上传中...',
-    })
+    
+    if (wx.showLoading) {
+      wx.showLoading({
+        title: '图片上传中...',
+      })
+    }
     var tempPics = this.data.filePaths;
     if (tempPics.length == 0) {
-      wx.hideLoading();
+      if (wx.hideLoading) {
+        wx.hideLoading();
+      }
       wx.showModal({
         title: '提交订单成功',
         content: '请稍等，将会有师傅和您联系！',
@@ -280,7 +291,9 @@ Page({
             that.setData({ updalodcount: that.data.updalodcount + 1 })
             if (that.data.updalodcount == that.data.filePaths.length) {
               that.setData({ updalodcount: 0 })
-              wx.hideLoading();
+              if (wx.hideLoading) {
+                wx.hideLoading();
+              }
               // 上传数据成功
               wx.showModal({
                 title: '提交订单成功',

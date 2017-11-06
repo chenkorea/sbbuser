@@ -18,12 +18,16 @@ Page({
     })
   },
   getUserOrderComment: function (dispatching_id) {
-    wx.showLoading({ title: '数据加载中...', })
+    if (wx.showLoading) {
+      wx.showLoading({ title: '数据加载中...', })
+    }
     var that = this;
     // 提交数据
     var process_status = '';
     Util.getUserOrderComment(function (data) {
-      wx.hideLoading();
+      if (wx.hideLoading) {
+        wx.hideLoading();
+      }
       var code = data.data.code;
       if (code == "1") {
         that.setData({ coment: data.data.content[0] })
@@ -31,12 +35,16 @@ Page({
     }, dispatching_id);
   },
   getUserOrderAllPrice: function (dispatching_id) {
-    wx.showLoading({ title: '数据加载中...', })
+    if (wx.showLoading) {
+      wx.showLoading({ title: '数据加载中...', })
+    }
     var that = this;
     // 提交数据
     var process_status = '';
     Util.getUserOrderAllPrice(function (data) {
-      wx.hideLoading();
+      if (wx.hideLoading) {
+        wx.hideLoading();
+      }
       var code = data.data.code;
       if (code == "1") {
         console.log(data.data.content)
