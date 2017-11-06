@@ -22,7 +22,7 @@
     <text class="login-title"></text> 
    <view class="user-view {{bold_name_line}}">
      <image class="user_img"  src="{{name_icon}}"></image>
-     <input class="user-text" bindblur='bindnameblur' bindfocus='bindnamefocus' bindinput="getusername" placeholder="手机号" type="number" value="{{username}}"/>
+     <input class="user-text" bindblur='bindnameblur' bindfocus='bindnamefocus' bindinput="getusername" focus='true' placeholder="手机号" type="number" value="{{username}}"/>
    </view>
    <view class="bot_view"></view>
 

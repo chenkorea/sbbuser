@@ -8,8 +8,8 @@
         <text class='title-desc'>{{item.coupon_nam}}</text>
       </view>
       <view style='position:relative'>
-        <image style='display:flex;width:420rpx;height:160rpx;' src='../../../images/ico_coupon.png'></image>
-         <text class='price-style'>{{item.coupon_type=='1'?'服务免费':'￥' + item.coupon_price}}</text>
+        <image style='display:flex;width:420rpx;height:160rpx;' src='../../../images/mmexport1509958104727.jpg'></image>
+         <!-- <text class='price-style'>{{item.coupon_type=='1'?'服务免费':'￥' + item.coupon_price}}</text> -->
       </view>
 
     </view>
