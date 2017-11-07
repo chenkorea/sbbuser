@@ -24,8 +24,7 @@ Page({
   },
   onLoad: function (info){
     var that = this;
-    info = JSON.parse(info.infor)
-    var tech_id = info.id;
+    var tech_id = info.tech_id;
     if (tech_id) {
       // 查询
       that.gettechqual(tech_id);
@@ -71,7 +70,6 @@ Page({
   },
   gettechqual: function (tech_id) {
     var that = this;
-    console.log('tech_id = ' + tech_id)
     Util.gettechqual(function (data) {
       if (wx.hideLoading) {
         wx.hideLoading();
