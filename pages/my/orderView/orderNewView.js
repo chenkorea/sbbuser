@@ -199,6 +199,9 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       complete: function (res) {
+
+        console.log('11111111111')
+        console.log(res);
         if (wx.hideLoading) {
           wx.hideLoading();
         }

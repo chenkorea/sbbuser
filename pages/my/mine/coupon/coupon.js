@@ -6,13 +6,15 @@ Page({
    */
   data: {
     couponList:[],
-    order_infor:{}
+    order_infor:{},
+    is_f:true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
     if (options.order_infor != undefined){
       this.setData({
         order_infor: JSON.parse(options.order_infor)
@@ -23,8 +25,9 @@ Page({
     var is_able = ''
     if (prevPage.__route__.indexOf('pages/my/orderView/orderNewView') != -1) {
       is_able='1'
+      that.setData({is_f: false})
     }
-    var that = this
+    
     wx.getStorage({
       key: 'uid',
       success: function (res) {
@@ -62,12 +65,16 @@ Page({
         content: '确定使用该卡券？',
         complete: function (res) {
           if (res.confirm) {
-            prevPage.wxLogin(that.data.order_infor, item.coupon_type, item.coupon_price, item.id);
+            prevPage.wxLogin(that.data.order_infor, item.coupon_type, ""+item.coupon_price, item.id);
             wx.navigateBack({
 
             })
           }
         }
+      })
+    } else {
+      wx.previewImage({
+        urls: ['https://www.gzwnks.com/sbb-web/upload/headericon/shoudanmianfei.jpg'],
       })
     }
   }

@@ -29,12 +29,14 @@ Page({
       var temp = [];
       var phones = [];
       var persons = this.data.temp;
+      console.log(persons);
       for (var i = 0; i < persons.length; i++) {
         var name = persons[i].name
         
         if ((persons[i].name != undefined && persons[i].name.indexOf(e.detail.value)>=0)
           || (persons[i].phone != undefined && persons[i].phone.indexOf(e.detail.value) >= 0)){
           temp.push(persons[i]);
+          phones.push(persons[i].phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3"));
         }
       }
       console.log(phones);
@@ -74,15 +76,15 @@ Page({
           phones[i] = res.data.content[i].phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
         }
 
-        if (res.data.content.length > 0){
-          that.setData({
-            is_show: true
-          })
-        }
+        // if (res.data.content.length > 0){
+        //   that.setData({
+        //     is_show: true
+        //   })
+        // }
 
-        that.setData({
-          goods: res.data.content
-        })
+        // that.setData({
+        //   goods: res.data.content
+        // })
 
         that.setData({
           persons: res.data.content,
