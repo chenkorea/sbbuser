@@ -55,7 +55,7 @@
   </view>
 
   <!-- 提交按钮 -->
-  <form bindsubmit='saveData'>
+  <form report-submit bindsubmit='saveData'>
     <button class="save-button" form-type="submit">提交</button>
   </form>
   <!-- <form report-submit bindsubmit='saveData'>
