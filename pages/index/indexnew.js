@@ -108,6 +108,7 @@ Page({
       }
     })
   },
+  
   onLoad: function () {
     // 打开调试
     // wx.setEnableDebug({

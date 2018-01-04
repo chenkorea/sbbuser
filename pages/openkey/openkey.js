@@ -149,8 +149,9 @@ Page({
     for (var i = 0; i < that.data.ableCity.length; i++) {
       var nowcity = that.data.ableCity[i];
       var city_name = nowcity.city;
+      var city_able = nowcity.is_able;
       
-      if (that.data.showAddress.indexOf(city_name) >= 0) {
+      if (that.data.showAddress.indexOf(city_name) >= 0 && city_able == '1') {
         is_able = true;
         break;
       }

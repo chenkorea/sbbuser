@@ -317,6 +317,24 @@ function getAppAbleCity(callback) {
   })
 }
 
+// 发送极光推送通知
+function sendJPushMsg(user_id, status, callback) {
+  var remoteUrl = getApp().globalData.serverIp + "openkey/sendJPushMsg";
+
+  wx.request({
+    url: remoteUrl,
+    data: {
+      user_id: user_id,
+      status: status
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      callback(res);
+    }
+  })
+}
+
 module.exports = {
   getUserAddress: getUserAddress,
   addUserAddress: addUserAddress,
@@ -335,5 +353,6 @@ module.exports = {
   saveWXFormId: saveWXFormId,
   saveWXOrderFormId: saveWXOrderFormId,
   cancelOrders: cancelOrders,
-  getAppAbleCity: getAppAbleCity
+  getAppAbleCity: getAppAbleCity,
+  sendJPushMsg: sendJPushMsg
 } 

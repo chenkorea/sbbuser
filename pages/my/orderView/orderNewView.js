@@ -350,7 +350,6 @@ Page({
     var obj = JSON.parse(objj);
 
     var orderObj = e.currentTarget.dataset.item;
-    
     wx.requestPayment({
       timeStamp: obj.timeStamp,
       nonceStr: obj.nonceStr,
@@ -384,6 +383,9 @@ Page({
             that.saveWXFormId(formId, uid);
 
             that.saveWXOrderFormId(formId, orderId);
+
+            // 发送推送通知给师傅端
+            that.sendJPushMsg(orderObj.process_person_id, '07');
           } else {
             // 失败
             wx.showModal({
@@ -415,6 +417,7 @@ Page({
       }
     })
   },
+  // 发送消息给微信
   sendMsgForStatus: function (orderId, status, jsId) {
     var that = this;
     wx.request({
@@ -427,6 +430,23 @@ Page({
         orderId: orderId,
         status: status,
         jsId: jsId },
+      success: function (res) {
+      }
+    })
+  },
+  // 发送极光推送通知
+  sendJPushMsg: function (user_id, status) {
+    var that = this;
+    wx.request({
+      url: getApp().globalData.serverIp + 'openkey/sendJPushMsg',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        user_id: user_id,
+        status: status
+      },
       success: function (res) {
       }
     })

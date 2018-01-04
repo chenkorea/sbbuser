@@ -61,7 +61,7 @@ Page({
         
       } else {
         // 失败
-        that.setData({ userLocation: [] })
+        that.setData({ userLocation: {} })
       }
     }, techid);
   },
@@ -119,6 +119,10 @@ Page({
         if(res.confirm){
           Util.cancelOrders(that.data.userOrder.id, function (res) {
             if (res.data.code == '1') {
+
+            // 订单取消成功，推送消息给师傅
+              that.sendJPushMsg(that.data.userOrder.process_person_id, '09');
+
               wx.showModal({
                 title: '提示',
                 content: '订单取消成功',
@@ -143,6 +147,23 @@ Page({
       }
     })
 
+  },
+  // 发送极光推送通知
+  sendJPushMsg: function (user_id, status) {
+    var that = this;
+    wx.request({
+      url: getApp().globalData.serverIp + 'openkey/sendJPushMsg',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        user_id: user_id,
+        status: status
+      },
+      success: function (res) {
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
