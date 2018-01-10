@@ -6,6 +6,7 @@ Page({
   data: {
     titleText: '',
     userOrder: {},
+    hasGuarantee:true,
     selectPicAr: [],
     imageWidth: getApp().screenWidth / 4 - 10,
     coment:{},
@@ -70,6 +71,12 @@ Page({
   onLoad: function (optains) {
     var jsonStr = optains.jsonStr;
     var userOrder = JSON.parse(jsonStr);
+    if (typeof userOrder.guarantee === "undefined"
+      || userOrder.guarantee == ""
+      || typeof userOrder.guarantee_date_type === "undefined"
+      || userOrder.guarantee_date_type == "") {
+      this.setData({ hasGuarantee: false })
+    }
     console.log('dispatching_id----' + userOrder.dispatching_id);
     
     var that = this

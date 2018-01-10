@@ -4,6 +4,7 @@
     <view class="order-status jiantou-view" catchtap="toDetail"><text class="or-title">订单号：</text><text class="or_value">{{userOrder.order_no}}</text>
       <image class="jiantou" src="../../images/jiantou.png"></image>
     </view>
+    <view hidden='{{!hasGuarantee}}' class="order-status"><text class="or-title">保修时间：</text><text class="or_value">{{userOrder.guarantee + (userOrder.guarantee_date_type == '1'?'月':'年')}}</text></view>
     <view class="order-status"><text class="or-title">时间：</text><text class="or_value">{{userOrder.create_time_ttr}}</text></view>
     <view class="order-status"><text class="or-title">类别：</text><text class="or_value">{{userOrder.data_name}}-{{userOrder.service_item}}</text></view>
     <view class="order-status"><text class="or-title">服务地址：</text><text class="or_value">{{userOrder.service_address}}</text></view>

@@ -2,6 +2,7 @@
 
   <view class="info_view">
     <view class="infon_text">订单号：{{userOrder.order_no}}</view>
+    <view hidden='{{!hasGuarantee}}' class="infon_text">保修时间：{{userOrder.guarantee + (userOrder.guarantee_date_type == '1'?'月':'年')}}</view>
     <view class="infon_text">创建时间：{{userOrder.create_time_ttr}}</view>
     <view class="infon_text">服务类别：{{userOrder.data_name}}-{{userOrder.service_item}}</view>
     <view class="infon_text">服务地址：{{userOrder.service_address}}</view>
