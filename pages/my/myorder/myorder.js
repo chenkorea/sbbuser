@@ -77,7 +77,7 @@ Page({
       || userOrder.guarantee_date_type == "") {
       this.setData({ hasGuarantee: false })
     }
-    console.log('dispatching_id----' + userOrder.dispatching_id);
+    console.log('dispatching_id----' + JSON.stringify(userOrder));
     
     var that = this
     that.setData({ userOrder: userOrder})
