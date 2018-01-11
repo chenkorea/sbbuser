@@ -17,7 +17,7 @@
   align-items: center;
   justify-content: right;
   position: absolute;
-  padding: 20rpx;
+  padding-top: 20rpx;
   color: #999999;
   font-size: 28rpx;
 }

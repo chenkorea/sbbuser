@@ -24,6 +24,11 @@ Page({
       success: function (res) {
         noticeutil.getnotice(res.data, function (e) {
           if (e.data.code == '1') {
+            for (var i = 0; i < e.data.content.length;i++){
+              e.data.content[i].send_time = that.formatTime(new Date(e.data.content[i] 
+              .send_time))
+            }
+            console.log('e.data.content', e)
             that.setData({
               noticecontent: e.data.content
             })
@@ -36,5 +41,22 @@ Page({
     wx.navigateTo({
       url: './noticedetail/noticedetail?detail=' + JSON.stringify(e.currentTarget.dataset.detail),
     })
+  },
+  formatTime:function(date) {
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+
+    return [year, month, day].map(this.formatNumber).join('-') + ' ' + [hour, minute, second]
+     .map(this.formatNumber).join(':')
+  },
+  //数据转化
+  formatNumber:function(n) {
+    n = n.toString()
+  return n[1] ? n : '0' + n
   }
 })
