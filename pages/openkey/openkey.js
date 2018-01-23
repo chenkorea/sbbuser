@@ -8,7 +8,7 @@ var homeUtil = require('../../utils/home.js');
 var app = getApp()
 Page({
   data: {
-    titleAr: ['开锁服务', '换锁服务', '报修服务', '汽车解匙', '民用解匙'],  // 导航栏显示
+    titleAr: ['开锁服务', '换锁服务', '报修服务', '汽车钥匙', '民用钥匙'],  // 导航栏显示
     index: 0,       // 保修选择索引
     bxarray: ['保修期内', '保修期外'],  // 保修类型数据
     fdmindex: 0,   // 服务类别选择索引
@@ -143,27 +143,27 @@ Page({
    */
   saveData:function (e) {
     var that = this;
-    // 判断当前城市是否支持服务
-    var is_able = false;
+    // 判断当前城市是否支持服务 取消区域限制
+    // var is_able = false;
     
-    for (var i = 0; i < that.data.ableCity.length; i++) {
-      var nowcity = that.data.ableCity[i];
-      var city_name = nowcity.city;
-      var city_able = nowcity.is_able;
+    // for (var i = 0; i < that.data.ableCity.length; i++) {
+    //   var nowcity = that.data.ableCity[i];
+    //   var city_name = nowcity.city;
+    //   var city_able = nowcity.is_able;
       
-      if (that.data.showAddress.indexOf(city_name) >= 0 && city_able == '1') {
-        is_able = true;
-        break;
-      }
-    }
-    if (!is_able) {
-      wx.showModal({
-        title: '提示',
-        content: '当前城市暂未开放服务！',
-        showCancel: false
-      })
-      return;
-    }
+    //   if (that.data.showAddress.indexOf(city_name) >= 0 && city_able == '1') {
+    //     is_able = true;
+    //     break;
+    //   }
+    // }
+    // if (!is_able) {
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '当前城市暂未开放服务！',
+    //     showCancel: false
+    //   })
+    //   return;
+    // }
 
     
     // 保存表单ID
@@ -215,7 +215,7 @@ Page({
           service_time_describe: that.data.serviceTime,
           guarantee_type: guaran,
           remarks: that.data.remark,
-          order_type: '1'
+          order_type: '1' 
         }
 
         // 提交数据
@@ -269,6 +269,12 @@ Page({
         title: '提交订单成功',
         content: '请稍等，将会有师傅和您联系！',
         showCancel: false,
+        success: function (res) {
+          if (res.confirm) {
+            wx.navigateBack({
+            })
+          }
+        }
       })
     } else {
       for (var i = 0; i < tempPics.length; i++) {
@@ -278,8 +284,8 @@ Page({
           filePath: tempPics[i],
           name: 'file',
           formData: {
-            'file_type': '5',
-            'parent_id': orderId
+            'file_type': encodeURI('5'),
+            'parent_id': encodeURI(orderId)
           },
           header: { 'content-type': 'application/x-www-form-urlencoded' },
           success: function (res) {
@@ -288,6 +294,7 @@ Page({
             alldata = JSON.parse(res.data);
             var code = alldata.code;
 
+            console.log('上传成功了图片----------');
             // 成功
             that.setData({ updalodcount: that.data.updalodcount + 1 })
             if (that.data.updalodcount == that.data.filePaths.length) {
@@ -300,6 +307,12 @@ Page({
                 title: '提交订单成功',
                 content: '请稍等，将会有师傅和您联系！',
                 showCancel: false,
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.navigateBack({
+                    })
+                  }
+                }
               })
             }
           }
@@ -343,7 +356,7 @@ Page({
     // })
 
     // 获取服务城市
-    that.getAppAbleCity();
+    // that.getAppAbleCity();
 
     // 自动定位获取地理位置
     homeUtil.getCityName(function (locationData) {
