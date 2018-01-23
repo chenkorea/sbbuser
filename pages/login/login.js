@@ -22,7 +22,7 @@ Page({
   },
   bindRegisterTap: function () {
     wx.navigateTo({
-      url: '../login/register/register'
+      url: '../login/reg/newregister'
     })
   },
   loginTap: function () {

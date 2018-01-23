@@ -24,7 +24,7 @@
     "pages/login/login",
     "pages/login/findpwd/findpwd",
     "pages/login/changepwd/changepwd",
-    "pages/login/register/register",
+    "pages/login/reg/newregister",
     "pages/my/mine/findpwd/findpwd",
     "pages/my/mine/updatepwd/updatepwd",
     "pages/openkey/newPic/newPic",
