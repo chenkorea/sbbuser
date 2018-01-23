@@ -17,8 +17,8 @@
   </view> -->
   <view wx:if="{{noticecontent.length>0}}">
     <view class="item_container" wx:for="{{noticecontent}}" wx:key="{{index}}" data-detail="{{noticecontent[index]}}" data-detail="{{noticecontent[index]}}" bindtap="godetail">
-      <view class="item_container-content">{{item.content}}</view>
-      <view class="item_container-time">{{item.send_time}}</view>
+      <view class="item_container-content">{{item.data_name}}</view>
+      <view class="item_container-time">{{item.content}}</view>
       <view/>
     </view>
   </view>

@@ -48,6 +48,9 @@
   padding-top: 10rpx;
   padding-bottom: 10rpx;
   font-size: 28rpx;
+  white-space: nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .item_container-content{

@@ -7,6 +7,7 @@ Page({
    */
   data: {
     userOrder: {},
+    hasGuarantee:true,
     ordersProcess:[],
     userLocation: {},
     hideDelete: true
@@ -84,6 +85,12 @@ Page({
   onLoad: function (options) {
     var jsonStr = options.jsonStr;
     var userOrder = JSON.parse(jsonStr);
+    if (typeof userOrder.guarantee === "undefined"
+      || userOrder.guarantee == ""
+      || typeof userOrder.guarantee_date_type === "undefined"
+      || userOrder.guarantee_date_type == "") {
+      this.setData({ hasGuarantee: false })
+    }
     var deleteshow = false
     var stage = userOrder.process_stage;
     if ('06' == stage || '07' == stage || '08' == stage || '09' == stage){

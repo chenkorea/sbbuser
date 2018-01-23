@@ -15,8 +15,10 @@ function getnotice(uid,callback){
       if (e.data.code == 1){
         callback(e)
       }else {
-        wx.showToast({
-          title: '获取通知信息异常，请重新尝试',
+        wx.showModal({
+          title: '提示',
+          content: '获取通知信息异常，请重新尝试',
+          showCancel:false
         })
       }
     }

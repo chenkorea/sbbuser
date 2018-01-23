@@ -1,31 +1,32 @@
 <view class="main_view">
 
   <view class="info_view">
-    <view class="infon_text">订单号：{{userOrder.order_no}}</view>
-    <view class="infon_text">创建时间：{{userOrder.create_time_ttr}}</view>
-    <view class="infon_text">服务类别：{{userOrder.data_name}}-{{userOrder.service_item}}</view>
-    <view class="infon_text">服务地址：{{userOrder.service_address}}</view>
+    <view class="order-status"><text class="or-title">订单号：</text><text class="or_value">{{userOrder.order_no}}</text></view>
+    <view hidden='{{!hasGuarantee}}' class="order-status"><text class="or-title">保修时间：</text><text class="or_value">{{userOrder.guarantee + (userOrder.guarantee_date_type == '1'?'月':'年')}}</text></view>
+    <view class="order-status"><text class="or-title">创建时间：</text><text class="or_value">{{userOrder.create_time_ttr}}</text></view>
+    <view class="order-status"><text class="or-title">服务类别：</text><text class="or_value">{{userOrder.data_name}}-{{userOrder.service_item}}</text></view>
+    <view class="order-status"><text class="or-title">服务地址：</text><text class="or_value">{{userOrder.service_address}}</text></view>
   </view>
 
   <view class="title_text"></view>
   <view class="info_view">
-    <view class="infon_text">服务技师：{{userOrder.process_person_name}}</view>
-    <view class="infon_text">订单总价：{{allPrice}}</view>
-    <view class="infon_text">完工时间：{{userOrder.finish_time}}</view>
+    <view class="order-status"><text class="or-title">服务技师：</text><text class="or_value">{{userOrder.process_person_name}}</text></view>
+    <view class="order-status"><text class="or-title">订单总价：</text><text class="or_value">{{allPrice}}</text></view>
+    <view class="order-status"><text class="or-title">完工时间：</text><text class="or_value">{{userOrder.finish_time}}</text></view>
   </view>
 
 
   <view class="title_text"></view>
   <view class="info_view">
-    <view class="infon_text">支付总额：{{allPrice}}</view>
-    <view class="infon_text">支付方式：在线支付</view>
+    <view class="order-status"><text class="or-title">支付总额：</text><text class="or_value">{{allPrice}}</text></view>
+    <view class="order-status"><text class="or-title">支付方式：</text><text class="or_value">{{userOrder.pay_type=='1'?'在线支付':'现金支付'}}</text></view>
   </view>
 
   
   <view class="title_text" hidden="{{coment.level != undefined || '' != coment.level}}"></view>
   <view class="info_view" hidden="{{coment.level != undefined || '' != coment.level}}">
-    <view class="infon_text">评论类型：{{coment.level}}</view>
-    <view class="infon_text">评论内容：{{coment.content}}</view>
+    <view class="order-status"><text class="or-title">评论类型：</text><text class="or_value">{{coment.level}}</text></view>
+    <view class="order-status"><text class="or-title">评论内容：</text><text class="or_value">{{coment.content}}</text></view>
   </view>
 
   <view class="title_text"></view>
