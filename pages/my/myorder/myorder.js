@@ -32,6 +32,7 @@ Page({
       var code = data.data.code;
       if (code == "1") {
         that.setData({ coment: data.data.content[0] })
+
       }
     }, dispatching_id);
   },

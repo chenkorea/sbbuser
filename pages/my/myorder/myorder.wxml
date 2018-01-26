@@ -23,8 +23,8 @@
   </view>
 
   
-  <view class="title_text" hidden="{{coment.level != undefined || '' != coment.level}}"></view>
-  <view class="info_view" hidden="{{coment.level != undefined || '' != coment.level}}">
+  <view class="title_text" wx-if="{{coment.level != undefined || '' != coment.level}}"></view>
+  <view class="info_view" wx-if="{{coment.level != undefined || '' != coment.level}}">
     <view class="order-status"><text class="or-title">评论类型：</text><text class="or_value">{{coment.level}}</text></view>
     <view class="order-status"><text class="or-title">评论内容：</text><text class="or_value">{{coment.content}}</text></view>
   </view>
