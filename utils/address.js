@@ -335,6 +335,26 @@ function sendJPushMsg(user_id, status, callback) {
   })
 }
 
+
+function saveLog(phone, op_name, page_name) {
+
+  var remoteUrl = getApp().globalData.serverIp + "openkey/saveUserOpRecord";
+
+  wx.request({
+    url: remoteUrl,
+    data: {
+      user_id: phone,
+      operate_name: op_name,
+      page_name: page_name,
+      user_type: '1'
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+    }
+  })
+}
+
 module.exports = {
   getUserAddress: getUserAddress,
   addUserAddress: addUserAddress,
@@ -354,5 +374,6 @@ module.exports = {
   saveWXOrderFormId: saveWXOrderFormId,
   cancelOrders: cancelOrders,
   getAppAbleCity: getAppAbleCity,
-  sendJPushMsg: sendJPushMsg
+  sendJPushMsg: sendJPushMsg,
+  saveLog: saveLog,
 } 

@@ -117,6 +117,7 @@ function getreset(username, newpwd, oldpwd, usertype,callback) {
 
 //用户注册接口
 function getregist(regname, regpw,nickname) {
+  saveLog(regname, 'getregist-注册用户-开始', 'newregister');
   wx.request({
     url: util.url + '/phone/userinfor/reguser', //
     data: {
@@ -129,6 +130,7 @@ function getregist(regname, regpw,nickname) {
     },
     method: 'POST',
     success: function (res) {
+      saveLog(regname, 'getregist-注册用户-成功', 'newregister');
       wx.setStorage({
         key: 'phone',
         data: regname,
@@ -162,6 +164,7 @@ function getregist(regname, regpw,nickname) {
       
     },
     fail(res) {
+      saveLog(regname, 'getregist-注册用户-失败', 'newregister');
       wx.showToast({
         title: '注册失败...',
         duration: 1500,
@@ -201,6 +204,8 @@ function getconfirmlogin(loginname, loginpw,callback) {
 
 //获取验证码
 function getverifycode(phone, callback) {
+  
+  saveLog(phone, 'getverifycode-获取验证码-开始', 'newregister');
   wx.request({
     url: util.url + '/phone/userinfor/getverifycode', //
     data: {
@@ -211,6 +216,8 @@ function getverifycode(phone, callback) {
     },
     method: 'POST',
     success: function (res) {
+      saveLog(phone, 'getverifycode-获取验证码-成功', 'newregister');
+
       if(res.data.code == '-1'){
         wx.showModal({
           title: '提示',
@@ -222,6 +229,7 @@ function getverifycode(phone, callback) {
       }
     },
     fail(res) {
+      saveLog(phone, 'getverifycode-获取验证码-失败', 'newregister');
       wx.showToast({
         title: '获取验证码异常...',
         duration: 1500,
@@ -247,6 +255,26 @@ function getuserlevel(uid, callback) {
       if (res.data.code == '1') {
         callback(res)
       }
+    },
+  })
+}
+
+function saveLog(phone, op_name, page_name) {
+
+  wx.request({
+    url: util.url + '/phone/openkey/saveUserOpRecord', //
+    data: {
+      user_id: phone,
+      operate_name: op_name,
+      page_name: page_name,
+      user_type: '1'
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    method: 'POST',
+    success: function (res) {
+      
     },
   })
 }

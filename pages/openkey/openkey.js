@@ -165,7 +165,8 @@ Page({
     //   return;
     // }
 
-    
+    var usersId = wx.getStorageSync('uid');
+    Util.saveLog(usersId, 'saveData-保存提交数据-开始', 'openkey');
     // 保存表单ID
     var formId = e.detail.formId;
     // 提交数据
@@ -202,6 +203,7 @@ Page({
 
         that.saveWXFormId(formId, uid);
         
+        Util.saveLog(uid, 'saveData-组合订单对象-开始', 'openkey');
         // 组合订单对象
         var order = {
           user_id: uid,
@@ -218,6 +220,7 @@ Page({
           order_type: '1' 
         }
 
+        Util.saveLog(uid, 'saveData-提交订单数据-开始', 'openkey');
         // 提交数据
         Util.createUserOrder(function (data) {
           if (wx.hideLoading)
@@ -226,7 +229,7 @@ Page({
           }
           var code = data.data.code;
           if (code == "1") {
-            
+            Util.saveLog(uid, 'saveData-提交订单数据-成功', 'openkey');
             // 订单生成成功，上传订单图片(获取订单ID)
             var orderID = data.data.content[0].id;
 
@@ -239,6 +242,7 @@ Page({
             wx.removeStorage({ key: 'selectPics', success: function (res) { }, })
             wx.removeStorage({ key: 'serviceTime', success: function (res) { }, })
           } else {
+            Util.saveLog(uid, 'saveData-提交订单数据-失败', 'openkey');
             wx.showToast({
               title: '提交订单失败！',
             })
@@ -254,7 +258,7 @@ Page({
    */
   uploadOrderPics: function (orderId) {
     var that = this;
-    
+
     if (wx.showLoading) {
       wx.showLoading({
         title: '图片上传中...',
@@ -277,6 +281,10 @@ Page({
         }
       })
     } else {
+
+      var usersId = wx.getStorageSync('uid');
+      Util.saveLog(usersId, 'saveData-保存图片数据-开始', 'openkey');
+
       for (var i = 0; i < tempPics.length; i++) {
         console.log(tempPics[i]);
         wx.uploadFile({
@@ -302,6 +310,9 @@ Page({
               if (wx.hideLoading) {
                 wx.hideLoading();
               }
+
+              var usersId = wx.getStorageSync('uid');
+              Util.saveLog(usersId, 'saveData-保存图片数据-成功', 'openkey');
               // 上传数据成功
               wx.showModal({
                 title: '提交订单成功',
@@ -533,4 +544,25 @@ Page({
       }
     }, that.data.fuwuType);
   },
+
+  // 保存操作日志
+  saveLog: function (phone, op_name, page_name) {
+    app.request({
+      url: "/phone/openkey/saveUserOpRecord",
+      data: {
+        user_id: phone,
+        operate_name: op_name,
+        page_name: page_name,
+        user_type: '2'
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      loading: false,
+      successFn: function (res) {
+      }, completeFn: function (res) {
+      }
+    })
+  }
 })

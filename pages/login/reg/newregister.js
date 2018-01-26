@@ -90,13 +90,14 @@ Page({
   bindViewTap: function () {
     var that = this;
     if (that.data.isagree) {
-      if (!app.phoneRe.test(that.data.reg_phone_num)) {
-        wx.showModal({
-          title: '提示',
-          content: '手机号码格式有误',
-          showCancel: false
-        })
-      } else if (that.data.reg_passwd=='' || (that.data.reg_passwd.length < 6)) {
+      // if (!app.phoneRe.test(that.data.reg_phone_num)) {
+      //   wx.showModal({
+      //     title: '提示',
+      //     content: '手机号码格式有误',
+      //     showCancel: false
+      //   })
+      // } else 
+      if (that.data.reg_passwd=='' || (that.data.reg_passwd.length < 6)) {
         wx.showModal({
           title: '提示',
           content: '请设置至少六位登录密码',
