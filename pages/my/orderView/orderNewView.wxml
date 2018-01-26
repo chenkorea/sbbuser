@@ -31,8 +31,8 @@
             <text class="det_value">查看详细</text>
             <image class="to_jaintou" src="../../images/jiantou.png"></image>
           </view>
-          <view class="but-lay-view">
-            <form hidden="{{item.process_stage!='06'}}" data-id="{{item.id}}" data-item="{{item}}" report-submit bindsubmit='toPay'>
+          <view class="but-lay-view" >
+            <form wx-if="{{item.process_stage =='06' && item.pay_type == '1'}}" data-id="{{item.id}}" data-item="{{item}}" report-submit bindsubmit='toPay'>
               <button class="pay_but" form-type="submit">去支付</button>
             </form>
             <button class="pay_but" data-id="{{item.id}}" data-dis="{{item.dispatching_id}}" catchtap="toRating" hidden="{{item.process_stage!='07'}}">去评价</button>
