@@ -1,20 +1,27 @@
 <!--pages/my/mine/coupon/coupon.wxml-->
-<view style='background:#eeeeee;height:100%;width:100%;position:fixed'>
-  <view wx:if="{{couponList.length>0}}">
-    <view bindtap="selcoupon" data-item="{{item}}" class='coupon-list-view' wx:for="{{couponList}}" wx:key="{{item}}">
-      <view style='margin-bottom:5rpx'>
-        <text wx:if="{{item.is_able==1}}" class='title-text' style='color:#FF7F24'>可使用</text>
-        <text wx:if="{{item.is_able==0}}" class='title-text'>已使用</text>
-        <text class='title-desc'>{{item.coupon_nam}}</text>
+<view class="main-view" >
+  <view style='height:100%;margin-bottom:120rpx;padding-top:1rpx;'>
+    <view wx:if="{{couponList.length>0}}">
+      <view bindtap="selcoupon" data-item="{{item}}" class='coupon-list-view' wx:for="{{couponList}}" wx:key="{{item}}">
+        <view style='margin-bottom:10rpx'>
+          <text wx:if="{{item.is_able==1}}" class='title-text' style='color:#FF7F24'>可使用</text>
+          <text wx:if="{{item.is_able==0}}" class='title-text'>已使用</text>
+          <text class='title-desc'>{{item.coupon_nam}}</text>
+        </view>
+        <view style='position:relative'>
+          <image style='display:flex;width:420rpx;height:160rpx;' src='../../../images/mmexport1509958104727.jpg'></image>
+          <!-- <text class='price-style'>{{item.coupon_type=='1'?'服务免费':'￥' + item.coupon_price}}</text> -->
+        </view>
       </view>
-      <view style='position:relative'>
-        <image style='display:flex;width:420rpx;height:160rpx;' src='../../../images/mmexport1509958104727.jpg'></image>
-         <!-- <text class='price-style'>{{item.coupon_type=='1'?'服务免费':'￥' + item.coupon_price}}</text> -->
-      </view>
-
     </view>
+
+    <view wx:else>
+      <view class="no_notice-view">当前没有卡券信息</view>
+    </view>
+
   </view>
-  <view wx:else>
-    <view class="no_notice-view">当前没有卡券信息</view>
+
+  <view bindtap="goChoose" style="position:Fixed; width:100%; z-index:5;bottom:0px;left:0px;">
+    <button style="background:#FF7F24;color: #FFF; text-align:center; border-radius:0px">领取代金劵</button>
   </view>
 </view>

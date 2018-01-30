@@ -7,7 +7,9 @@ Page({
   data: {
     couponList:[],
     order_infor:{},
-    is_f:true
+    is_f:true,
+    is_able:'',
+    isChange:false
   },
 
   /**
@@ -22,12 +24,19 @@ Page({
     }
     var pages = getCurrentPages();
     var prevPage = pages[pages.length - 2];  //上一个页面
-    var is_able = ''
     if (prevPage.__route__.indexOf('pages/my/orderView/orderNewView') != -1) {
-      is_able='1'
+      that.setData({ is_able:'1'});
       that.setData({is_f: false})
     }
     
+    this.getHavCoupon();
+   
+
+  },
+
+
+  getHavCoupon:function() {
+    var that = this;
     wx.getStorage({
       key: 'uid',
       success: function (res) {
@@ -35,7 +44,7 @@ Page({
           url: getApp().globalData.serverIp + 'userinfor/getUserCoupon', //
           data: {
             uid: res.data,
-            is_able: is_able
+            is_able: that.data.is_able
           },
           header: {
             'content-type': 'application/x-www-form-urlencoded'
@@ -43,6 +52,7 @@ Page({
           method: 'POST',
           complete: function (e) {
             if (e.data.code == '1') {
+              console.log(e.data.content);
               that.setData({
                 couponList: e.data.content
               })
@@ -51,8 +61,16 @@ Page({
         })
       },
     })
-
   },
+
+  onShow:function() {
+    console.log("回来了", this.data.isChange);
+    if (this.data.isChange) {
+      this.getHavCoupon();
+      this.setData({isChange:false});
+    }
+  },
+
   selcoupon:function(data){
     var that = this
     var pages = getCurrentPages();
@@ -77,5 +95,12 @@ Page({
         urls: ['https://www.gzwnks.com/sbb-web/upload/headericon/shoudanmianfei.jpg'],
       })
     }
+  },
+
+  goChoose:function () {
+    console.log('ddsss')
+    wx.navigateTo({
+      url: './newcoupon/newcoupon',
+    })
   }
 })

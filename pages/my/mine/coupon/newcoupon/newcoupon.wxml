@@ -1,0 +1,23 @@
+<!--pages/my/mine/coupon/coupon.wxml-->
+<view class="main-view">
+  <view style='margin-bottom:130rpx;padding-top:1rpx;'>
+    <view wx:if="{{couponList.length>0}}">
+      <view bindtap="getCoupon" data-item="{{item}}" class='coupon-list-view' wx:for="{{couponList}}" wx:key="{{item}}">
+        <view style='margin-bottom:10rpx'>
+          <text class='title-text' style='color:#FF7F24;'>一键领取</text>
+          <text class='title-desc'>{{item.coupon_name}}</text>
+        </view>
+        <view style='position:relative'>
+          <image style='display:flex;width:420rpx;height:160rpx;' src='../../../../images/mmexport1509958104727.jpg'></image>
+          <!-- <text class='price-style'>{{item.coupon_type=='1'?'服务免费':'￥' + item.coupon_price}}</text> -->
+        </view>
+      </view>
+    </view>
+
+    <view wx:else>
+      <view class="no_notice-view">当前没有卡券信息</view>
+    </view>
+
+  </view>
+
+</view>

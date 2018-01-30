@@ -37,7 +37,8 @@
     "pages/my/shifu/shifu",
     "pages/my/share/share",
     "pages/index/price/price",
-    "pages/my/mine/coupon/coupon"
+    "pages/my/mine/coupon/coupon",
+    "pages/my/mine/coupon/newcoupon/newcoupon"
   ],
   "window": {
     "backgroundTextStyle": "light",
