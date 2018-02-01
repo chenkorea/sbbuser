@@ -10,7 +10,9 @@ Page({
     selectPicAr: [],
     imageWidth: getApp().screenWidth / 4 - 10,
     coment:{},
-    allPrice:'0'
+    allPrice:'0',
+    hasFinish:false,
+    hasComent:false
   },
   //事件处理函数
   bindViewTap: function () {
@@ -30,9 +32,11 @@ Page({
         wx.hideLoading();
       }
       var code = data.data.code;
-      if (code == "1") {
-        that.setData({ coment: data.data.content[0] })
-
+      if (code == "1" && data.data.content.length>0) {
+        that.setData({ coment: data.data.content[0]})
+        if (data.data.content[0]["level"]){
+          that.setData({ hasComent: true })
+        }
       }
     }, dispatching_id);
   },
@@ -79,7 +83,9 @@ Page({
       this.setData({ hasGuarantee: false })
     }
     console.log('dispatching_id----' + JSON.stringify(userOrder));
-    
+    if (userOrder && userOrder.process_stage > '05'){
+      this.setData({ hasFinish:true})
+    }
     var that = this
     that.setData({ userOrder: userOrder})
 
