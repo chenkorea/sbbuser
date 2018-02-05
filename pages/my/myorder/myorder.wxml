@@ -11,20 +11,19 @@
   <view class="title_text"></view>
   <view class="info_view">
     <view class="order-status"><text class="or-title">服务技师：</text><text class="or_value">{{userOrder.process_person_name}}</text></view>
-    <view class="order-status"><text class="or-title">订单总价：</text><text class="or_value">{{allPrice}}</text></view>
-    <view class="order-status"><text class="or-title">完工时间：</text><text class="or_value">{{userOrder.finish_time}}</text></view>
+    <view wx-if="{{!hasFinish}}" class="order-status"><text class="or-title">订单总价：</text><text class="or_value">{{allPrice}}</text></view>
+    <view hidden="{{!hasFinish}}" class="order-status"><text class="or-title">完工时间：</text><text class="or_value">{{userOrder.finish_time}}</text></view>
   </view>
 
 
-  <view class="title_text"></view>
-  <view class="info_view">
+  <view hidden="{{!hasFinish}}" class="info_view">
     <view class="order-status"><text class="or-title">支付总额：</text><text class="or_value">{{allPrice}}</text></view>
-    <view class="order-status"><text class="or-title">支付方式：</text><text class="or_value">{{userOrder.pay_type=='1'?'在线支付':'现金支付'}}</text></view>
+    <view hidden="{{!hasFinish}}" class="order-status"><text class="or-title">支付方式：</text><text class="or_value">{{userOrder.pay_type=='1'?'在线支付':'现金支付'}}</text></view>
   </view>
 
   
-  <view class="title_text" wx-if="{{coment.level != undefined || '' != coment.level}}"></view>
-  <view class="info_view" wx-if="{{coment.level != undefined || '' != coment.level}}">
+  <view class="title_text" wx-if="{{hasComent}}"></view>
+  <view class="info_view" wx-if="{{hasComent}}">
     <view class="order-status"><text class="or-title">评论类型：</text><text class="or_value">{{coment.level}}</text></view>
     <view class="order-status"><text class="or-title">评论内容：</text><text class="or_value">{{coment.content}}</text></view>
   </view>
