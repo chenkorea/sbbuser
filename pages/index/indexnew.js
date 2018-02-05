@@ -41,6 +41,7 @@ Page({
     })
   },
   selectNewCity: function () {
+    console.log('this.data.city = ' + this.data.city)
     wx.navigateTo({
       url: '../switchcity/switchcity?city=' + this.data.city
     })
@@ -222,13 +223,10 @@ Page({
       })
 
     // 获取uid
-    wx.getStorage({
-      key: 'uid',
-      success: function (res) {
-        that.setData({ userId: res.data })
-      },
-    })
+    var nowuid = wx.getStorageSync('uid')
+    that.setData({ userId: nowuid })
 
+    
     // 自动定位获取地理位置
     homeUtil.getCityName(function (locationData) {
 

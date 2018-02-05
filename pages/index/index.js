@@ -72,6 +72,8 @@ Page({
         user_head: userInfo.avatarUrl == "" ? "http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg" : userInfo.avatarUrl
       })
     })
+
+
     // 自动定位获取地理位置
     homeUtil.getCityName(function (locationData) {
 
