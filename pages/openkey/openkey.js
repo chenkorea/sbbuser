@@ -167,25 +167,33 @@ Page({
 
     var usersId = wx.getStorageSync('uid');
     Util.saveLog(usersId, 'saveData-保存提交数据-开始', 'openkey');
-    // 保存表单ID
-    var formId = e.detail.formId;
+    
     // 提交数据
-    var service_item_id = that.data.serviceAr[that.data.fdmindex].id;
-
+    var fwindex = that.data.fdmindex;
+    if (that.data.serviceAr != null && that.data.serviceAr.length > 0) {
+      var service_item_id = that.data.serviceAr[fwindex].id;
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请选择服务类别',
+      })
+      return;
+    }
+    
     var service_time = "01";
     if ("马上" != that.data.serviceTime) {
         service_time = "02";
     }
     // 保修期Index
-    var type = that.data.fuwuType;
+    var fwtype = that.data.fuwuType;
     var guaran = "1";
     if (that.data.index != 0) {
       guaran = "2"
     }
-    if (type != '03') {
+    if (fwtype != '03') {
       guaran = '0'
     }
-    if (that.data.address.address == undefined || "" == that.data.address.address) {
+    if (that.data.address.address == undefined || "" == that.data.address.address || "undefined" == that.data.address.address) {
       wx.showModal({
         title: '提示',
         content: '请选择服务地址',
@@ -196,61 +204,54 @@ Page({
       wx.showLoading({ title: '数据上传中...', })
     }
     
-    wx.getStorage({
-      key: 'uid',
-      success: function(res) {
-        var uid = res.data;
+    // var uid = res.data;
+    Util.saveLog(usersId, 'saveData-组合订单对象-开始', 'openkey');
+    // 组合订单对象
+    var order = {
+      user_id: usersId,
+      user_name: that.data.uname,
+      user_phone: that.data.phone,
+      service_type: that.data.fuwuType,
+      service_item_id: service_item_id,
+      popedom_name: that.data.address.popedom,
+      service_address: that.data.address.address,
+      service_time: service_time,
+      service_time_describe: that.data.serviceTime,
+      guarantee_type: guaran,
+      remarks: that.data.remark,
+      order_type: '1'
+    }
 
-        that.saveWXFormId(formId, uid);
-        
-        Util.saveLog(uid, 'saveData-组合订单对象-开始', 'openkey');
-        // 组合订单对象
-        var order = {
-          user_id: uid,
-          user_name: that.data.uname,
-          user_phone: that.data.phone,
-          service_type: that.data.fuwuType,
-          service_item_id: service_item_id,
-          popedom_name: that.data.address.popedom,
-          service_address: that.data.address.address,
-          service_time: service_time,
-          service_time_describe: that.data.serviceTime,
-          guarantee_type: guaran,
-          remarks: that.data.remark,
-          order_type: '1' 
-        }
+    Util.saveLog(usersId, 'saveData-提交订单数据-开始', 'openkey');
+    // 提交数据
+    Util.createUserOrder(function (data) {
+      if (wx.hideLoading) {
+        wx.hideLoading();
+      }
+      var code = data.data.code;
+      if (code == "1") {
+        Util.saveLog(usersId, 'saveData-提交订单数据-成功', 'openkey');
+        // 订单生成成功，上传订单图片(获取订单ID)
+        var orderID = data.data.content[0].id;
+        that.uploadOrderPics(orderID);
 
-        Util.saveLog(uid, 'saveData-提交订单数据-开始', 'openkey');
-        // 提交数据
-        Util.createUserOrder(function (data) {
-          if (wx.hideLoading)
-          {
-            wx.hideLoading();
-          }
-          var code = data.data.code;
-          if (code == "1") {
-            Util.saveLog(uid, 'saveData-提交订单数据-成功', 'openkey');
-            // 订单生成成功，上传订单图片(获取订单ID)
-            var orderID = data.data.content[0].id;
+        // 清空当前订单界面的数据
+        wx.removeStorage({ key: 'remark', success: function (res) { }, })
+        wx.removeStorage({ key: 'selectPics', success: function (res) { }, })
+        wx.removeStorage({ key: 'serviceTime', success: function (res) { }, })
 
-            that.saveWXOrderFormId(formId, orderID);
-
-            that.uploadOrderPics(orderID);
-            
-            // 清空当前订单界面的数据
-            wx.removeStorage({ key: 'remark', success: function (res) { }, })
-            wx.removeStorage({ key: 'selectPics', success: function (res) { }, })
-            wx.removeStorage({ key: 'serviceTime', success: function (res) { }, })
-          } else {
-            Util.saveLog(uid, 'saveData-提交订单数据-失败', 'openkey');
-            wx.showToast({
-              title: '提交订单失败！',
-            })
-          }
-        }, order);
-        console.log(order);
-      },
-    })
+        that.saveWXOrderFormId(formId, orderID);
+      } else {
+        Util.saveLog(usersId, 'saveData-提交订单数据-失败', 'openkey');
+        wx.showToast({
+          title: '提交订单失败！',
+        })
+      }
+    }, order);
+    console.log(order);
+    // 保存表单ID
+    var formId = e.detail.formId;
+    that.saveWXFormId(formId, usersId);
   },
 
   /**
@@ -258,30 +259,28 @@ Page({
    */
   uploadOrderPics: function (orderId) {
     var that = this;
-
-    if (wx.showLoading) {
-      wx.showLoading({
-        title: '图片上传中...',
-      })
-    }
+    // 上传数据成功
+    wx.showModal({
+      title: '提交订单成功',
+      content: '请稍等，将会有师傅和您联系！',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          wx.navigateBack({
+          })
+        }
+      }
+    })
+    
     var tempPics = this.data.filePaths;
     if (tempPics.length == 0) {
       if (wx.hideLoading) {
         wx.hideLoading();
       }
-      wx.showModal({
-        title: '提交订单成功',
-        content: '请稍等，将会有师傅和您联系！',
-        showCancel: false,
-        success: function (res) {
-          if (res.confirm) {
-            wx.navigateBack({
-            })
-          }
-        }
-      })
+      
     } else {
-
+      
+      // header: { 'content-type': 'application/x-www-form-urlencoded' },
       var usersId = wx.getStorageSync('uid');
       Util.saveLog(usersId, 'saveData-保存图片数据-开始', 'openkey');
 
@@ -295,7 +294,7 @@ Page({
             'file_type': encodeURI('5'),
             'parent_id': encodeURI(orderId)
           },
-          header: { 'content-type': 'application/x-www-form-urlencoded' },
+          header: { 'content-type': 'multipart/form-data' },
           success: function (res) {
 
             var alldata = {};
@@ -307,24 +306,11 @@ Page({
             that.setData({ updalodcount: that.data.updalodcount + 1 })
             if (that.data.updalodcount == that.data.filePaths.length) {
               that.setData({ updalodcount: 0 })
-              if (wx.hideLoading) {
-                wx.hideLoading();
-              }
+              
 
               var usersId = wx.getStorageSync('uid');
               Util.saveLog(usersId, 'saveData-保存图片数据-成功', 'openkey');
-              // 上传数据成功
-              wx.showModal({
-                title: '提交订单成功',
-                content: '请稍等，将会有师傅和您联系！',
-                showCancel: false,
-                success: function (res) {
-                  if (res.confirm) {
-                    wx.navigateBack({
-                    })
-                  }
-                }
-              })
+              
             }
           }
         })
@@ -510,6 +496,7 @@ Page({
       key: 'selectPics',
       success: function(res) {
         that.setData({ filePaths: res.data })
+        
         that.setData({ picnumStr: '已经选择' + res.data.length + '张图片' });
         that.setData({ picnum: res.data.length });
       },

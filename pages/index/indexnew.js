@@ -125,8 +125,6 @@ Page({
       },
     })
 
-    console.log('onLoad')
-
     var islogin = wx.getStorageSync('isLogin');
     if (islogin != '1') {
       wx.navigateTo({
@@ -177,8 +175,10 @@ Page({
     })
     len = Math.floor((len + 2) / 3) * 3;
     for (var i = 0; i < len; i++) {
+      
       if ((i + 1) % 3 == 0) {
         row.push(indexs.PageItems[i]);
+        
         pageItems.push(row);
         row = [];
         continue;
