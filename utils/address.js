@@ -355,6 +355,61 @@ function saveLog(phone, op_name, page_name) {
   })
 }
 
+//获取验证码
+function getuserverifycode(callback, phone) {
+  var remoteUrl = getApp().globalData.serverIp + "userinfor/getverifycode";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      phone: phone
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
+
+//用户注册
+function registerUser(callback, regname, regpw, nickname) {
+  var remoteUrl = getApp().globalData.serverIp + "userinfor/reguser";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      username: regname,
+      passwd: regpw,
+      nickname: nickname
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
+
+//用户注册优惠券
+function getUserFristCoupon(callback, regname) {
+  var remoteUrl = getApp().globalData.serverIp + "userinfor/getUserFristCoupon";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      username: regname
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
+
+
+
 module.exports = {
   getUserAddress: getUserAddress,
   addUserAddress: addUserAddress,
@@ -376,4 +431,7 @@ module.exports = {
   getAppAbleCity: getAppAbleCity,
   sendJPushMsg: sendJPushMsg,
   saveLog: saveLog,
+  getuserverifycode: getuserverifycode,
+  registerUser: registerUser,
+  getUserFristCoupon: getUserFristCoupon,
 } 

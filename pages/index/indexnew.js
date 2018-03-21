@@ -125,14 +125,7 @@ Page({
       },
     })
 
-    var islogin = wx.getStorageSync('isLogin');
-    if (islogin != '1') {
-      wx.navigateTo({
-        url: '../login/login',
-        success: function (res) {
-        },
-      })
-    }
+    
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function (userInfo) {
       //更新数据
@@ -206,6 +199,16 @@ Page({
    */
   onShow: function () {
     var that = this;
+
+    var islogin = wx.getStorageSync('isLogin');
+    if (islogin != '1') {
+      wx.navigateTo({
+        url: '../login/login',
+        success: function (res) {
+        },
+      })
+    }
+
     wx.getStorage({
       key: 'city',
       success: function (res) {

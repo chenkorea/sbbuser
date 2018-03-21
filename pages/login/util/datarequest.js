@@ -130,12 +130,13 @@ function getregist(regname, regpw,nickname) {
     },
     method: 'POST',
     success: function (res) {
-      saveLog(regname, 'getregist-注册用户-成功', 'newregister');
+      
       wx.setStorage({
         key: 'phone',
         data: regname,
       });
       if (res.data.code == '1') {
+        saveLog(regname, 'getregist-注册用户-成功', 'newregister');
         wx.showModal({
           title: '提示',
           content: '注册成功,请登录体验吧',
@@ -149,6 +150,7 @@ function getregist(regname, regpw,nickname) {
           }
         })
       } else if (res.data.code == '-1') {
+        saveLog(regname, 'getregist-注册用户-账号已经注册过了', 'newregister');
         wx.showModal({
           title: '提示',
           content: '账号已经注册过了，请直接登录吧',
@@ -160,6 +162,8 @@ function getregist(regname, regpw,nickname) {
             }
           }
         })
+      } else {
+        saveLog(regname, 'getregist-注册用户-返回失败', 'newregister');
       }
       
     },

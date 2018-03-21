@@ -21,8 +21,11 @@ Page({
     })
   },
   bindRegisterTap: function () {
+    // wx.navigateTo({
+    //   url: '../login/reg/newregister'
+    // })
     wx.navigateTo({
-      url: '../login/reg/newregister'
+      url: '../login/userreg/userreg'
     })
   },
   loginTap: function () {

@@ -143,14 +143,20 @@ Page({
    */
   saveData:function (e) {
     var that = this;
+    var usersId = wx.getStorageSync('uid');
+    that.convertDataUpload(e, usersId);
+  },
+
+  convertDataUpload: function (e, usersId) {
+    var that = this;
     // 判断当前城市是否支持服务 取消区域限制
     // var is_able = false;
-    
+
     // for (var i = 0; i < that.data.ableCity.length; i++) {
     //   var nowcity = that.data.ableCity[i];
     //   var city_name = nowcity.city;
     //   var city_able = nowcity.is_able;
-      
+
     //   if (that.data.showAddress.indexOf(city_name) >= 0 && city_able == '1') {
     //     is_able = true;
     //     break;
@@ -164,10 +170,8 @@ Page({
     //   })
     //   return;
     // }
-
-    var usersId = wx.getStorageSync('uid');
     Util.saveLog(usersId, 'saveData-保存提交数据-开始', 'openkey');
-    
+
     // 提交数据
     var fwindex = that.data.fdmindex;
     if (that.data.serviceAr != null && that.data.serviceAr.length > 0) {
@@ -179,10 +183,10 @@ Page({
       })
       return;
     }
-    
+
     var service_time = "01";
     if ("马上" != that.data.serviceTime) {
-        service_time = "02";
+      service_time = "02";
     }
     // 保修期Index
     var fwtype = that.data.fuwuType;
@@ -203,10 +207,10 @@ Page({
     if (wx.showLoading) {
       wx.showLoading({ title: '数据上传中...', })
     }
-    
+
     // var uid = res.data;
     Util.saveLog(usersId, 'saveData-组合订单对象-开始', 'openkey');
-    // 组合订单对象
+    // 组合订单对象user_name: that.data.uname,
     var order = {
       user_id: usersId,
       user_name: that.data.uname,
@@ -442,7 +446,8 @@ Page({
       })
       wx.setNavigationBarTitle({ title: that.data.titleAr[4], })
     }
-    
+    var userPhone = wx.getStorageSync('phone')
+    that.setData({phone:userPhone})
   },
   onShow: function () {
     var that = this;

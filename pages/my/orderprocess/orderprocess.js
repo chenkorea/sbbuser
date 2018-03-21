@@ -93,7 +93,7 @@ Page({
     }
     var deleteshow = false
     var stage = userOrder.process_stage;
-    if ('06' == stage || '07' == stage || '08' == stage || '09' == stage){
+    if ('06' == stage || '07' == stage || '08' == stage || '05' == stage){
       deleteshow = true
       this.setData({ hideDelete: true});
     } else {

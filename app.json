@@ -38,7 +38,8 @@
     "pages/my/share/share",
     "pages/index/price/price",
     "pages/my/mine/coupon/coupon",
-    "pages/my/mine/coupon/newcoupon/newcoupon"
+    "pages/my/mine/coupon/newcoupon/newcoupon",
+    "pages/login/userreg/userreg"
   ],
   "window": {
     "backgroundTextStyle": "light",
