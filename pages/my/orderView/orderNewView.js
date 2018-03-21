@@ -304,6 +304,9 @@ Page({
         var code = res.data.code;
         if (code == '1') {
           // 成功
+          if (coupon_id != '' && coupon_id != null){
+            that.insertCouponId2Order(orderId,coupon_id);
+          }
           var prepay_id = res.data.content[0];
           if (prepay_id == null || '' == prepay_id) {
             wx.showToast({
@@ -314,6 +317,8 @@ Page({
             that.sign(prepay_id, e,coupon_id);
           }
         }
+      },
+      complete:function(res){
       }
     })
   },
@@ -414,6 +419,25 @@ Page({
       },
       complete: function (res) {
         // console.log(res)
+      }
+    })
+  },
+  insertCouponId2Order: function (order_id, coupon_id) {
+    wx.request({
+      url: getApp().globalData.serverIp + 'openkey/updateOrderCouponId',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        orderId: order_id,
+        couponId: coupon_id
+      },
+      complete: function (res) {
+        // console.log(res)
+        if (res.data.code != '1') {
+          wx.showToast({ title: '订单关联卡券信息失败', })
+        }
       }
     })
   },
