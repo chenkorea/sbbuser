@@ -23,12 +23,12 @@
 }
 
 .selected {
-  color: #FF7F24;
-  border-bottom: 6rpx solid #FF7F24;
+  color: #396fbf;
+  border-bottom: 6rpx solid #396fbf;
 }
 
 .orsel {
-  color: #FF7F24;
+  color: #396fbf;
 }
 
 .order-item {
@@ -80,7 +80,7 @@
 }
 
 .price-text {
-  color: #FF7F24;
+  color: #396fbf;
   font-size: 46rpx;
 }
 
@@ -120,7 +120,7 @@
 }
 
 .bottomsel {
-  color: #FF7F24;
+  color: #396fbf;
 }
 
 .order_view {
@@ -167,7 +167,7 @@
 
 .score-val {
   margin-left: 20rpx;
-  color: #FF7F24;
+  color: #396fbf;
 }
 
 .my-view {
@@ -235,7 +235,7 @@
 .pay_but {
   border: none;
   height: 75rpx;
-  background: #FF7F24;
+  background: #396fbf;
   color: white;
   font-size: 30rpx;
   margin: 10rpx;

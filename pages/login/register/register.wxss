@@ -63,7 +63,7 @@
   margin-left: 10rpx;
   right: 0rpx;
   bottom: 10rpx;
-  background: #FF7F24;
+  background: #396fbf;
   flex-direction: row;
   color: #ffffff;
   align-items: center;
@@ -110,7 +110,7 @@
   right: 20rpx;
   border-radius: 35rpx;
   height: 90rpx;
-  background: #FF7F24;
+  background: #396fbf;
   color: #FFFFFF;
   font-size: 30rpx;
 }
@@ -128,7 +128,7 @@
 }
 
 .agreeselect {
-  color: #FF7F24;
+  color: #396fbf;
   font-size: 40rpx;
 }
 
@@ -203,7 +203,7 @@
   font-size: 30rpx;
   display: flex;
   align-items: center;
-  /* border-bottom: 2rpx solid #FF7F24;
+  /* border-bottom: 2rpx solid #396fbf;
   border-left: 1rpx solid #F0F0F0;
   border-right: 1rpx solid #F0F0F0; */
 }
@@ -254,7 +254,7 @@
 .reg_en_btn {
   width: 80%;
   height: 90rpx;
-  background: #FF7F24;
+  background: #396fbf;
   border-radius: 40rpx;
   color: #FFFFFF;
   margin-left: 60rpx;
@@ -287,11 +287,11 @@
 
 .register_text
 {
-  color: #FF7F24;
+  color: #396fbf;
 }
 
 .bolder-en-line{
-  border-bottom: 2rpx solid #FF7F24;
+  border-bottom: 2rpx solid #396fbf;
   border-left: 1rpx solid #F0F0F0;
   border-right: 1rpx solid #F0F0F0;
 }

@@ -2,7 +2,7 @@
   padding: 20rpx;
   display: flex;
   justify-content: center;
-  color: #FF7F24;
+  color: #396fbf;
   font-size: 35rpx;
 }
 

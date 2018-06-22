@@ -43,13 +43,13 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FF7F24",
+    "navigationBarBackgroundColor": "#396fbf",
     "navigationBarTitleText": "锁帮帮",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#666666",
-    "selectedColor": "#FF7F24",
+    "selectedColor": "#396fbf",
     "backgroundColor": "#fff",
     "borderStyle": "#FFF",
     "list": [

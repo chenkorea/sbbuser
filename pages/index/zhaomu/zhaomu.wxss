@@ -30,6 +30,6 @@
   height: 100rpx;
   color: #FFFFFF;
   font-size: 32rpx;
-  background: #FF7F24;
+  background: #396fbf;
   border-radius:0;
 }

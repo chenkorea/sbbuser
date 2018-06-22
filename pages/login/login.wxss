@@ -47,7 +47,7 @@
   left: 5%;
   font-size: 34rpx;
   border-bottom-width: 100%;
-  border-bottom-color: #FF7F24;
+  border-bottom-color: #396fbf;
 }
 
 .account-pic{
@@ -115,7 +115,7 @@
 .login_btn {
   width: 80%;
   height: 90rpx;
-  background: #FF7F24;
+  background: #396fbf;
   border-radius: 40rpx;
   color: #FFFFFF;
   margin-left: 60rpx;
@@ -143,7 +143,7 @@
   font-size: 30rpx;
   display: flex;
   align-items: center;
-  /* border-bottom: 2rpx solid #FF7F24; */
+  /* border-bottom: 2rpx solid #396fbf; */
 }
 
 .pwd-view {
@@ -201,11 +201,11 @@
 
 .register_text
 {
-  color: #FF7F24;
+  color: #396fbf;
 }
 
 .bolder-en-line{
-  border-bottom: 2rpx solid #FF7F24;
+  border-bottom: 2rpx solid #396fbf;
   border-left: 1rpx solid #F0F0F0;
   border-right: 1rpx solid #F0F0F0;
 }

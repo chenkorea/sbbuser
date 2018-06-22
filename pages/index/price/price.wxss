@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   font-size: 28rpx;
-  color: #FF7F24;
+  color: #396fbf;
   height: 80rpx;
   border-bottom: 1rpx solid #F0F0F0;
   margin-top: 20rpx;

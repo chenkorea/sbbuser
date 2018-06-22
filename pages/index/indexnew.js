@@ -26,7 +26,13 @@ Page({
     user_name: '昵称',
     user_head: 'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg',
     noticecontent: [],
-    open_id: '0000'
+    open_id: '0000',
+    showDaall: false,
+    hiddenmodalput: true,
+    phone: '',
+    nickName: '', 
+    avatarUrl: '', 
+    openId: ''
   },
   toCallPhone: function () {
     wx.makePhoneCall({
@@ -83,12 +89,14 @@ Page({
         var jsonObj = JSON.parse(openIdStr);
         console.log('open_id = ' + jsonObj.openid);
         that.setData({ open_id: jsonObj.openid});
-        wx.getStorage({
-          key: 'uid',
-          success: function (res) {
-            that.saveOpenId(jsonObj.openid, res.data);
-          },
-        })
+        let uid = wx.getStorageSync('uid')
+        
+        if (uid) {
+          that.saveOpenId(jsonObj.openid, res.data);
+        } else {
+          // 新用户
+          that.getUserRealInfo(jsonObj.openid)
+        }
       }
     })
   },
@@ -109,6 +117,67 @@ Page({
       }
     })
   },
+  getUserRealInfo(openid) {
+    var that = this
+    wx.getUserInfo({
+      success: function (res) {
+        console.log(res)
+        var userInfo = res.userInfo
+        console.log(userInfo)
+        that.setData({
+          nickName: userInfo.nickName,
+          avatarUrl: userInfo.avatarUrl,
+          openId: openid
+        })
+        that.modalinput()
+        // that.addEditWxUser('', userInfo.nickName, userInfo.avatarUrl, openid)
+      }
+    })
+  },
+  addEditWxUser: function (user_id, nickname, head_img, open_id, phone) {
+    var that = this;
+    wx.request({
+      url: getApp().globalData.serverIp + 'openkey/addEditWxUser',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        open_id: open_id,
+        user_id: user_id,
+        nickname: nickname,
+        head_img: head_img,
+        phone: phone
+      },
+      success: function (res) {
+        var code = res.data.code;
+        if (code == '1') {
+          // 成功
+          console.log(res.data.content[0])
+          wx.setStorage({
+            key: 'uid',
+            data: res.data.content[0].id,
+          });
+          wx.setStorage({
+            key: 'phone',
+            data: res.data.content[0].phone,
+          });
+          wx.setStorage({
+            key: 'isLogin',
+            data: '1',
+          });
+          wx.setStorage({
+            key: 'nickname',
+            data: res.data.content[0].name,
+          });
+          wx.setStorage({
+            key: 'is_vip',
+            data: res.data.content[0].is_vip,
+          });
+        }
+      }
+    })
+  },
   
   onLoad: function () {
     // 打开调试
@@ -125,6 +194,7 @@ Page({
       },
     })
 
+    this.shihis()
     
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function (userInfo) {
@@ -200,14 +270,14 @@ Page({
   onShow: function () {
     var that = this;
 
-    var islogin = wx.getStorageSync('isLogin');
-    if (islogin != '1') {
-      wx.navigateTo({
-        url: '../login/login',
-        success: function (res) {
-        },
-      })
-    }
+    // var islogin = wx.getStorageSync('isLogin');
+    // if (islogin != '1') {
+    //   wx.navigateTo({
+    //     url: '../login/login',
+    //     success: function (res) {
+    //     },
+    //   })
+    // }
 
     wx.getStorage({
       key: 'city',
@@ -278,5 +348,66 @@ Page({
     if ('0000' == that.data.open_id) {
       that.wxLogin();
     }
+  },
+  shihis: function () {
+    var that = this;
+    wx.getSetting({
+      success: res => {
+        console.log(res)
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          wx.getUserInfo({
+            success: data => {
+              // 可以将 res 发送给后台解码出 unionId
+              app.globalData.userInfo = data.userInfo;
+              console.log(data.userInfo)
+
+              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+              // 所以此处加入 callback 以防止这种情况
+              // if (this.userInfoReadyCallback) {
+              //   this.userInfoReadyCallback(res)
+              // }
+            }
+          })
+        } else {
+          that.setData({ showDaall: true })
+        }
+      }
+    })
+  },
+  bindGetUserInfo: function (e) {
+    app.globalData.userInfo = e.detail.userInfo;
+    this.setData({ showDaall: false })
+    this.wxLogin();
+  },
+  //点击按钮痰喘指定的hiddenmodalput弹出框  
+  modalinput: function () {
+    this.setData({
+      hiddenmodalput: !this.data.hiddenmodalput
+    })
+  },
+  //取消按钮  
+  cancel: function () {
+    this.setData({
+      hiddenmodalput: true
+    });
+  },
+  //确认  
+  confirm: function () {
+    if (this.data.phone.length != 11) {
+        wx.showToast({
+          title: '请输入正确的手机号',
+        })
+        return;
+    }
+    this.addEditWxUser('', this.data.nickName, this.data.avatarUrl, this.data.openId, this.data.phone)
+    this.setData({
+      hiddenmodalput: true
+    })
+  },
+  phoneInput: function(e) {
+    this.setData({
+      phone: e.detail.value
+    })
   }
 })

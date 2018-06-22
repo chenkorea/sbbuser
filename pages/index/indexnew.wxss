@@ -114,7 +114,7 @@
 }
 
 .bottom-icon {
-  background: #FF7F24;
+  background: #396fbf;
 }
 
 .footer_view {
@@ -219,4 +219,47 @@
 .ad_img {
   width: 100%;
   height: 300rpx;
+}
+
+.souquan-view {
+  position: fixed;
+  top: 50%;
+  left: 15%;
+  width: 70%;
+  height: 300rpx;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: center;
+  background: #FFF;
+  border: 1rpx solid #F0F0F0;
+  border-radius: 6rpx;
+}
+
+.souquan-main-view {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50rpx;
+  width: 100%;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resss {
+  /* width: 100%;
+  height: 100%;
+  position: relative; */
+}
+
+.shuhuh {
+  position: absolute;
+  left: 10%;
+  bottom: 50rpx;
+  width: 80%;
+  height: 90rpx;
+  color: #fff;
+  background: #fa3f81;
+  margin-top: 50rpx;
 }

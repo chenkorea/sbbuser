@@ -26,4 +26,8 @@
       <icon class="iconfont icon-mysss1 icon-duihuan" />
       <text class="my-title">我的卡券</text>
     </view>
+    <view class="seting-view" bindtap="tonicat">
+      <icon class="iconfont icon-mysss1 icon-duihuan" />
+      <text class="my-title">我的密钥</text>
+    </view>
   </view>

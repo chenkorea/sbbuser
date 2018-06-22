@@ -4,7 +4,7 @@
     <view wx:if="{{couponList.length>0}}">
       <view bindtap="getCoupon" data-item="{{item}}" class='coupon-list-view' wx:for="{{couponList}}" wx:key="{{item}}">
         <view style='margin-bottom:10rpx'>
-          <text class='title-text' style='color:#FF7F24;'>一键领取</text>
+          <text class='title-text' style='color:#396fbf;'>一键领取</text>
           <text class='title-desc'>{{item.coupon_name}}</text>
         </view>
         <view style='position:relative'>

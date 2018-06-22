@@ -180,7 +180,7 @@
   width: 80%;
   margin-left: 10%;
   margin-top: 40rpx;
-  background-color: #FF7F24;
+  background-color: #396fbf;
   height: 90rpx;
   border-radius: 40rpx;
   font-size: 32rpx;

@@ -67,7 +67,7 @@ var PageItems =
     },
     {
       id: '9',
-      text: '资质查询',
+      text: '信息查询',
       icon: 'iconfont icon-chaxun',
       bac: 'bottom-icon',
       url: '../index/search/search',

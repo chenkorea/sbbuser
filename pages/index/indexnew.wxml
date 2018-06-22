@@ -57,3 +57,14 @@
   <view class="gongan-one-text">贵州锁帮帮科技有限公司</view>
 </view>
 
+
+<view class='souquan-view' wx:if="{{showDaall}}">
+<view class='resss'>
+  <view class='souquan-main-view'>需要获取您的用户信息，请授权</view>
+  <button open-type="getUserInfo" class='shuhuh' bindgetuserinfo="bindGetUserInfo">确认授权</button>
+  </view>
+</view>
+
+<modal hidden="{{hiddenmodalput}}" title="绑定手机号" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">  
+    <input type='phone' placeholder="请输入手机号" auto-focus bindinput='phoneInput'/>  
+</modal>  

@@ -4,7 +4,7 @@
     <view wx:if="{{couponList.length>0}}">
       <view bindtap="selcoupon" data-item="{{item}}" class='coupon-list-view' wx:for="{{couponList}}" wx:key="{{item}}">
         <view style='margin-bottom:10rpx'>
-          <text wx:if="{{item.is_able==1}}" class='title-text' style='color:#FF7F24'>可使用</text>
+          <text wx:if="{{item.is_able==1}}" class='title-text' style='color:#396fbf'>可使用</text>
           <text wx:if="{{item.is_able==0}}" class='title-text'>已使用</text>
           <text class='title-desc'>{{item.coupon_nam}}</text>
         </view>
@@ -22,6 +22,6 @@
   </view>
 
   <view bindtap="goChoose" style="position:Fixed; width:100%; z-index:5;bottom:0px;left:0px;">
-    <button style="background:#FF7F24;color: #FFF; text-align:center; border-radius:0px">领取代金劵</button>
+    <button style="background:#396fbf;color: #FFF; text-align:center; border-radius:0px">领取代金劵</button>
   </view>
 </view>

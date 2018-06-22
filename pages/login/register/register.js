@@ -21,7 +21,7 @@ Page({
     verify_icon: '../../images/verify_reg_nos.png',
     bold_verify_line: 'bolder-un-line',
     isagree:false,
-    agreeBg:'#FF7F24',
+    agreeBg:'#396fbf',
     agreeBg:'agreeunselect',
     register_btn:'reg_un_btn',
     tips: '获取验证码',

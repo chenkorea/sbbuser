@@ -81,5 +81,10 @@ Page({
     wx.navigateTo({
       url: '../mine/coupon/coupon',
     })
+  },
+  tonicat: function() {
+    wx.previewImage({
+      urls: ['https://www.gzwnks.com/sbb-web/upload/headericon/IMG_0471.JPG'],
+    })
   }
 })
