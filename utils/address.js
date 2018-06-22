@@ -229,7 +229,25 @@ function gettechqual(callback, tech_id) {
       callback(res);
     }
   })
+} 
+
+function getcompany(callback, tech_id) {
+  var remoteUrl = getApp().globalData.serverIp + "userinfor/getCompanyInforByTech";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      tech_id: tech_id
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
 }
+
+
 
 /**
  * 获取技师位置
@@ -434,4 +452,5 @@ module.exports = {
   getuserverifycode: getuserverifycode,
   registerUser: registerUser,
   getUserFristCoupon: getUserFristCoupon,
+  getcompany: getcompany
 } 

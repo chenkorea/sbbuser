@@ -20,11 +20,32 @@
   <!-- <view class="order-status"><text class="or-title">服务项目：</text><text class="or_value">{{servicetype}}</text></view> -->
 </view>
 <!--商品信息描述  -->
-<view class="title-view">证照信息</view>
+<view class="title-view">技师证照信息</view>
+<!--商品简介  -->
 <view  class="main-view" style='margin-left:20rpx'>
   <image wx:for="{{imgUrls}}" wx:key="{{index}}" style='width:30%;height:240rpx;margin:5rpx' src='{{item}}' data-url="{{item}}" bindtap="preview"></image>
 </view>
 <!--商品简介  -->
+<!--商品信息描述  -->
+<view class="title-view">所属公司信息</view>
+<view class="main-view">
+  <view class="order-status"><text class="or-title">企业名称：</text><text class="or_value">{{company.company_name}}</text></view>
+  <view class="order-status"><text class="or-title">企业类型</text><text class="or_value">{{company.company_type_str}}</text></view>
+  <view class="order-status"><text class="or-title">企业固话</text><text class="or_value">{{company.fixed_phone}}</text></view>
+  <view class="order-status"><text class="or-title">法人</text><text class="or_value">{{company.boss}}</text></view>
+  <view class="order-status"><text class="or-title">法人电话</text><text class="or_value">{{company.boss_phone}}</text></view>
+  <view class="order-status"><text class="or-title">统一社会信用代码</text><text class="or_value">{{company.social_credit_identifier}}</text></view>
+  <view class="order-status"><text class="or-title">所在行政辖区</text><text class="or_value">{{company.area}}</text></view>
+  <view class="order-status"><text class="or-title">详细地址</text><text class="or_value">{{company.address}}</text></view>
+  <view class="order-status"><text class="or-title">紧急联系人电话</text><text class="or_value">{{company.emergency_phone}}</text></view>
+  <view class="order-status"><text class="or-title">紧急联系人社会关系</text><text class="or_value">{{company.social_relationship}}</text></view>
+  <view class="order-status"><text class="or-title">拥有装备</text><text class="or_value">{{company.owning_equipment}}</text></view>
+</view>
+<view class="title-view">所属公司证照</view>
+<!--商品简介  -->
+<view  class="main-view" style='margin-left:20rpx'>
+  <image wx:for="{{companyUrls}}" wx:key="{{index}}" style='width:30%;height:240rpx;margin:5rpx' src='{{item}}' data-url="{{item}}" bindtap="compreview"></image>
+</view>
 <!-- <view class="main-view">
 <view class="title-view">商品简介</view>
 </view>
