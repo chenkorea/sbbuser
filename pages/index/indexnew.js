@@ -383,7 +383,7 @@ Page({
   //点击按钮痰喘指定的hiddenmodalput弹出框  
   modalinput: function () {
     this.setData({
-      hiddenmodalput: !this.data.hiddenmodalput
+      hiddenmodalput: false
     })
   },
   //取消按钮  
