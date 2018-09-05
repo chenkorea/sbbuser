@@ -339,6 +339,15 @@ Page({
     console.log('onLoad')
     // 获取传送过来的值
     var that = this;
+    var phonesss = wx.getStorageSync('phone')
+    if (phonesss == null || phonesss == undefined || phonesss == '') {
+      // 不存在 需要绑定
+      wx.navigateBack({
+        
+      })
+      return;
+    }
+
     // wx.removeStorage({
     //   key: 'selAddr',
     //   success: function(res) {},

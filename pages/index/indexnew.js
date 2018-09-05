@@ -347,6 +347,8 @@ Page({
     console.log('// 获取用户open_id');
     if ('0000' == that.data.open_id) {
       that.wxLogin();
+    } else {
+      that.checkPhone();
     }
   },
   shihis: function () {
@@ -409,5 +411,12 @@ Page({
     this.setData({
       phone: e.detail.value
     })
+  },
+  checkPhone: function() {
+    var phone = wx.getStorageSync('phone')
+    if (phone == null || phone == undefined || phone == '') {
+      // 不存在 需要绑定
+      this.modalinput()
+    }
   }
 })

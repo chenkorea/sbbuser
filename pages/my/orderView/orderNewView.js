@@ -20,7 +20,8 @@ Page({
     userOrders: [],
     user_name: '昵称',
     user_head: 'http://img3.imgtn.bdimg.com/it/u=2733704563,565708946&fm=26&gp=0.jpg',
-    status_cla: 'impoerta'
+    status_cla: 'impoerta',
+    canpay: '1'
   },
   //事件处理函数
   bindStatusViewTap: function (e) {
@@ -230,6 +231,9 @@ Page({
    * 去支付
    */
   toPay: function (e) {
+    this.setData({
+      canpay: '0'
+    })
     this.getCoupon(e);
   },
   /**
@@ -374,6 +378,9 @@ Page({
           }
           var code = data.data.code;
           if (code == "1") {
+            this.setData({
+              canpay: '1'
+            })
             wx.showToast({ title: '支付成功', })
             //更新卡券状态(使用过后不能被再次使用)
             that.updateCouponStatus(coupon_id)
@@ -392,6 +399,9 @@ Page({
             // 发送推送通知给师傅端
             that.sendJPushMsg(orderObj.process_person_id, '07');
           } else {
+            this.setData({
+              canpay: '1'
+            })
             // 失败
             wx.showModal({
               title: '失败',
@@ -403,6 +413,9 @@ Page({
       },
       fail: function (res) {
         // 失败
+        this.setData({
+          canpay: '1'
+        })
         wx.showToast({ title: '支付失败', })
       }
     })
@@ -488,6 +501,9 @@ Page({
     })
   },
   onShow: function () {
+    this.setData({
+      canpay: '1'
+    })
     this.getUserOrder(this.data.uid, this.data.orderstatus);
   }
 })
