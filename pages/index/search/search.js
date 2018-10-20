@@ -16,12 +16,19 @@ Page({
     is_show: false
   },
   bindKeyInput: function (e) {
-    var searchVal = e.detail.value
-    var that = this 
-    this.setData({
-      inputValue: searchVal,
-      is_show:true
-    })
+    var searchVal = e.detail.value    
+    if (searchVal == ''){
+      this.setData({
+        is_show: false,
+        showspersons: [],
+        showscompanys: []
+      })        
+    }else{
+      this.setData({
+        inputValue: searchVal,
+        is_show: true,
+      })
+    }
   },
   onLoad: function () {
     var that = this
