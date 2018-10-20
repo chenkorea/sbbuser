@@ -18,7 +18,7 @@ function formatNumber(n) {
 
 module.exports = {
   formatTime: formatTime,
-  url: 'https://www.gzwnks.com/sbb-web',
-  // url: 'http://192.200.200.21:9000/sbb-web',
+  // url: 'https://www.gzwnks.com/sbb-web',
+  url: 'http://192.200.200.21:9090/sbb-web',
   no_pic:'http://img.hb.aicdn.com/e1432b68297d3faed808ebac7007556596d9a3be1462-mA26Of_fw658'
 }
