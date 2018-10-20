@@ -7,8 +7,8 @@
   </block>
 </swiper> -->
 <!--商品信息描述  -->
-<view class="title-view">基本信息</view>
-<view class="main-view">
+<view wx:if="{{zz_type=='tech'}}" class="title-view">基本信息</view>
+<view wx:if="{{zz_type=='tech'}}" class="main-view">
   <view class="order-status"><text class="or-title">姓名：</text><text class="or_value">{{name}}</text></view>
   <view class="order-status jiantou-view" catchtap="dialphone"><text class="or-title">电话：</text><text class="or_value">{{hidePhone}}</text>
     <image class="jiantou" src="../../../images/phone_dial.png"></image>
@@ -20,15 +20,15 @@
   <!-- <view class="order-status"><text class="or-title">服务项目：</text><text class="or_value">{{servicetype}}</text></view> -->
 </view>
 <!--商品信息描述  -->
-<view class="title-view">技师证照信息</view>
+<view wx:if="{{zz_type=='tech'}}" class="title-view">技师证照信息</view>
 <!--商品简介  -->
-<view  class="main-view" style='margin-left:20rpx'>
+<view wx:if="{{zz_type=='tech'}}" class="main-view" style='margin-left:20rpx'>
   <image wx:for="{{imgUrls}}" wx:key="{{index}}" style='width:30%;height:240rpx;margin:5rpx' src='{{item}}' data-url="{{item}}" bindtap="preview"></image>
 </view>
 <!--商品简介  -->
 <!--商品信息描述  -->
-<view class="title-view">所属公司信息</view>
-<view class="main-view">
+<view class="title-view"><text wx:if="{{zz_type=='tech'}}">所属</text>公司信息</view>
+<view wx:if="{{isRecord}}" class="main-view">
   <view class="order-status"><text class="or-title">企业名称：</text><text class="or_value">{{company.company_name}}</text></view>
   <view class="order-status"><text class="or-title">企业类型</text><text class="or_value">{{company.company_type_str}}</text></view>
   <view class="order-status"><text class="or-title">企业固话</text><text class="or_value">{{company.fixed_phone}}</text></view>
@@ -41,7 +41,10 @@
   <view class="order-status"><text class="or-title">紧急联系人社会关系</text><text class="or_value">{{company.social_relationship}}</text></view>
   <view class="order-status"><text class="or-title">拥有装备</text><text class="or_value">{{company.owning_equipment}}</text></view>
 </view>
-<view class="title-view">所属公司证照</view>
+<view wx:else>
+  <view class="order-status"><text class="or_value">该技师尚未备案</text></view>
+</view>
+<view class="title-view"><text wx:if="{{zz_type=='tech'}}">所属</text>公司证照</view>
 <!--商品简介  -->
 <view  class="main-view" style='margin-left:20rpx'>
   <image wx:for="{{companyUrls}}" wx:key="{{index}}" style='width:30%;height:240rpx;margin:5rpx' src='{{item}}' data-url="{{item}}" bindtap="compreview"></image>

@@ -19,6 +19,20 @@ function gettechqual(callback){
     }
   })
 }
+
+function getallcompany(callback) {
+  var remoteUrl = getApp().globalData.serverIp + "userinfor/getCompanyInfor";
+  wx.request({
+    url: remoteUrl,
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
 module.exports = {
-  gettechqual: gettechqual
+  gettechqual: gettechqual,
+  getallcompany: getallcompany
 }

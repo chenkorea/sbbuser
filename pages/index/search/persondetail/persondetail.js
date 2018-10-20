@@ -16,6 +16,8 @@ Page({
     servicetype: [],
     hidePhone:'',
     company:{},
+    zz_type:'tech',
+    isRecord:false,
     test:[
       'http://imge.kugou.com/stdmusic/20170423/20170423114015440967.jpg',
       'http://imge.kugou.com/stdmusic/20151218/20151218200608401755.jpg',
@@ -24,27 +26,32 @@ Page({
       'http://imge.kugou.com/stdmusic/20170423/20170423114015440967.jpg',
     ]
   },
-  onLoad: function (info){
-    var that = this;
-    var tech_id = info.tech_id;
-    if (tech_id) {
-      // 查询
-      that.gettechqual(tech_id);
-      that.getcompany(tech_id);
-    } else {
-      // 显示
-      var e = JSON.parse(info.infor)
-      that.getcompany(e.id);
-      that.gettechqual(e.id);
-      // that.setData({
-      //   name: e.name,
-      //   phone: e.phone,
-      //   grade: e.grade,
-      //   servicetype: e.service_types,
-      //   imgUrls: e.archives_url,
-      //   hidePhone: e.phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
-      // })
+  onLoad: function (info) {
+    var e = JSON.parse(info.infor)
+    console.log('info....', e.zz_type)
+    if (e.zz_type != undefined && e.zz_type == 'company'){
+      this.setData({
+        zz_type: 'company',
+        isRecord:true
+      })
+      console.log(e.id,'e.ide.ide.ide.ide.ide.ide.ide.ide.ide.ide.id')
+      this.getCompanyInfor(e.id)
+    }else{
+      var tech_id = e.tech_id;
+      this.setData({
+        zz_type: 'tech'
+      })
+      if (tech_id) {
+        // 查询
+        this.gettechqual(tech_id);
+        this.getcompany(tech_id);
+      } else {
+        // 显示
+        this.getcompany(e.id);
+        this.gettechqual(e.id);
+      }
     }
+    
   },
   preview: function (e) {
     var str = JSON.stringify(e)
@@ -80,6 +87,31 @@ Page({
       duration: e.detail.value
     })
   },
+  //查看公司备案信息
+  getCompanyInfor: function (company_id) {
+    var that = this;
+    Util.getCompanyInfor(function (data) {
+      if (wx.hideLoading) {
+        wx.hideLoading();
+      }
+      var code = data.data.code;
+      if (code == "1") {
+        var companys = data.data.content;
+        var company = companys[0];
+        var cimgs = []
+        if (company.company_url != undefined) {
+          cimgs = company.company_url.split(",");
+          for (var i = 0; i < cimgs.length - 1; i++) {
+            cimgs[i] = (getApp().globalData.imageServerIp + cimgs[i])
+          }
+        }
+        that.setData({
+          company: company,
+          companyUrls: cimgs
+        })
+      }
+    }, company_id);
+  },
   getcompany: function (tech_id) {
     var that = this;
     Util.getcompany(function (data) {
@@ -99,7 +131,12 @@ Page({
         }
         that.setData({
           company: company,
-          companyUrls:cimgs
+          companyUrls:cimgs,
+          isRecord:true
+        })
+      }else{
+        that.setData({
+          isRecord: false,
         })
       }
     }, tech_id);
@@ -115,6 +152,7 @@ Page({
         var users = data.data.content;
         var shifu = users[0];
         var imgs = []
+        console.log('shifu....', shifu.archives_url)
         if (shifu.archives_url != undefined) {
           imgs = shifu.archives_url.split(",");
           for (var i = 0; i < imgs.length; i++) {

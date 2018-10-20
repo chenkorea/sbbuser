@@ -229,7 +229,7 @@ function gettechqual(callback, tech_id) {
       callback(res);
     }
   })
-} 
+}
 
 function getcompany(callback, tech_id) {
   var remoteUrl = getApp().globalData.serverIp + "userinfor/getCompanyInforByTech";
@@ -426,6 +426,23 @@ function getUserFristCoupon(callback, regname) {
   })
 }
 
+//用户注册优惠券
+function getCompanyInfor(callback, company_id) {
+  var remoteUrl = getApp().globalData.serverIp + "userinfor/getCompanyInfor";
+  wx.request({
+    url: remoteUrl,
+    data: {
+      company_id: company_id
+    },
+    method: 'POST',
+    header: { 'content-type': 'application/x-www-form-urlencoded' },
+    success: function (res) {
+      console.log(res);
+      callback(res);
+    }
+  })
+}
+
 
 
 module.exports = {
@@ -452,5 +469,6 @@ module.exports = {
   getuserverifycode: getuserverifycode,
   registerUser: registerUser,
   getUserFristCoupon: getUserFristCoupon,
-  getcompany: getcompany
+  getcompany: getcompany,
+  getCompanyInfor: getCompanyInfor
 } 

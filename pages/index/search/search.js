@@ -1,7 +1,7 @@
 
 // 获取Util实例
 var datarequest = require('./util/datarequest.js');
-var urlutil = require('../.././../utils/util.js');
+var urlutil = require('../.././../utils/address.js');
 
 //获取应用实例
 var app = getApp()
@@ -9,46 +9,24 @@ Page({
   data: {
     inputValue: '',
     persons: [],
-    temp:[],
+    showspersons: [],
+    companys:[],
+    showscompanys:[],
     hidePhones: [],
     is_show: false
   },
   bindKeyInput: function (e) {
+    var searchVal = e.detail.value
     var that = this 
     this.setData({
-      inputValue: e.detail.value,
+      inputValue: searchVal,
       is_show:true
     })
-    if (e.detail.value.length == 0){
-      var temp = this.data.temp
-      this.setData({
-        persons: temp,
-        is_show: false
-      })
-    }else{
-      var temp = [];
-      var phones = [];
-      var persons = this.data.temp;
-      console.log(persons);
-      for (var i = 0; i < persons.length; i++) {
-        var name = persons[i].name
-        
-        if ((persons[i].name != undefined && persons[i].name.indexOf(e.detail.value)>=0)
-          || (persons[i].phone != undefined && persons[i].phone.indexOf(e.detail.value) >= 0)){
-          temp.push(persons[i]);
-          phones.push(persons[i].phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3"));
-        }
-      }
-      console.log(phones);
-      this.setData({
-        persons: temp,
-        hidePhones: phones
-      })
-    }
   },
   onLoad: function () {
     var that = this
     that.getAllTecher();
+    that.getallcompany()
   },
   getAllTecher: function () {
     var that = this
@@ -56,6 +34,7 @@ Page({
       var phones = [];
       if (res.data.code == '1') {
         for (var i = 0; i < res.data.content.length; i++) {
+          res.data.content[i]['zz_type'] = 'tech'
           var urls = [];
           if (res.data.content[i].archives_url == undefined) {
             urls.push(urlutil.no_pic);
@@ -75,34 +54,72 @@ Page({
           }
           phones[i] = res.data.content[i].phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
         }
-
-        // if (res.data.content.length > 0){
-        //   that.setData({
-        //     is_show: true
-        //   })
-        // }
-
-        // that.setData({
-        //   goods: res.data.content
-        // })
-
         that.setData({
           persons: res.data.content,
-          temp: res.data.content,
           hidePhones: phones
         })
       }
     })
   },
+  getallcompany: function() {
+    var that = this
+    datarequest.getallcompany(function (res) {
+      if (res.data.code == '1') {
+        for (var j = 0; j < res.data.content.length; j++) {
+          res.data.content[j]['zz_type'] = 'company'
+        }  
+        that.setData({
+          companys: res.data.content
+        })
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '获取公司列表异常',
+          showCancel: false
+        })
+      }
+    },)
+  },
   cancelsearch:function(){
-    var temp = this.data.temp
-    this.setData({
-      persons: temp,
-      inputValue:''
-    })
+    // this.setData({
+    //   showspersons: [],
+    //   showscompanys: [],
+    //   inputValue:''
+    // })
+    var searchVal = this.data.inputValue
+    if (searchVal.length == 0) {
+      this.setData({
+        showspersons: [],
+        showscompanys: [],
+        is_show: false
+      })
+    } else {
+      var personlist = []
+      for (var i = 0; i < this.data.persons.length; i++) {
+        var temp = this.data.persons[i]
+        if ((temp.name != undefined && temp.name == searchVal)
+          || (temp.phone != undefined && temp.phone == searchVal)) {
+          if (temp.phone) {
+            temp.phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
+          }
+          personlist.push(temp);
+        }
+      }
+      var companylist = []
+      for (var i = 0; i < this.data.companys.length; i++) {
+        var temp = this.data.companys[i]
+        if ((temp.company_name != undefined && temp.company_name == searchVal)
+          || (temp.fixed_phone != undefined && temp.fixed_phone == searchVal)) {
+          companylist.push(temp);
+        }
+      }
+      this.setData({
+        showspersons: personlist,
+        showscompanys: companylist,
+      })
+    }
   },
   gopersondetail:function(e){
-    console.log('gopersondetail----->>' + JSON.stringify(e))
     wx.navigateTo({
       url: './persondetail/persondetail?infor=' + JSON.stringify(e.currentTarget.dataset.item),
     })
