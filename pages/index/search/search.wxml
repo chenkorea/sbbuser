@@ -1,11 +1,15 @@
 <view class="main-view">
   <view class="search-view">
   <!-- bindinput绑定数据改变 -->
-    <input value='{{inputValue}}' bindinput="bindKeyInput" placeholder="搜索技师姓名/手机号码" class="search-text"/>
-    <text class="cancel-text" bindtap="cancelsearch">取消</text>
+    <input value='{{inputValue}}' bindinput="bindKeyInput" placeholder="搜索名称或电话号码" class="search-text"/>
+    <text class="cancel-text" bindtap="cancelsearch">搜索</text>
   </view>
-  <view class='no-text-content' hidden='{{is_show}}'>请输入技师名字或手机号进行查询</view>
-  <view class="result-list-view" wx:for="{{persons}}" wx:key="{{index}}" data-item="{{persons[index]}}" bindtap="gopersondetail" hidden='{{!is_show}}'>
+  <view class='no-text-content' hidden='{{is_show}}'>请输入名称或电话号码查询</view>
+  <view class="result-list-view" wx:for="{{showscompanys}}" wx:key="{{index}}" data-item="{{showscompanys[index]}}" bindtap="gopersondetail" hidden='{{!is_show}}'>
+     <view class="name-text">公司名称：{{item.company_name}}</view>
+     <view class="phone-text">公司固话：{{item.fixed_phone}}</view>
+  </view>
+  <view class="result-list-view" wx:for="{{showspersons}}" wx:key="{{index}}" data-item="{{showspersons[index]}}" bindtap="gopersondetail" hidden='{{!is_show}}'>
      <view class="name-text">姓名：{{item.name}}</view>
      <view class="phone-text">电话号码：{{hidePhones[index]}}</view>
      <view class="level-text">资质：
