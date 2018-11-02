@@ -107,7 +107,7 @@ Page({
         if ((temp.name != undefined && temp.name == searchVal)
           || (temp.phone != undefined && temp.phone == searchVal)) {
           if (temp.phone) {
-            temp.phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
+            temp.phone = temp.phone.replace(/(\d{3})(\d{4})(\d{4})/, "$1****$3")
           }
           personlist.push(temp);
         }
@@ -120,6 +120,8 @@ Page({
           companylist.push(temp);
         }
       }
+      console.log('11111111111')
+      console.log(personlist)
       this.setData({
         showspersons: personlist,
         showscompanys: companylist,
